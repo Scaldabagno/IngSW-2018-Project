@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+            <Text layoutX="20.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Area autista">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Button layoutX="400.0" layoutY="105.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="186.0" text="Visualizza Resoconto Stipendio" />
+            <Button layoutX="400.0" layoutY="181.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="186.0" text="Comunica indisponibilità autista" />
+            <Button layoutX="20.0" layoutY="342.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="80.0" text="Annulla" />
+            <Button layoutX="546.0" layoutY="342.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="80.0" text="Logout" />
+            <AnchorPane layoutX="7.0" layoutY="62.0" prefHeight="270.0" prefWidth="348.0">
+               <children>
+                  <GridPane prefHeight="270.0" prefWidth="362.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="364.0" minWidth="10.0" prefWidth="250.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="544.0" minWidth="10.0" prefWidth="379.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="58.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="152.0" minHeight="3.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="152.0" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="Nome" />
+                        <Label text="Cognome" GridPane.rowIndex="1" />
+                        <Label text="Email" GridPane.rowIndex="2" />
+                        <Label prefHeight="35.0" prefWidth="47.0" text="Telefono" GridPane.rowIndex="3" />
+                        <Label text="Data di Nascita" GridPane.rowIndex="4" />
+                        <Label text="Stipendio" GridPane.rowIndex="5" />
+                        <Label text="Turno" GridPane.rowIndex="6" />
+                        <Label text="Ruolo" GridPane.rowIndex="7" />
+                        <Label text="Ore" GridPane.rowIndex="8" />
+                        <Label text="Label" GridPane.columnIndex="1" />
+                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
