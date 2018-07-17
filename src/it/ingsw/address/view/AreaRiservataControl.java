@@ -70,6 +70,7 @@ private MainApp mainApp;
 		AccessoAutistaControl controller = loader.getController();
 		controller.setMainApp(mainApp);
 	}
+	
 	@FXML
 	public void annullaButton() throws IOException{
 		FXMLLoader loader=new FXMLLoader();

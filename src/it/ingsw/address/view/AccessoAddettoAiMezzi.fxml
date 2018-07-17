@@ -31,7 +31,7 @@
             <Font size="13.0" />
          </font>
       </Button>
-      <Button fx:id="loginAM" alignment="CENTER" layoutX="583.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="103.0" text="Login">
+      <Button fx:id="loginAM" alignment="CENTER" layoutX="583.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#loginAreaAddettoAiMezzi" prefHeight="31.0" prefWidth="103.0" text="Login">
          <font>
             <Font size="15.0" />
          </font>

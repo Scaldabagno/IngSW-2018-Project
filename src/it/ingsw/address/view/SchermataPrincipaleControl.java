@@ -36,7 +36,6 @@ public class SchermataPrincipaleControl {
 	private void initialize() {
 	}
 	
-
 	@FXML
 	public void areaRiservataButton() throws IOException{
 		FXMLLoader loader=new FXMLLoader();

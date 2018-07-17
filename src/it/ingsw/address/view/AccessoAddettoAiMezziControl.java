@@ -31,6 +31,19 @@ public class AccessoAddettoAiMezziControl {
 	private void initialize() {
 	}
 	
+	@FXML
+	public void loginAreaAddettoAiMezzi() throws IOException{
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziScreen.fxml"));
+		AnchorPane areaAddettoAiMezzi = (AnchorPane) loader.load();
+		Scene scene = new Scene(areaAddettoAiMezzi);
+		System.out.println(scene);
+		System.out.println(areaAddettoAiMezzi);
+		Stage stage = mainApp.getPrimaryStage();
+		stage.setScene(scene);
+		AddettoAiMezziControl controller = loader.getController();
+		controller.setMainApp(mainApp);
+	}
 
 	@FXML
 	public void annullaButton() throws IOException{
