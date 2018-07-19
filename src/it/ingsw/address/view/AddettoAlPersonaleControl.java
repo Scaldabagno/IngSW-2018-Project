@@ -11,6 +11,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * @author Federico Augello
+ * @description gestisce la prima schermata 
+ */
 public class AddettoAlPersonaleControl {
 	private MainApp mainApp;
 	

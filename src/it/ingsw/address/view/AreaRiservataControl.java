@@ -10,6 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * @author Federico Augello
+ * @description gestisce la prima schermata 
+ */
 public class AreaRiservataControl {
 private MainApp mainApp;
 
