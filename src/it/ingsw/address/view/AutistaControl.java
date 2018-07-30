@@ -7,43 +7,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
  * @author Federico Augello
- * @description gestisce l'area Addetto Al Personale
+ * @description gestisce l'area Autista  
  */
-public class AddettoAlPersonaleControl {
+public class AutistaControl {
 	private MainApp mainApp;
 	
 	@FXML
 	private Button logout;
 	
 	@FXML
-	private TextField ricercaImpiegato;
-	
-	@FXML
-	private Button nuovoImpiegato;
-	
-	@FXML
-	private Button modificaImpiegato;
-	
-	@FXML
-	private Button cancellaImpiegato;
-	
-	@FXML
-	private Button calcolaStipendio;
-	
-	@FXML
-	private Button allocaMezzo;
-	
-	@FXML
-	private Button allocaTurno;
-	
-	@FXML
-	public void logoutAP() throws IOException{
+	public void logoutA() throws IOException{
 		FXMLLoader loader=new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("view/SchermataPrincipale.fxml"));
 		AnchorPane schermataPrincipale = (AnchorPane) loader.load();
@@ -59,5 +37,4 @@ public class AddettoAlPersonaleControl {
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
-
 }

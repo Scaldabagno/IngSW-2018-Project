@@ -1,8 +1,10 @@
 package it.ingsw.address.view;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,10 +14,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import it.ingsw.address.MainApp;
+import it.ingsw.address.model.Linea;
 
 /**
  * @author Federico Augello
- * @description gestisce la prima schermata 
+ * @description gestisce la Schermata Principale "L'area cittadino" 
  */
 public class SchermataPrincipaleControl {
 	private MainApp mainApp;
@@ -35,9 +38,16 @@ public class SchermataPrincipaleControl {
 	@FXML
 	private Button areaRiservata;
 	
+	private ObservableList<Linea> listLine = FXCollections.observableArrayList();
 	
 	@FXML
-	private void initialize() {
+	private void initialize() throws SQLException{
+		
+		
+	} 
+	
+	public SchermataPrincipaleControl() {
+		listLine.add(new Linea(100, "Muster", 10));
 	}
 	
 	@FXML

@@ -6,15 +6,17 @@ import it.ingsw.address.MainApp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
  * @author Federico Augello
- * @description gestisce la prima schermata 
+ * @description gestisce l'accesso autista
  */
 public class AccessoAutistaControl {
 	private MainApp mainApp;
@@ -35,7 +37,30 @@ public class AccessoAutistaControl {
 	private void initialize() {
 	}
 	
-
+	@FXML
+	public void loginAutista() throws IOException{
+		//da completare ovviamente
+		if(emailA.getText().equals("") || passwordA.getText().equals("")) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(null);
+            alert.setTitle("Connection Information");
+            alert.setHeaderText("Matricola e/o password errate");
+            alert.setContentText("Controlla le credenziali inserite e riprova.");
+            alert.showAndWait();
+		}else {
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/AutistaScreen.fxml"));
+		AnchorPane areaAutista = (AnchorPane) loader.load();
+		Scene scene = new Scene(areaAutista);
+		System.out.println(scene);
+		System.out.println(areaAutista);
+		Stage stage = mainApp.getPrimaryStage();
+		stage.setScene(scene);
+		AutistaControl controller = loader.getController();
+		controller.setMainApp(mainApp);
+		}
+	}
+	
 	@FXML
 	public void annullaButton() throws IOException{
 		FXMLLoader loader=new FXMLLoader();

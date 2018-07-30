@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 /**
  * @author Federico Augello
- * @description gestisce la prima schermata 
+ * @description gestisce l'area Riservata  
  */
 public class AreaRiservataControl {
 private MainApp mainApp;

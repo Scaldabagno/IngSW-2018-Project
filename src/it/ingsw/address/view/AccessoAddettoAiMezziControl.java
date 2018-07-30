@@ -6,15 +6,17 @@ import it.ingsw.address.MainApp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
  * @author Federico Augello
- * @description gestisce la prima schermata 
+ * @description gestisce l'accesso addetto ai mezzi
  */
 public class AccessoAddettoAiMezziControl {
 	private MainApp mainApp;
@@ -37,6 +39,15 @@ public class AccessoAddettoAiMezziControl {
 	
 	@FXML
 	public void loginAreaAddettoAiMezzi() throws IOException{
+		//da completare ovviamente
+		if(emailAM.getText().equals("") || passwordAM.getText().equals("")) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(null);
+            alert.setTitle("Connection Information");
+            alert.setHeaderText("Matricola e/o password errate");
+            alert.setContentText("Controlla le credenziali inserite e riprova.");
+            alert.showAndWait();
+		}else {
 		FXMLLoader loader=new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziScreen.fxml"));
 		AnchorPane areaAddettoAiMezzi = (AnchorPane) loader.load();
@@ -47,6 +58,7 @@ public class AccessoAddettoAiMezziControl {
 		stage.setScene(scene);
 		AddettoAiMezziControl controller = loader.getController();
 		controller.setMainApp(mainApp);
+		}
 	}
 
 	@FXML

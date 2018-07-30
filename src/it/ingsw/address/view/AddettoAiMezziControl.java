@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 /**
  * @author Federico Augello
- * @description gestisce la prima schermata 
+ * @description gestisce l'area Addetto Ai Mezzi
  */
 public class AddettoAiMezziControl {
 	private MainApp mainApp;
