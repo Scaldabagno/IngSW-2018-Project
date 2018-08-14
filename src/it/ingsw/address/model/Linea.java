@@ -1,39 +1,52 @@
 package it.ingsw.address.model;
 
+
 public class Linea {
 	
-	private int numeroLinea;
-	private String itinerario;
-	
-	private int orario;
+	private String numeroLinea;
+	private String capolineaI;
+	private String capolineaF;
 	
 	public Linea() {
 	}
 	
-	public Linea(int i, String string, int j) {
-		this.setNumeroLinea(i);
-		this.setItinerario(string);
-		this.setOrario(j);
-	}
-	
-	public int getNumeroLinea() {
+	public String getNumeroLinea() {
 		return numeroLinea;
 	}
-	public void setNumeroLinea(int numeroLinea) {
+	
+	public void setNumeroLinea(String numeroLinea) {
 		this.numeroLinea = numeroLinea;
 	}
-	public String getItinerario() {
-		return itinerario;
+
+	public String getCapolineaI() {
+		return capolineaI;
 	}
-	public void setItinerario(String itinerario) {
-		this.itinerario = itinerario;
+
+	public void setCapolineaI(String capolineaI) {
+		this.capolineaI = capolineaI;
 	}
-	public int getOrario() {
-		return orario;
+
+	public String getCapolineaF() {
+		return capolineaF;
 	}
-	public void setOrario(int orario) {
-		this.orario = orario;
+
+	public void setCapolineaF(String capolineaF) {
+		this.capolineaF = capolineaF;
 	}
+	
+	
+//	public String getItinerario() {
+//		return itinerario;
+//	}
+//	public void setItinerario(String itinerario) {
+//		this.itinerario = itinerario;
+//	}
+//	public int getOrario() {
+//		return orario;
+//	}
+//	public void setOrario(int orario) {
+//		this.orario = orario;
+//	}
 	
 	
 }

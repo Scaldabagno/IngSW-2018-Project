@@ -2,7 +2,7 @@ package it.ingsw.address.model;
 
 import java.time.LocalDate;
 
-public abstract class Impiegato {
+public class Impiegato {
 	
 	private String matricola;
 	private String nome;
@@ -10,26 +10,14 @@ public abstract class Impiegato {
 	private String email;
 	private String numeroTel;
 	private LocalDate dataNascita;
-	private Turno turno;
-	private String ruolo;
-	private double ore;
+	private Ruolo ruolo;
+	private Orari ore;
+	private boolean disponibilita;
 	
 	
 	public Impiegato() {
 	
-	}
-	
-	public Impiegato(String m, String n, String c, String e, String nT, LocalDate d, Turno t, String r ){
-		this.matricola = m;
-		this.nome = n;
-		this.cognome = c;
-		this.email = e;
-		this.numeroTel = nT;
-		this.dataNascita = d;
-		this.turno = t;
-		this.ruolo = r;
-	}
-	
+	}	
 	
 	public String getMatricola() {
 		return matricola;
@@ -73,25 +61,26 @@ public abstract class Impiegato {
 		this.dataNascita = dataNascita;
 	}
 	
-	public Turno getTurno() {
-		return turno;
-	}
-	public void setTurno(Turno turno) {
-		this.turno = turno;
-	}
-	
-	public String getRuolo() {
+	public Ruolo getRuolo() {
 		return ruolo;
 	}
-	public void setRuolo(String ruolo) {
+	public void setRuolo(Ruolo ruolo) {
 		this.ruolo = ruolo;
 	}
 	
-	public double getOre() {
+	public Orari getOre() {
 		return ore;
 	}
-	public void setOre(double ore) {
+	public void setOre(Orari ore) {
 		this.ore = ore;
+	}
+
+	public boolean getDisponibilita() {
+		return disponibilita;
+	}
+
+	public void setDisponibilita(boolean disponibilita) {
+		this.disponibilita = disponibilita;
 	}
 	
 	

@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class DBConnection {
+public class DBManager {
     private String username;
     private String psw;
     private String server;
@@ -20,7 +20,7 @@ public class DBConnection {
     private Statement statement = null;
     private ResultSet resultSet = null;
 
-    private static final Logger LOG = Logger.getLogger(DBConnection.class.getName());
+    private static final Logger LOG = Logger.getLogger(DBManager.class.getName());
 
     public void log(Level level, String msg) {
         LOG.log(level, msg);
@@ -30,7 +30,7 @@ public class DBConnection {
     	return connection;
     }
 
-    public DBConnection(String host, String uname, String password, String db) {
+    public DBManager(String host, String uname, String password, String db) {
         loadMySQLDriver();
         this.server = host;
         this.username = uname;
@@ -92,7 +92,7 @@ public class DBConnection {
           alert.setHeaderText("Connessione Non Disponibile");
           alert.setContentText("Controlla la connessione e riprova.");
           alert.showAndWait();
-            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
     }
@@ -102,7 +102,7 @@ public class DBConnection {
             this.connection.close();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
@@ -120,7 +120,7 @@ public class DBConnection {
           alert.setHeaderText("Connessione Non Disponibile");
           alert.setContentText("Controlla la connessione e riprova.");
           alert.showAndWait();
-            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -138,7 +138,7 @@ public class DBConnection {
             alert.setHeaderText("Connessione Non Disponibile");
             alert.setContentText("Controlla la connessione e riprova.");
             alert.showAndWait();
-            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
             return result;
         }
     }

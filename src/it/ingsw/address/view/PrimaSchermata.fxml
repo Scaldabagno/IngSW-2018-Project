@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ingsw.address.view.AvvioProgrammaControl">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ingsw.address.view.AvvioProgrammaControl">
    <children>
       <Button fx:id="avvioProgramma" layoutX="275.0" layoutY="185.0" mnemonicParsing="false" onAction="#avvioProgrammaButton" prefHeight="80.0" prefWidth="150.0" text="Avvia&#10;Programma" textAlignment="CENTER">
          <font>
