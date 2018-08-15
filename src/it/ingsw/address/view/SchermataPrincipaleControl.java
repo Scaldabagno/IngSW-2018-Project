@@ -13,15 +13,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import it.ingsw.address.MainApp;
-import it.ingsw.address.database.DBLineShow;
+import it.ingsw.address.database.DBLinea;
 import it.ingsw.address.model.DatiLinea;
-import it.ingsw.address.model.Linea;
 
 /**
  * @author Federico Augello
@@ -46,6 +45,9 @@ public class SchermataPrincipaleControl {
 	private Label fermate;
 	
 	@FXML
+	private Label orari;
+	
+	@FXML
 	private TextField ricercaLinea;
 	
 	@FXML
@@ -55,57 +57,41 @@ public class SchermataPrincipaleControl {
 		
 	}
 	
-	private Linea lineaModel;
-	ObservableList<DatiLinea> listLine = FXCollections.observableArrayList();
+	ObservableList<DatiLinea> listLinea = FXCollections.observableArrayList();
 	
 	@FXML
 	private void initialize() throws SQLException{
-		listLine = DBLineShow.getInstance().getAllLines();
-//		numeroLinea.setCellValueFactory(
-//				new PropertyValueFactory<DatiLinea, String>("numeroLinea"));
-		//linea.setText();
-		//capolinea.setText();
-		numeroLinea.setCellValueFactory(cellData -> cellData.getValue().numeroLineaProperty());
+		listLinea = DBLinea.getInstance().getLinee();
+		numeroLinea.setCellValueFactory(
+				new PropertyValueFactory<DatiLinea, String>("numeroLinea"));
 		showLineaDetails(null);
 		
 		tabellaLinee.getSelectionModel().selectedItemProperty().addListener(
 	            (observable, oldValue, newValue) -> showLineaDetails(newValue));
 		
-		System.out.println(listLine);
+		System.out.println(listLinea);
 		
-		FilteredList<DatiLinea> filteredData = new FilteredList<>(listLine, p -> true);
+		FilteredList<DatiLinea> filteredData = new FilteredList<>(listLinea, p -> true);
 
 		ricercaLinea.textProperty().addListener((observable, oldValue, newValue) -> {
-		      filteredData.setPredicate(line -> {
-		          // If filter text is empty, display all persons.
+		      filteredData.setPredicate(linea -> {
+		          // Se il testo della barra è vuoto, restituisce tutte le linee.
 		          if (newValue == null || newValue.isEmpty()) {
 		              return true;
 		          }
 
-		          // Compare first name and last name of every person with filter text.
+		          // Ricerca linee, sia per capolinea che per numero.
 		          String lowerCaseFilter = newValue.toLowerCase();
 
-		          return lineaModel.getNumeroLinea().toLowerCase().contains(lowerCaseFilter) /*||
-		          			 line.getStartTerminal().toLowerCase().contains(lowerCaseFilter) ||
-		          			 line.getEndTerminal().toLowerCase().contains(lowerCaseFilter)*/;
+		          return linea.getDatiNumeroLinea().toLowerCase().contains(lowerCaseFilter) ||
+		          			 linea.getDatiCapolineaI().toLowerCase().contains(lowerCaseFilter) ||
+		          			 linea.getDatiCapolineaF().toLowerCase().contains(lowerCaseFilter);
 		      });
 		    });
 		SortedList<DatiLinea> sortedData = new SortedList<>(filteredData);
 	    sortedData.comparatorProperty().bind(tabellaLinee.comparatorProperty());
 
 	  	tabellaLinee.setItems(sortedData);
-
-	  	tabellaLinee.setRowFactory(tv -> {
-			TableRow<DatiLinea> row = new TableRow<>();
-			row.setOnMouseClicked(event -> {
-				if(event.getClickCount() == 2 && (!row.isEmpty())) {
-					lineaModel = row.getItem().getLinea();
-		//			showPath();
-				}
-			});
-			return row;
-		});
-	 // 	timerStart();
 	}
 	
 	@FXML
@@ -129,15 +115,16 @@ public class SchermataPrincipaleControl {
 
 	private void showLineaDetails(DatiLinea datiLinea) {
 	    if (datiLinea != null) {
-	        // Fill the labels with info from the person object.
+	        // Riempie le label con numero linea, capolinea, fermate, orari 
 	        linea.setText(datiLinea.getDatiNumeroLinea());
 	        capolinea.setText(datiLinea.getDatiCapolineaI() + "-" + datiLinea.getDatiCapolineaF());
-	        // TODO: We need a way to convert the birthday into a String!
-	        // birthdayLabel.setText(...);
+	        // TODO: Fermate e orari
 	    } else {
-	        // Person is null, remove all the text.
+	        // Se non viene selezionata nessuna linea, non mostra nulla.
 	        linea.setText("");
 	        capolinea.setText("");
+	        fermate.setText("");
+	        orari.setText("");
 	    }
 	}
 	

@@ -20,7 +20,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="ricercaLinea" layoutX="330.0" layoutY="13.0" prefHeight="25.0" prefWidth="296.0" promptText="Ricerca Linea" />
+      <TextField fx:id="ricercaLinea" layoutX="330.0" layoutY="12.0" prefHeight="25.0" prefWidth="356.0" promptText="Ricerca Linea" />
       <SplitPane dividerPositions="0.2786885245901639" layoutX="14.0" layoutY="57.0" prefHeight="324.0" prefWidth="672.0">
          <items>
             <TableView fx:id="tabellaLinee" cacheShape="false" centerShape="false" editable="true" focusTraversable="false" onSort="#initialize" prefHeight="285.0" prefWidth="30.0" scaleShape="false">
@@ -53,7 +53,7 @@
                         <Label fx:id="capolinea" prefHeight="71.0" prefWidth="269.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label fx:id="fermate" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="100.0" prefWidth="269.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="Orari" GridPane.rowIndex="3" />
-                        <Label prefHeight="88.0" prefWidth="269.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="orari" prefHeight="88.0" prefWidth="269.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                </children>
@@ -61,6 +61,5 @@
          </items>
       </SplitPane>
       <Button fx:id="areaRiservata" layoutX="606.0" layoutY="397.0" mnemonicParsing="false" onAction="#areaRiservataButton" onMouseClicked="#areaRiservataButton" prefHeight="39.0" prefWidth="80.0" text="Area&#10;Riservata" textAlignment="CENTER" />
-      <Button layoutX="634.0" layoutY="13.0" mnemonicParsing="false" text="Cerca" />
    </children>
 </AnchorPane>

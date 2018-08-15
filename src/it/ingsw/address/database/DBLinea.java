@@ -9,27 +9,27 @@ import it.ingsw.address.model.Linea;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class DBLineShow {
+public class DBLinea {
 	private static DBManager dbm = new DBManager("localhost", "root", "root", "mydb");
-	private static DBLineShow instance;
+	private static DBLinea instance;
 	
-	private DBLineShow() throws SQLException {
+	private DBLinea() throws SQLException {
 		dbm.connect();
 	}
 	
-	public static DBLineShow getInstance() throws SQLException {
+	public static DBLinea getInstance() throws SQLException {
 		if(instance != null) {
 			return instance;
 		}
-		instance = new DBLineShow();
+		instance = new DBLinea();
 		return instance;
 	}
 	
-	public Linea getLineById(String id) throws SQLException {
-		return getAllLinesArray("idLinea = '" + id + "'").get(0);
+	public Linea getLineaById(String id) throws SQLException {
+		return getArrayLinee("idLinea = '" + id + "'").get(0);
 	}
 
-	public ArrayList<Linea> getAllLinesArray(String clause) throws SQLException{
+	public ArrayList<Linea> getArrayLinee(String clause) throws SQLException{
 		ArrayList<Linea> linee = new ArrayList<>();
 
 		clause = (clause == null)? "TRUE":clause;
@@ -39,16 +39,12 @@ public class DBLineShow {
 		while(resultSet.next()) {
 			Linea linea = new Linea();
 			linea.setNumeroLinea(resultSet.getString("numeroLinea"));
-//			line.setStartTerminal(this.getTerminal(line, true));
-//			line.setEndTerminal(this.getTerminal(line, false));
-//			line.setGoingStops(this.getStops(line, true));
-//			line.setReturnStops(this.getStops(line, false));
 			linee.add(linea);
 		}
 		return linee;
 	}
 	
-	public ObservableList<DatiLinea> getAllLines() {
+	public ObservableList<DatiLinea> getLinee() {
 		ArrayList<DatiLinea> linee = new ArrayList<>();
 		try {
 			dbm.executeQuery("SELECT * FROM linee");
@@ -59,10 +55,6 @@ public class DBLineShow {
 				linea.setNumeroLinea(resultSet.getString("numeroLinea"));
 				linea.setCapolineaI(resultSet.getString("capolineaI"));
 				linea.setCapolineaF(resultSet.getString("capolineaF"));
-//				line.setStartTerminal(this.getTerminal(line, true));
-//				line.setEndTerminal(this.getTerminal(line, false));
-//				line.setGoingStops(this.getStops(line, true));
-//				line.setReturnStops(this.getStops(line, false));
 				linee.add(new DatiLinea (linea));
 			}
 		} catch(SQLException exc) {

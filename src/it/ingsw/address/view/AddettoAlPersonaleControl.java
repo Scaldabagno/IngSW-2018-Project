@@ -4,9 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import it.ingsw.address.MainApp;
-import it.ingsw.address.database.DBEmployeeShow;
+import it.ingsw.address.database.DBImpiegato;
 import it.ingsw.address.model.DatiImpiegato;
-import it.ingsw.address.model.Impiegato;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,7 +16,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -47,7 +45,9 @@ public class AddettoAlPersonaleControl {
 	private Label cognomeLabel;
 	
 	@FXML
-	private Label matricolaLabel;
+	private Label ruoloLabel;
+	
+//	TODO: Aggiungere altre Label
 	
 	@FXML
 	private Button logout;
@@ -73,58 +73,52 @@ public class AddettoAlPersonaleControl {
 	@FXML
 	private Button allocaTurno;
 	
-	private Impiegato impiegatoModel;
-	ObservableList<DatiImpiegato> listEmployee = FXCollections.observableArrayList();
+	public AddettoAlPersonaleControl() {
+		
+	}
+	
+	ObservableList<DatiImpiegato> listImpiegato = FXCollections.observableArrayList();
+	
+	/**
+	 * @author Federico Augello
+	 * @description funzione che si avvia entrando nell'area Addetto Al Personale
+	 */
 	
 	@FXML
 	private void initialize() throws SQLException{
-		listEmployee = DBEmployeeShow.getInstance().getAllEmployees();
-//		matricolaColumn.setCellValueFactory(
-//				new PropertyValueFactory<DatiImpiegato, String>("matricola"));
-//		cognomeColumn.setCellValueFactory(
-//				new PropertyValueFactory<DatiImpiegato, String>("cognome"));
-		matricolaColumn.setCellValueFactory(cellData -> cellData.getValue().matricolaProperty());
-		cognomeColumn.setCellValueFactory(cellData -> cellData.getValue().cognomeProperty());
+		listImpiegato = DBImpiegato.getInstance().getImpiegati();
+		matricolaColumn.setCellValueFactory(
+				new PropertyValueFactory<DatiImpiegato, String>("matricola"));
+		cognomeColumn.setCellValueFactory(
+				new PropertyValueFactory<DatiImpiegato, String>("cognome"));
 		showImpiegatoDetails(null);
 		
 		tabellaImpiegati.getSelectionModel().selectedItemProperty().addListener(
 	            (observable, oldValue, newValue) -> showImpiegatoDetails(newValue));
 		
-		System.out.println(listEmployee);
+		System.out.println(listImpiegato);
 		
-		FilteredList<DatiImpiegato> filteredData = new FilteredList<>(listEmployee, p -> true);
+		FilteredList<DatiImpiegato> filteredData = new FilteredList<>(listImpiegato, p -> true);
 
 		ricercaImpiegato.textProperty().addListener((observable, oldValue, newValue) -> {
-		      filteredData.setPredicate(line -> {
-		          // If filter text is empty, display all persons.
+		      filteredData.setPredicate(impiegato -> {
+		          // Se il testo della barra è vuoto, restituisce tutte le linee.
 		          if (newValue == null || newValue.isEmpty()) {
 		              return true;
 		          }
 
-		          // Compare first name and last name of every person with filter text.
+		          // Ricerca linee, sia per capolinea che per numero.
 		          String lowerCaseFilter = newValue.toLowerCase();
 
-		          return impiegatoModel.getMatricola().toLowerCase().contains(lowerCaseFilter) /*||
-		          			 line.getStartTerminal().toLowerCase().contains(lowerCaseFilter) ||
-		          			 line.getEndTerminal().toLowerCase().contains(lowerCaseFilter)*/;
+		          return impiegato.getDatiNome().toLowerCase().contains(lowerCaseFilter) ||
+		          			 impiegato.getDatiCognome().toLowerCase().contains(lowerCaseFilter) ||
+		          			 impiegato.getDatiMatricola().toLowerCase().contains(lowerCaseFilter);
 		      });
 		    });
 		SortedList<DatiImpiegato> sortedData = new SortedList<>(filteredData);
 	    sortedData.comparatorProperty().bind(tabellaImpiegati.comparatorProperty());
 
 	  	tabellaImpiegati.setItems(sortedData);
-
-	  	tabellaImpiegati.setRowFactory(tv -> {
-			TableRow<DatiImpiegato> row = new TableRow<>();
-			row.setOnMouseClicked(event -> {
-				if(event.getClickCount() == 2 && (!row.isEmpty())) {
-					impiegatoModel = row.getItem().getImpiegato();
-		//			showPath();
-				}
-			});
-			return row;
-		});
-	 // 	timerStart();
 	}
 	
 	@FXML
@@ -147,17 +141,17 @@ public class AddettoAlPersonaleControl {
 	
 	private void showImpiegatoDetails(DatiImpiegato datiImpiegato) {
 	    if (datiImpiegato != null) {
-	        // Fill the labels with info from the person object.
+	        // Riempie le label con nome, cognome e gli altri dati
 	        nomeLabel.setText(datiImpiegato.getDatiNome());
 	        cognomeLabel.setText(datiImpiegato.getDatiCognome());
-	        matricolaLabel.setText(datiImpiegato.getDatiMatricola());
-	        // TODO: We need a way to convert the birthday into a String!
-	        // birthdayLabel.setText(...);
+	        // TODO: Altri dati
+//	        ruoloLabel.setText(datiImpiegato.getDatiRuolo());
 	    } else {
-	        // Person is null, remove all the text.
+	        // Se non viene selezionata nessuna linea, non mostra nulla.
 	        nomeLabel.setText("");
 	        cognomeLabel.setText("");
+//	        TODO: Aggiungere gli altri
+	        ruoloLabel.setText("");
 	    }
 	}
-
 }

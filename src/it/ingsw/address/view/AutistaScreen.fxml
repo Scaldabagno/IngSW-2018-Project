@@ -11,15 +11,15 @@
 
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ingsw.address.view.AutistaControl">
    <children>
-      <Text layoutX="20.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Area autista">
+      <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Area autista">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Button layoutX="460.0" layoutY="104.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="186.0" text="Visualizza Resoconto Stipendio" />
-      <Button layoutX="460.0" layoutY="206.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="186.0" text="Comunica indisponibilità autista" />
+      <Button fx:id="resocontoStipendio" layoutX="460.0" layoutY="104.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="186.0" text="Visualizza Resoconto Stipendio" />
+      <Button fx:id="indisponibilita" layoutX="460.0" layoutY="206.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="186.0" text="Comunica indisponibilità autista" />
       <Button fx:id="logout" layoutX="606.0" layoutY="397.0" mnemonicParsing="false" onMouseClicked="#logoutA" prefHeight="39.0" prefWidth="80.0" text="Logout" />
-      <AnchorPane layoutX="7.0" layoutY="62.0" prefHeight="372.0" prefWidth="436.0">
+      <AnchorPane layoutX="7.0" layoutY="62.0" prefHeight="372.0" prefWidth="438.0">
          <children>
             <GridPane prefHeight="270.0" prefWidth="362.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columnConstraints>
@@ -29,33 +29,30 @@
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="58.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="152.0" minHeight="3.0" prefHeight="35.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="152.0" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
                   <Label text="Nome" />
                   <Label text="Cognome" GridPane.rowIndex="1" />
-                  <Label text="Email" GridPane.rowIndex="2" />
-                  <Label prefHeight="35.0" prefWidth="47.0" text="Telefono" GridPane.rowIndex="3" />
+                  <Label text="Matricola" GridPane.rowIndex="2" />
+                  <Label text="Email" GridPane.rowIndex="3" />
                   <Label text="Data di Nascita" GridPane.rowIndex="4" />
                   <Label text="Stipendio" GridPane.rowIndex="5" />
                   <Label text="Turno" GridPane.rowIndex="6" />
-                  <Label text="Ruolo" GridPane.rowIndex="7" />
-                  <Label text="Ore" GridPane.rowIndex="8" />
-                  <Label text="Label" GridPane.columnIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <Label text="Ore" GridPane.rowIndex="7" />
+                  <Label fx:id="nomeLabel" prefHeight="17.0" prefWidth="288.0" GridPane.columnIndex="1" />
+                  <Label fx:id="cognomeLabel" prefHeight="17.0" prefWidth="365.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="matricolaLabel" prefHeight="17.0" prefWidth="291.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="emailLabel" prefHeight="17.0" prefWidth="329.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="nascitaLabel" prefHeight="17.0" prefWidth="347.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="stipendioLabel" prefHeight="17.0" prefWidth="290.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="turnoLabel" prefHeight="17.0" prefWidth="395.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label fx:id="oreLabel" prefHeight="17.0" prefWidth="385.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                </children>
             </GridPane>
          </children>

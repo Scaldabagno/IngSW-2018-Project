@@ -61,7 +61,7 @@
                               <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Nome" />
+                              <Label prefHeight="29.0" prefWidth="85.0" text="Nome" />
                               <Label text="Cognome" GridPane.rowIndex="1" />
                               <Label text="Email" GridPane.rowIndex="2" />
                               <Label prefHeight="35.0" prefWidth="47.0" text="Telefono" GridPane.rowIndex="3" />
@@ -72,13 +72,13 @@
                               <Label text="Ore" GridPane.rowIndex="8" />
                               <Label fx:id="nomeLabel" prefHeight="16.0" prefWidth="233.0" GridPane.columnIndex="1" />
                               <Label fx:id="cognomeLabel" prefHeight="17.0" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                              <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                              <Label prefHeight="17.0" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label prefHeight="17.0" prefWidth="257.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label prefHeight="17.0" prefWidth="237.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label prefHeight="17.0" prefWidth="241.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label prefHeight="17.0" prefWidth="251.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label fx:id="ruoloLabel" prefHeight="17.0" prefWidth="251.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Label prefHeight="17.0" prefWidth="239.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                            </children>
                         </GridPane>
                      </children>

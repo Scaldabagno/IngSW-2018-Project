@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 public class Impiegato {
 	
-	private String matricola;
 	private String nome;
 	private String cognome;
+	private String matricola;
 	private String email;
 	private String numeroTel;
 	private LocalDate dataNascita;
@@ -18,13 +18,6 @@ public class Impiegato {
 	public Impiegato() {
 	
 	}	
-	
-	public String getMatricola() {
-		return matricola;
-	}
-	public void setMatricola(String matricola) {
-		this.matricola = matricola;
-	}
 	
 	public String getNome() {
 		return nome;
@@ -38,6 +31,13 @@ public class Impiegato {
 	}
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
+	}
+	
+	public String getMatricola() {
+		return matricola;
+	}
+	public void setMatricola(String matricola) {
+		this.matricola = matricola;
 	}
 	
 	public String getEmail() {
