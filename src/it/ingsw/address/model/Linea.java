@@ -1,11 +1,13 @@
 package it.ingsw.address.model;
 
+// import java.util.ArrayList;
 
 public class Linea {
 	
 	private String numeroLinea;
 	private String capolineaI;
 	private String capolineaF;
+//	private ArrayList<Fermata> fermate;
 	
 	public Linea() {
 	}
