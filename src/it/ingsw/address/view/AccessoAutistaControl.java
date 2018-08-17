@@ -1,8 +1,13 @@
 package it.ingsw.address.view;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 
 import it.ingsw.address.MainApp;
+import it.ingsw.address.database.DBImpiegato;
+import it.ingsw.address.model.Impiegato;
+import it.ingsw.address.model.Ruolo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -38,27 +43,56 @@ public class AccessoAutistaControl {
 	}
 	
 	@FXML
-	public void loginAutista() throws IOException{
+	public void loginAreaAutista() throws IOException{
 		//da completare ovviamente
-		if(emailA.getText().equals("") || passwordA.getText().equals("")) {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.initOwner(null);
-            alert.setTitle("Connection Information");
-            alert.setHeaderText("Matricola e/o password errate");
-            alert.setContentText("Controlla le credenziali inserite e riprova.");
-            alert.showAndWait();
+		if(emailA.getText().equals("") && passwordA.getText().equals("")) {
+//			TODO: da togliere
+			FXMLLoader loader=new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/AutistaScreen.fxml"));
+			AnchorPane areaAutista = (AnchorPane) loader.load();
+			Scene scene = new Scene(areaAutista);
+			System.out.println(scene);
+			System.out.println(areaAutista);
+			Stage stage = mainApp.getPrimaryStage();
+			stage.setScene(scene);
+			AutistaControl controller = loader.getController();
+			controller.setMainApp(mainApp);
 		}else {
-		FXMLLoader loader=new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("view/AutistaScreen.fxml"));
-		AnchorPane areaAutista = (AnchorPane) loader.load();
-		Scene scene = new Scene(areaAutista);
-		System.out.println(scene);
-		System.out.println(areaAutista);
-		Stage stage = mainApp.getPrimaryStage();
-		stage.setScene(scene);
-		AutistaControl controller = loader.getController();
-		controller.setMainApp(mainApp);
-		}
+			  try {
+					DBImpiegato dbm = DBImpiegato.getInstance();
+					Ruolo ruolo = Ruolo.Autista;
+					Impiegato impiegato = dbm.loginAutista(emailA.getText(), passwordA.getText(), ruolo);
+							System.out.println(ruolo);
+							if(impiegato != null && impiegato.getRuolo() == ruolo) {
+									FXMLLoader loader=new FXMLLoader();
+									loader.setLocation(MainApp.class.getResource("view/AutistaScreen.fxml"));
+									AnchorPane areaAutista = (AnchorPane) loader.load();
+									Scene scene = new Scene(areaAutista);
+									System.out.println(scene);
+									System.out.println(areaAutista);
+									Stage stage = mainApp.getPrimaryStage();
+									stage.setScene(scene);
+									AutistaControl controller = loader.getController();
+									controller.setMainApp(mainApp);
+							} else if (impiegato == null || impiegato.getRuolo() != Ruolo.Autista) {
+								Alert alert = new Alert(AlertType.WARNING);
+					            alert.initOwner(null);
+					            alert.setTitle("Connection Information");
+					            alert.setHeaderText("Email e/o password errate");
+					            alert.setContentText("Controlla le credenziali inserite e riprova.");
+					            alert.showAndWait();
+							}
+					
+				} catch (SQLException exc) {
+					exc.printStackTrace();
+					Alert alert = new Alert(AlertType.WARNING);
+		            alert.initOwner(null);
+		            alert.setTitle("Connection Information");
+		            alert.setHeaderText("Connessione Non Disponibile");
+		            alert.setContentText("Controlla la connessione e riprova.");
+		            alert.showAndWait();
+				}
+		  }
 	}
 	
 	@FXML

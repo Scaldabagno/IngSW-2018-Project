@@ -1,8 +1,12 @@
 package it.ingsw.address.view;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import it.ingsw.address.MainApp;
+import it.ingsw.address.database.DBImpiegato;
+import it.ingsw.address.model.Impiegato;
+import it.ingsw.address.model.Ruolo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -40,25 +44,54 @@ public class AccessoAddettoAiMezziControl {
 	@FXML
 	public void loginAreaAddettoAiMezzi() throws IOException{
 		//da completare ovviamente
-		if(emailAM.getText().equals("") || passwordAM.getText().equals("")) {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.initOwner(null);
-            alert.setTitle("Connection Information");
-            alert.setHeaderText("Matricola e/o password errate");
-            alert.setContentText("Controlla le credenziali inserite e riprova.");
-            alert.showAndWait();
+		if(emailAM.getText().equals("") && passwordAM.getText().equals("")) {
+//			TODO: da togliere
+			FXMLLoader loader=new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziScreen.fxml"));
+			AnchorPane areaAddettoAiMezzi = (AnchorPane) loader.load();
+			Scene scene = new Scene(areaAddettoAiMezzi);
+			System.out.println(scene);
+			System.out.println(areaAddettoAiMezzi);
+			Stage stage = mainApp.getPrimaryStage();
+			stage.setScene(scene);
+			AddettoAiMezziControl controller = loader.getController();
+			controller.setMainApp(mainApp);
 		}else {
-		FXMLLoader loader=new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziScreen.fxml"));
-		AnchorPane areaAddettoAiMezzi = (AnchorPane) loader.load();
-		Scene scene = new Scene(areaAddettoAiMezzi);
-		System.out.println(scene);
-		System.out.println(areaAddettoAiMezzi);
-		Stage stage = mainApp.getPrimaryStage();
-		stage.setScene(scene);
-		AddettoAiMezziControl controller = loader.getController();
-		controller.setMainApp(mainApp);
-		}
+			  try {
+					DBImpiegato dbm = DBImpiegato.getInstance();
+					Ruolo ruolo = Ruolo.Mezzi;
+					Impiegato impiegato = dbm.loginAddettoAiMezzi(emailAM.getText(), passwordAM.getText(), ruolo);
+							System.out.println(ruolo);
+							if(impiegato != null && impiegato.getRuolo() == ruolo) {
+									FXMLLoader loader=new FXMLLoader();
+									loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziScreen.fxml"));
+									AnchorPane areaAddettoAiMezzi = (AnchorPane) loader.load();
+									Scene scene = new Scene(areaAddettoAiMezzi);
+									System.out.println(scene);
+									System.out.println(areaAddettoAiMezzi);
+									Stage stage = mainApp.getPrimaryStage();
+									stage.setScene(scene);
+									AddettoAiMezziControl controller = loader.getController();
+									controller.setMainApp(mainApp);
+							} else if (impiegato == null || impiegato.getRuolo() != Ruolo.Mezzi) {
+								Alert alert = new Alert(AlertType.WARNING);
+					            alert.initOwner(null);
+					            alert.setTitle("Connection Information");
+					            alert.setHeaderText("Email e/o password errate");
+					            alert.setContentText("Controlla le credenziali inserite e riprova.");
+					            alert.showAndWait();
+							}
+					
+				} catch (SQLException exc) {
+					exc.printStackTrace();
+					Alert alert = new Alert(AlertType.WARNING);
+		            alert.initOwner(null);
+		            alert.setTitle("Connection Information");
+		            alert.setHeaderText("Connessione Non Disponibile");
+		            alert.setContentText("Controlla la connessione e riprova.");
+		            alert.showAndWait();
+				}
+		  }
 	}
 
 	@FXML

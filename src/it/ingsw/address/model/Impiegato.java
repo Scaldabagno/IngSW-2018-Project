@@ -4,10 +4,12 @@ import java.time.LocalDate;
 
 public class Impiegato {
 	
+	private int idImpiegato;
 	private String nome;
 	private String cognome;
 	private String matricola;
 	private String email;
+	private String password;
 	private String numeroTel;
 	private LocalDate dataNascita;
 	private Ruolo ruolo;
@@ -18,6 +20,10 @@ public class Impiegato {
 	public Impiegato() {
 	
 	}	
+	
+	public int getIdImpiegato() {
+		return idImpiegato;
+	}
 	
 	public String getNome() {
 		return nome;
@@ -47,6 +53,14 @@ public class Impiegato {
 		this.email = email;
 	}
 	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getNumeroTel() {
 		return numeroTel;
 	}

@@ -65,8 +65,9 @@ public class AutistaControl {
 	
 	@FXML
 	private void initialize() throws SQLException{
-		DatiImpiegato autista = DBImpiegato.getInstance().getAutista();
-		ShowAutistaDetails(autista);
+//		TODO: da modificare per visualizzazione dati autista
+//		DatiImpiegato autista = DBImpiegato.getInstance().getAutista(null);
+//		dettagliAutista(autista);
 		}
 	
 	@FXML
@@ -87,7 +88,7 @@ public class AutistaControl {
 		this.mainApp = mainApp;
 	}
 	
-	public void ShowAutistaDetails(DatiImpiegato datiAutista) {
+	public void dettagliAutista(DatiImpiegato datiAutista) {
 		if (datiAutista != null) {
 	        // Riempie le label con nome, cognome e gli altri dati
 	        nomeLabel.setText(datiAutista.getDatiNome());

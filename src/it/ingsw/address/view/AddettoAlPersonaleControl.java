@@ -91,10 +91,10 @@ public class AddettoAlPersonaleControl {
 				new PropertyValueFactory<DatiImpiegato, String>("matricola"));
 		cognomeColumn.setCellValueFactory(
 				new PropertyValueFactory<DatiImpiegato, String>("cognome"));
-		showImpiegatoDetails(null);
+		dettagliImpiegato(null);
 		
 		tabellaImpiegati.getSelectionModel().selectedItemProperty().addListener(
-	            (observable, oldValue, newValue) -> showImpiegatoDetails(newValue));
+	            (observable, oldValue, newValue) -> dettagliImpiegato(newValue));
 		
 		System.out.println(listImpiegato);
 		
@@ -139,7 +139,7 @@ public class AddettoAlPersonaleControl {
 		this.mainApp = mainApp;
 	}
 	
-	private void showImpiegatoDetails(DatiImpiegato datiImpiegato) {
+	private void dettagliImpiegato(DatiImpiegato datiImpiegato) {
 	    if (datiImpiegato != null) {
 	        // Riempie le label con nome, cognome e gli altri dati
 	        nomeLabel.setText(datiImpiegato.getDatiNome());

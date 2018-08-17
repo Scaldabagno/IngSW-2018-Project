@@ -78,10 +78,10 @@ public class AddettoAiMezziControl {
 		listMezzo = DBMezzo.getInstance().getMezzi();
 		numeroTarga.setCellValueFactory(
 				new PropertyValueFactory<DatiMezzo, String>("targa"));
-		showMezzoDetails(null);
+		dettagliMezzo(null);
 		
 		tabellaMezzi.getSelectionModel().selectedItemProperty().addListener(
-	            (observable, oldValue, newValue) -> showMezzoDetails(newValue));
+	            (observable, oldValue, newValue) -> dettagliMezzo(newValue));
 		
 		System.out.println(listMezzo);
 		
@@ -125,7 +125,7 @@ public class AddettoAiMezziControl {
 		this.mainApp = mainApp;
 	}
 	
-	private void showMezzoDetails(DatiMezzo datiMezzo) {
+	private void dettagliMezzo(DatiMezzo datiMezzo) {
 	    if (datiMezzo != null) {
 	        // Riempie le label con targa, posto nel deposito, disponibilità
 	        targa.setText(datiMezzo.getDatiTarga());

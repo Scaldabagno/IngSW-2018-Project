@@ -146,6 +146,4 @@ public class DBManager {
     public ResultSet getResultSet() {
         return resultSet;
     }
-
-
 }
