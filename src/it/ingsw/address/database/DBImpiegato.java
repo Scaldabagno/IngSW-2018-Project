@@ -42,6 +42,12 @@ public class DBImpiegato {
 		return impiegato;
 	}
 	
+	public void eliminaImpiegatoAP(String matricola) throws SQLException{
+		Impiegato i = new Impiegato();
+		i.getMatricola();
+		dbm.executeQuery("DELETE FROM impiegati WHERE matricola='" + matricola + "'");
+	}
+	
 	public Impiegato loginAddettoAiMezzi(String email, String password, Ruolo ruolo) throws SQLException {
 		Impiegato impiegato = new Impiegato();
 		ruolo=Ruolo.Mezzi;
@@ -95,7 +101,7 @@ public class DBImpiegato {
 			impiegato.setMatricola(resultSet.getString("matricola"));
 			impiegato.setEmail(resultSet.getString("email"));
 			impiegato.setPassword(resultSet.getString("password"));
-//			impiegato.setRuolo(resultSet.getString("ruolo"));
+			impiegato.setRuolo(Ruolo.getByValue(resultSet.getString("ruolo")));
 			impiegati.add(impiegato);
 		}
 		return impiegati;

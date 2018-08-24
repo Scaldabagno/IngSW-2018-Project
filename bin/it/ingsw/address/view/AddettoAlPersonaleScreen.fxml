@@ -21,12 +21,11 @@
          </font>
       </Text>
       <TextField fx:id="ricercaImpiegato" layoutX="330.0" layoutY="13.0" prefHeight="25.0" prefWidth="296.0" promptText="Ricerca" />
-      <Button fx:id="nuovoImpiegato" layoutX="512.0" layoutY="57.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Inserisci nuovi dati" />
+      <Button fx:id="nuovoImpiegato" layoutX="512.0" layoutY="57.0" mnemonicParsing="false" onMouseClicked="#aggiungiImpiegato" prefHeight="25.0" prefWidth="114.0" text="Inserisci nuovi dati" />
       <Button fx:id="modificaImpiegato" layoutX="512.0" layoutY="104.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Modifica dati" />
-      <Button fx:id="cancellaImpiegato" layoutX="512.0" layoutY="149.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Elimina dati" />
-      <Button fx:id="calcolaStipendio" layoutX="512.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Calcola stipendio" />
-      <Button fx:id="allocaMezzo" layoutX="512.0" layoutY="249.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Alloca mezzo" />
-      <Button fx:id="allocaTurno" layoutX="512.0" layoutY="299.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Alloca turno" />
+      <Button fx:id="calcolaStipendio" layoutX="512.0" layoutY="148.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Calcola stipendio" />
+      <Button fx:id="allocaMezzo" layoutX="512.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Alloca mezzo" />
+      <Button fx:id="allocaTurno" layoutX="512.0" layoutY="248.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Alloca turno" />
       <Button fx:id="logout" layoutX="606.0" layoutY="395.0" mnemonicParsing="false" onMouseClicked="#logoutAP" prefHeight="39.0" prefWidth="80.0" text="Logout" />
       <AnchorPane layoutX="14.0" layoutY="54.0" prefHeight="342.0" prefWidth="471.0">
          <children>

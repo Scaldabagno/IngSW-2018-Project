@@ -10,7 +10,6 @@ public class Impiegato {
 	private String matricola;
 	private String email;
 	private String password;
-	private String numeroTel;
 	private LocalDate dataNascita;
 	private Ruolo ruolo;
 	private Orari ore;
@@ -59,13 +58,6 @@ public class Impiegato {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getNumeroTel() {
-		return numeroTel;
-	}
-	public void setNumeroTel(String numeroTel) {
-		this.numeroTel = numeroTel;
 	}
 	
 	public LocalDate getDataNascita() {

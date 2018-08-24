@@ -50,6 +50,9 @@ public class SchermataPrincipaleControl {
 	@FXML
 	private TextField ricercaLinea;
 	
+	@FXML 
+	private Button ricercaPercorso;
+	
 	@FXML
 	private Button areaRiservata;
 	
@@ -92,6 +95,20 @@ public class SchermataPrincipaleControl {
 	    sortedData.comparatorProperty().bind(tabellaLinee.comparatorProperty());
 
 	  	tabellaLinee.setItems(sortedData);
+	}
+	
+	@FXML
+	public void ricercaPercorso() throws IOException{
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/RicercaPercorso.fxml"));
+		AnchorPane ricercaPercorso = (AnchorPane) loader.load();
+		Scene scene = new Scene(ricercaPercorso);
+		System.out.println(scene);
+		System.out.println(ricercaPercorso);
+		Stage stage = mainApp.getPrimaryStage();
+		stage.setScene(scene);
+		RicercaPercorsoControl controller = loader.getController();
+		controller.setMainApp(mainApp);
 	}
 	
 	@FXML

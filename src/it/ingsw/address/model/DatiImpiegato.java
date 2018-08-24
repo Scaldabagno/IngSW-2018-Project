@@ -26,7 +26,7 @@ public class DatiImpiegato {
 		this.datiCognome = new SimpleStringProperty(i.getCognome());
 		this.datiMatricola = new SimpleStringProperty(i.getMatricola());
 		this.datiEmail = new SimpleStringProperty(i.getEmail());
-//		this.datiRuolo = null;
+//		this.datiRuolo = new SimpleStringProperty(i.getRuolo);
 	}
 	
 	public String getDatiNome() {
