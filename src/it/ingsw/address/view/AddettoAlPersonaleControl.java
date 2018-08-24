@@ -62,9 +62,6 @@ public class AddettoAlPersonaleControl {
 	private Button modificaImpiegato;
 	
 	@FXML
-	private Button cancellaImpiegato;
-	
-	@FXML
 	private Button calcolaStipendio;
 	
 	@FXML
@@ -121,6 +118,36 @@ public class AddettoAlPersonaleControl {
 	  	tabellaImpiegati.setItems(sortedData);
 	}
 	
+	private void dettagliImpiegato(DatiImpiegato datiImpiegato) {
+	    if (datiImpiegato != null) {
+	        // Riempie le label con nome, cognome e gli altri dati
+	        nomeLabel.setText(datiImpiegato.getDatiNome());
+	        cognomeLabel.setText(datiImpiegato.getDatiCognome());
+	        // TODO: Altri dati
+//	        ruoloLabel.setText(datiImpiegato.());
+	    } else {
+	        // Se non viene selezionata nessuna linea, non mostra nulla.
+	        nomeLabel.setText("");
+	        cognomeLabel.setText("");
+//	        TODO: Aggiungere gli altri
+	        ruoloLabel.setText("");
+	    }
+	}
+	
+	@FXML
+	public void aggiungiImpiegato() throws IOException{
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/AggiungiImpiegato.fxml"));
+		AnchorPane aggiungiImpiegato = (AnchorPane) loader.load();
+		Scene scene = new Scene(aggiungiImpiegato);
+		System.out.println(scene);
+		System.out.println(aggiungiImpiegato);
+		Stage stage = mainApp.getPrimaryStage();
+		stage.setScene(scene);
+		AggiungiImpiegatoControl controller = loader.getController();
+		controller.setMainApp(mainApp);
+	}
+	
 	@FXML
 	public void logoutAP() throws IOException{
 		FXMLLoader loader=new FXMLLoader();
@@ -137,21 +164,5 @@ public class AddettoAlPersonaleControl {
 	
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
-	}
-	
-	private void dettagliImpiegato(DatiImpiegato datiImpiegato) {
-	    if (datiImpiegato != null) {
-	        // Riempie le label con nome, cognome e gli altri dati
-	        nomeLabel.setText(datiImpiegato.getDatiNome());
-	        cognomeLabel.setText(datiImpiegato.getDatiCognome());
-	        // TODO: Altri dati
-//	        ruoloLabel.setText(datiImpiegato.getDatiRuolo());
-	    } else {
-	        // Se non viene selezionata nessuna linea, non mostra nulla.
-	        nomeLabel.setText("");
-	        cognomeLabel.setText("");
-//	        TODO: Aggiungere gli altri
-	        ruoloLabel.setText("");
-	    }
 	}
 }

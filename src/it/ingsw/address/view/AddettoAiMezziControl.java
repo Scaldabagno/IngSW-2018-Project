@@ -57,9 +57,6 @@ public class AddettoAiMezziControl {
 	private Button modificaMezzo;
 	
 	@FXML
-	private Button eliminaMezzo;
-	
-	@FXML
 	private Button disponibilitaMezzo;
 	
 	public AddettoAiMezziControl() {
