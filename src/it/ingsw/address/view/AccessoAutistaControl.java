@@ -3,11 +3,11 @@ package it.ingsw.address.view;
 import java.io.IOException;
 import java.sql.SQLException;
 
-
 import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBImpiegato;
 import it.ingsw.address.model.Impiegato;
 import it.ingsw.address.model.Ruolo;
+import it.ingsw.address.model.Sessione;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,10 +27,10 @@ public class AccessoAutistaControl {
 	private MainApp mainApp;
 	
 	@FXML 
-	TextField emailA;
+	private TextField emailA;
 	
 	@FXML
-	PasswordField passwordA;
+	private PasswordField passwordA;
 	
 	@FXML
 	private Button loginA;
@@ -46,6 +46,13 @@ public class AccessoAutistaControl {
 	public void loginAreaAutista() throws IOException{
 		//da completare ovviamente
 		if(emailA.getText().equals("") && passwordA.getText().equals("")) {
+			Sessione.impiegato = new Impiegato();
+			Impiegato i = Sessione.impiegato;
+			i.setNome("Ciao");
+			i.setCognome("Amico");
+			i.setEmail(emailA.getText() + "Niente");
+			i.setMatricola("1234");
+			i.setRuolo(Ruolo.Autista);
 //			TODO: da togliere
 			FXMLLoader loader=new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/AutistaScreen.fxml"));
@@ -64,6 +71,7 @@ public class AccessoAutistaControl {
 					Impiegato impiegato = dbm.loginAutista(emailA.getText(), passwordA.getText(), ruolo);
 							System.out.println(ruolo);
 							if(impiegato != null && impiegato.getRuolo() == ruolo) {
+									Sessione.impiegato = impiegato;
 									FXMLLoader loader=new FXMLLoader();
 									loader.setLocation(MainApp.class.getResource("view/AutistaScreen.fxml"));
 									AnchorPane areaAutista = (AnchorPane) loader.load();

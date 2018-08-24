@@ -2,19 +2,16 @@ package it.ingsw.address.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Optional;
+
+import com.mysql.fabric.xmlrpc.base.Value;
 
 import it.ingsw.address.MainApp;
-import it.ingsw.address.database.DBImpiegato;
-import it.ingsw.address.model.DatiImpiegato;
 import it.ingsw.address.model.Impiegato;
+import it.ingsw.address.model.Sessione;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -71,30 +68,15 @@ public class AutistaControl {
 	@FXML
 	private void initialize() throws SQLException{
 //		TODO: da modificare per visualizzazione dati autista, tramite, forse, Sessione
-		DatiImpiegato autista = DBImpiegato.getInstance().getAutista(/*"email= '" + email + "AND ruolo= '" + ruolo*/null);
-		dettagliAutista(autista);
-		
-	}
-	
-	public void dettagliAutista(DatiImpiegato datiAutista) {
-		if (datiAutista != null) {
-	        // Riempie le label con nome, cognome e gli altri dati
-	        nomeLabel.setText(datiAutista.getDatiNome());
-	        cognomeLabel.setText(datiAutista.getDatiCognome());
-	        matricolaLabel.setText(datiAutista.getDatiMatricola());
-	        emailLabel.setText(datiAutista.getDatiEmail());
-	        // TODO: Altri dati
-	    } else {
-	        // Se non viene selezionata nessuna linea, non mostra nulla.
-	        nomeLabel.setText("");
-	        cognomeLabel.setText("");
-	        matricolaLabel.setText("");
-	        emailLabel.setText("");
-	    }
+		this.nomeLabel.setText(Sessione.impiegato.getNome());
+		this.cognomeLabel.setText(Sessione.impiegato.getCognome());
+		this.matricolaLabel.setText(Sessione.impiegato.getMatricola());
+		this.emailLabel.setText(Sessione.impiegato.getEmail());		
 	}
 	
 	@FXML
 	public void logoutA() throws IOException{
+		Sessione.impiegato = new Impiegato();
 		FXMLLoader loader=new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("view/SchermataPrincipale.fxml"));
 		AnchorPane schermataPrincipale = (AnchorPane) loader.load();
