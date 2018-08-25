@@ -2,6 +2,7 @@ package it.ingsw.address.model;
 
 public class Mezzo {
 	private String targa;
+	private int numeroPosto;
 	private boolean disponibilita;
 	
 	public Mezzo() {
@@ -15,6 +16,14 @@ public class Mezzo {
 		this.targa = targa;
 	}
 	
+	public int getNumeroPosto() {
+		return numeroPosto;
+	}
+
+	public void setNumeroPosto(int numeroPosto) {
+		this.numeroPosto = numeroPosto;
+	}
+
 	public boolean isDisponibilita() {
 		return disponibilita;
 	}

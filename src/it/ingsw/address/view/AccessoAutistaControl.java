@@ -1,7 +1,9 @@
 package it.ingsw.address.view;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBImpiegato;
@@ -53,6 +55,7 @@ public class AccessoAutistaControl {
 			i.setEmail(emailA.getText() + "Niente");
 			i.setMatricola("1234");
 			i.setRuolo(Ruolo.Autista);
+			i.setDataNascita(LocalDate.now());
 //			TODO: da togliere
 			FXMLLoader loader=new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/AutistaScreen.fxml"));

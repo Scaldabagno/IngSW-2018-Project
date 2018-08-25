@@ -1,13 +1,13 @@
 package it.ingsw.address.model;
 
-// import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class Linea {
 	
 	private String numeroLinea;
 	private String capolineaI;
 	private String capolineaF;
-//	private ArrayList<Fermata> fermate;
+	private ArrayList<Fermata> fermate;
 	
 	public Linea() {
 	}
@@ -35,14 +35,15 @@ public class Linea {
 	public void setCapolineaF(String capolineaF) {
 		this.capolineaF = capolineaF;
 	}
+
+	public ArrayList<Fermata> getFermate() {
+		return fermate;
+	}
+
+	public void setFermate(ArrayList<Fermata> fermate) {
+		this.fermate = fermate;
+	}
 	
-	
-//	public String getItinerario() {
-//		return itinerario;
-//	}
-//	public void setItinerario(String itinerario) {
-//		this.itinerario = itinerario;
-//	}
 //	public int getOrario() {
 //		return orario;
 //	}

@@ -67,10 +67,10 @@ public class SchermataPrincipaleControl {
 		listLinea = DBLinea.getInstance().getLinee();
 		numeroLinea.setCellValueFactory(
 				new PropertyValueFactory<DatiLinea, String>("numeroLinea"));
-		showLineaDetails(null);
+		dettagliLinea(null);
 		
 		tabellaLinee.getSelectionModel().selectedItemProperty().addListener(
-	            (observable, oldValue, newValue) -> showLineaDetails(newValue));
+	            (observable, oldValue, newValue) -> dettagliLinea(newValue));
 		
 		System.out.println(listLinea);
 		
@@ -130,7 +130,7 @@ public class SchermataPrincipaleControl {
 	}
 
 
-	private void showLineaDetails(DatiLinea datiLinea) {
+	private void dettagliLinea(DatiLinea datiLinea) {
 	    if (datiLinea != null) {
 	        // Riempie le label con numero linea, capolinea, fermate, orari 
 	        linea.setText(datiLinea.getDatiNumeroLinea());

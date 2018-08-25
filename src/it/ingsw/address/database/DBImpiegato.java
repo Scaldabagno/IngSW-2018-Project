@@ -42,12 +42,6 @@ public class DBImpiegato {
 		return impiegato;
 	}
 	
-	public void eliminaImpiegatoAP(String matricola) throws SQLException{
-		Impiegato i = new Impiegato();
-		i.getMatricola();
-		dbm.executeQuery("DELETE FROM impiegati WHERE matricola='" + matricola + "'");
-	}
-	
 	public Impiegato loginAddettoAiMezzi(String email, String password, Ruolo ruolo) throws SQLException {
 		Impiegato impiegato = new Impiegato();
 		ruolo=Ruolo.Mezzi;
@@ -102,6 +96,8 @@ public class DBImpiegato {
 			impiegato.setEmail(resultSet.getString("email"));
 			impiegato.setPassword(resultSet.getString("password"));
 			impiegato.setRuolo(Ruolo.getByValue(resultSet.getString("ruolo")));
+			impiegato.setDataNascita(resultSet.getDate("dataDiNascita").toLocalDate());
+			impiegato.setStipendio(resultSet.getDouble("stipendio"));
 			impiegati.add(impiegato);
 		}
 		return impiegati;
@@ -120,7 +116,9 @@ public class DBImpiegato {
 				impiegato.setMatricola(resultSet.getString("matricola"));
 				impiegato.setEmail(resultSet.getString("email"));
 				impiegato.setPassword(resultSet.getString("password"));
-				//impiegato.setRuolo(resultSet.getString("ruolo"));
+				impiegato.setRuolo(Ruolo.getByValue(resultSet.getString("ruolo")));
+				impiegato.setDataNascita(resultSet.getDate("dataDiNascita").toLocalDate());
+				impiegato.setStipendio(resultSet.getDouble("stipendio"));
 				impiegati.add(new DatiImpiegato(impiegato));
 			}
 		} catch(SQLException exc) {
@@ -150,6 +148,8 @@ public class DBImpiegato {
 				i.setEmail(result.getString("email"));
 				i.setPassword(result.getString("password"));
 				i.setRuolo(Ruolo.getByValue(result.getString("ruolo")));
+				i.setDataNascita(result.getDate("dataDiNascita").toLocalDate());
+				i.setStipendio(result.getDouble("stipendio"));
 //				e.setSalary(result.getDouble("Salary"));
 //				e.setStatus(StatusEmployee.valueOf(result.getString("Status")));
 //				String w = result.getString("Workshift");
@@ -168,25 +168,6 @@ public class DBImpiegato {
 		return impiegati;
 	}
 	
-//	TODO: Da completare e corregere	
-	DatiImpiegato autista;
-	public DatiImpiegato getAutista(String clause) {
-		try {
-			dbm.executeQuery("SELECT * FROM impiegati WHERE" + clause);	//TODO: da completare query 
-			ResultSet resultSet = dbm.getResultSet();
-			Impiegato impiegato = new Impiegato();
-			impiegato.setNome(resultSet.getString("nome"));
-			impiegato.setCognome(resultSet.getString("cognome"));
-			impiegato.setMatricola(resultSet.getString("matricola"));
-			impiegato.setEmail(resultSet.getString("email"));
-			impiegato.setPassword(resultSet.getString("password"));				
-			autista.getImpiegato();
-		} catch(SQLException exc) {
-			exc.printStackTrace();
-		}
-		return autista;
-	}
-	
 //	TODO: Da completare e correggere
 	public void aggiungiImpiegato(Impiegato i) throws SQLException {
 		String query = " INSERT INTO mydb.impiegati ()" + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -198,7 +179,7 @@ public class DBImpiegato {
 		preparedStmt.setString (3, i.getMatricola());
 		preparedStmt.setString (4, i.getEmail());
 		preparedStmt.setString (5, i.getPassword());
-//		preparedStmt.setString (4, i.getBirthDate().getYear()+"-"+e.getBirthDate().getMonthValue()+"-"+e.getBirthDate().getDayOfMonth());
+		preparedStmt.setString (6, i.getDataNascita().getYear()+"-"+i.getDataNascita().getMonthValue()+"-"+i.getDataNascita().getDayOfMonth());
 //		preparedStmt.setDouble (6, i.getSalary());
 //		preparedStmt.setString (8, i.getRole().name());
 //		preparedStmt.setString (9, "AVAILABLE");

@@ -3,8 +3,6 @@ package it.ingsw.address.view;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import com.mysql.fabric.xmlrpc.base.Value;
-
 import it.ingsw.address.MainApp;
 import it.ingsw.address.model.Impiegato;
 import it.ingsw.address.model.Sessione;
@@ -48,9 +46,6 @@ public class AutistaControl {
 	private Label oreLabel;
 
 	@FXML
-	private Button resocontoStipendio;
-
-	@FXML
 	private Button indisponibilita;
 
 	@FXML
@@ -67,11 +62,12 @@ public class AutistaControl {
 	
 	@FXML
 	private void initialize() throws SQLException{
-//		TODO: da modificare per visualizzazione dati autista, tramite, forse, Sessione
 		this.nomeLabel.setText(Sessione.impiegato.getNome());
 		this.cognomeLabel.setText(Sessione.impiegato.getCognome());
 		this.matricolaLabel.setText(Sessione.impiegato.getMatricola());
-		this.emailLabel.setText(Sessione.impiegato.getEmail());		
+		this.emailLabel.setText(Sessione.impiegato.getEmail());	
+		this.nascitaLabel.setText(Sessione.impiegato.getDataNascita().toString());
+		this.stipendioLabel.setText(String.valueOf(Sessione.impiegato.getStipendio()) + " €");
 	}
 	
 	@FXML

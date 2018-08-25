@@ -39,6 +39,7 @@ public class DBMezzo {
 		while(resultSet.next()) {
 			Mezzo mezzo = new Mezzo();
 			mezzo.setTarga(resultSet.getString("targa"));
+			mezzo.setNumeroPosto(resultSet.getInt("posto"));
 			
 			mezzi.add(mezzo);
 		}
@@ -54,6 +55,7 @@ public class DBMezzo {
 			while(resultSet.next()) {
 				Mezzo mezzo = new Mezzo();
 				mezzo.setTarga(resultSet.getString("targa"));
+				mezzo.setNumeroPosto(resultSet.getInt("deposito_posto"));
 //				mezzo.setDisponibilita(resultSet.getString("disponibilitaMezzo")); Booleano, devo vedere come "settarlo"
 				mezzi.add(new DatiMezzo (mezzo));
 			}

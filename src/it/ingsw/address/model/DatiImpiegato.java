@@ -1,5 +1,10 @@
 package it.ingsw.address.model;
 
+import java.time.LocalDate;
+
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -8,17 +13,21 @@ public class DatiImpiegato {
 	private final SimpleStringProperty datiCognome;
 	private final SimpleStringProperty datiMatricola;
 	private final SimpleStringProperty datiEmail;
+	private final SimpleStringProperty datiRuolo;
+	private final SimpleObjectProperty <LocalDate> datiNascita;
+	private final SimpleStringProperty datiStipendio;
 	
-//	private final SimpleStringProperty datiRuolo;
 	//TODO: Aggiungere altre SimpleStringProperty
 	private Impiegato impiegato;
 	
-	public DatiImpiegato(String nome, String cognome, String matricola, String email) {
+	public DatiImpiegato(String nome, String cognome, String matricola, String email, String ruolo, String nascita, String stipendio) {
 		this.datiNome = new SimpleStringProperty(nome);
 		this.datiCognome = new SimpleStringProperty(cognome);
 		this.datiMatricola = new SimpleStringProperty(matricola);
 		this.datiEmail = new SimpleStringProperty(email);
-//		this.datiRuolo = null;
+		this.datiRuolo = new SimpleStringProperty(ruolo);
+		this.datiNascita = new SimpleObjectProperty(nascita);
+		this.datiStipendio = new SimpleStringProperty(stipendio);
 	}
 	
 	public DatiImpiegato(Impiegato i) {
@@ -26,7 +35,9 @@ public class DatiImpiegato {
 		this.datiCognome = new SimpleStringProperty(i.getCognome());
 		this.datiMatricola = new SimpleStringProperty(i.getMatricola());
 		this.datiEmail = new SimpleStringProperty(i.getEmail());
-//		this.datiRuolo = new SimpleStringProperty(i.getRuolo);
+		this.datiRuolo = new SimpleStringProperty(String.valueOf(Ruolo.getByValue(String.valueOf(i.getRuolo()))));
+		this.datiNascita = new SimpleObjectProperty(i.getDataNascita());
+		this.datiStipendio = new SimpleStringProperty(String.valueOf(i.getStipendio()));
 	}
 	
 	public String getDatiNome() {
@@ -77,10 +88,33 @@ public class DatiImpiegato {
 	    return datiEmail;
 	}
 
+	public String getDatiRuolo(){
+		return datiRuolo.get();
+	}
 	
-//	public String getDatiRuolo(){
-//		return datiRuolo.get();
-//	}
+	public LocalDate getDatiNascita() {
+		return datiNascita.get();
+	}
+	
+	public void setDatiNascita(LocalDate nascita) {
+		this.datiNascita.set(nascita);
+	}
+	
+	public ObjectProperty<LocalDate> nascitaProperty() {
+	    return datiNascita;
+	}
+	
+	public String getDatiStipendio() {
+		return datiStipendio.get();
+	}
+	
+	public void setDatiStipendio(String stipendio) {
+		this.datiStipendio.set(stipendio);
+	}
+	
+	public StringProperty stipendioProperty() {
+	    return datiStipendio;
+	}
 	
 	public String getEdit() {
 		return "edit";

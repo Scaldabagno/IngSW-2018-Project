@@ -45,7 +45,19 @@ public class AddettoAlPersonaleControl {
 	private Label cognomeLabel;
 	
 	@FXML
+	private Label matricolaLabel;
+	
+	@FXML
+	private Label emailLabel;
+	
+	@FXML
 	private Label ruoloLabel;
+	
+	@FXML
+	private Label nascitaLabel;
+	
+	@FXML
+	private Label stipendioLabel;
 	
 //	TODO: Aggiungere altre Label
 	
@@ -123,14 +135,23 @@ public class AddettoAlPersonaleControl {
 	        // Riempie le label con nome, cognome e gli altri dati
 	        nomeLabel.setText(datiImpiegato.getDatiNome());
 	        cognomeLabel.setText(datiImpiegato.getDatiCognome());
+	        emailLabel.setText(datiImpiegato.getDatiEmail());
+	        matricolaLabel.setText(datiImpiegato.getDatiMatricola());
+	        ruoloLabel.setText(String.valueOf(datiImpiegato.getDatiRuolo()));
+	        nascitaLabel.setText(String.valueOf(datiImpiegato.getDatiNascita()));
+	        stipendioLabel.setText(String.valueOf(datiImpiegato.getDatiStipendio()) + " €");
+	        
 	        // TODO: Altri dati
-//	        ruoloLabel.setText(datiImpiegato.());
 	    } else {
 	        // Se non viene selezionata nessuna linea, non mostra nulla.
 	        nomeLabel.setText("");
 	        cognomeLabel.setText("");
 //	        TODO: Aggiungere gli altri
+	        matricolaLabel.setText("");
+	        emailLabel.setText("");
 	        ruoloLabel.setText("");
+	        nascitaLabel.setText("");
+	        stipendioLabel.setText("");
 	    }
 	}
 	

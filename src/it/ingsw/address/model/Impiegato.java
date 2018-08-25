@@ -12,7 +12,8 @@ public class Impiegato {
 	private String password;
 	private LocalDate dataNascita;
 	private Ruolo ruolo;
-	private Orari ore;
+	private double stipendio;
+	private Turno ore;
 	private boolean disponibilita;
 	
 	
@@ -74,10 +75,18 @@ public class Impiegato {
 		this.ruolo = ruolo;
 	}
 	
-	public Orari getOre() {
+	public double getStipendio() {
+		return stipendio;
+	}
+
+	public void setStipendio(double stipendio) {
+		this.stipendio = stipendio;
+	}
+
+	public Turno getOre() {
 		return ore;
 	}
-	public void setOre(Orari ore) {
+	public void setOre(Turno ore) {
 		this.ore = ore;
 	}
 

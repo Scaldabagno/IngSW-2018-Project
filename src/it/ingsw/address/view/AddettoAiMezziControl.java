@@ -126,6 +126,8 @@ public class AddettoAiMezziControl {
 	    if (datiMezzo != null) {
 	        // Riempie le label con targa, posto nel deposito, disponibilità
 	        targa.setText(datiMezzo.getDatiTarga());
+	        posto.setText(datiMezzo.getDatiPosto());
+//	        disponibilita.setText(datiMezzo.getDatiDisponibilita());
 	        // TODO: posto e disp
 	    } else {
 	        // Se non viene selezionato nessun mezzo, non mostra nulla.

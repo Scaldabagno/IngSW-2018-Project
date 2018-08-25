@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import it.ingsw.address.model.DatiLinea;
+import it.ingsw.address.model.Fermata;
 import it.ingsw.address.model.Linea;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -64,4 +65,36 @@ public class DBLinea {
 		return datiLinee;
 	}
 	
+	public Fermata getTerminal(Linea linea, boolean first) {
+		Fermata fermata = new Fermata();
+		try {
+			if(first == true) {
+//				TODO: Aggiustare
+				dbm.executeQuery("SELECT s.idStop, s.Address FROM stop s, line_has_stop ls, line l " +
+						"WHERE s.idStop=ls.Stop_idStop AND l.idLine='" + linea.getNumeroLinea() +
+						"' AND l.idLine=ls.Line_idLine AND ls.type='FIRST'");
+			} else {
+				dbm.executeQuery("SELECT s.idStop, s.Address FROM stop s, line_has_stop ls, line l " +
+						"WHERE s.idStop=ls.Stop_idStop AND l.idLine='" + linea.getNumeroLinea() +
+						"' AND l.idLine=ls.Line_idLine AND ls.type='END'");
+			}
+			ResultSet result = dbm.getResultSet();
+			/**************
+			 * CONTROLLO DA FARE
+			 * ATTENZIONE
+			 */
+			if(!result.next()) {
+				Fermata s = new Fermata();
+				s.setFermata("Via vattelappesca 12");
+				return s;
+			}
+			/**
+			 * AGGIUSTARE
+			 */
+			fermata.setFermata(result.getString("s.Address"));
+		} catch(SQLException exc) {
+			exc.printStackTrace();
+		}
+		return fermata;
+	}
 }
