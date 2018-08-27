@@ -3,7 +3,6 @@ package it.ingsw.address.model;
 import java.time.LocalDate;
 
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -35,7 +34,7 @@ public class DatiImpiegato {
 		this.datiCognome = new SimpleStringProperty(i.getCognome());
 		this.datiMatricola = new SimpleStringProperty(i.getMatricola());
 		this.datiEmail = new SimpleStringProperty(i.getEmail());
-		this.datiRuolo = new SimpleStringProperty(String.valueOf(Ruolo.getByValue(String.valueOf(i.getRuolo()))));
+		this.datiRuolo = new SimpleStringProperty(String.valueOf(i.getRuolo()));
 		this.datiNascita = new SimpleObjectProperty(i.getDataNascita());
 		this.datiStipendio = new SimpleStringProperty(String.valueOf(i.getStipendio()));
 	}

@@ -1,7 +1,6 @@
 package it.ingsw.address.view;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 

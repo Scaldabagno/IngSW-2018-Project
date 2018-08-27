@@ -29,7 +29,7 @@ public class DBImpiegato {
 	
 	public Impiegato loginAddettoAlPersonale(String email, String password, Ruolo ruolo) throws SQLException {
 		Impiegato impiegato = new Impiegato();
-		ruolo=Ruolo.Personale;
+		ruolo=Ruolo.AddettoAlPersonale;
 		impiegato = this.getImpiegatoByEmail(email, "ruolo= '" + ruolo + "'");
 		if(impiegato == null) {
 			return null;
@@ -44,7 +44,7 @@ public class DBImpiegato {
 	
 	public Impiegato loginAddettoAiMezzi(String email, String password, Ruolo ruolo) throws SQLException {
 		Impiegato impiegato = new Impiegato();
-		ruolo=Ruolo.Mezzi;
+		ruolo=Ruolo.AddettoAiMezzi;
 		impiegato = this.getImpiegatoByEmail(email, "ruolo= '" + ruolo + "'");
 		if(impiegato == null) {
 			return null;
@@ -95,8 +95,9 @@ public class DBImpiegato {
 			impiegato.setMatricola(resultSet.getString("matricola"));
 			impiegato.setEmail(resultSet.getString("email"));
 			impiegato.setPassword(resultSet.getString("password"));
-			impiegato.setRuolo(Ruolo.getByValue(resultSet.getString("ruolo")));
+			impiegato.setRuolo(Ruolo.valueOf(resultSet.getString("ruolo")));
 			impiegato.setDataNascita(resultSet.getDate("dataDiNascita").toLocalDate());
+			impiegato.setDisponibilita(resultSet.getBoolean("disponibilit‡Impiegato"));
 			impiegato.setStipendio(resultSet.getDouble("stipendio"));
 			impiegati.add(impiegato);
 		}
@@ -116,8 +117,9 @@ public class DBImpiegato {
 				impiegato.setMatricola(resultSet.getString("matricola"));
 				impiegato.setEmail(resultSet.getString("email"));
 				impiegato.setPassword(resultSet.getString("password"));
-				impiegato.setRuolo(Ruolo.getByValue(resultSet.getString("ruolo")));
+				impiegato.setRuolo(Ruolo.valueOf(resultSet.getString("ruolo")));
 				impiegato.setDataNascita(resultSet.getDate("dataDiNascita").toLocalDate());
+				impiegato.setDisponibilita(resultSet.getBoolean("disponibilit‡Impiegato"));
 				impiegato.setStipendio(resultSet.getDouble("stipendio"));
 				impiegati.add(new DatiImpiegato(impiegato));
 			}
@@ -147,8 +149,9 @@ public class DBImpiegato {
 				i.setMatricola(result.getString("matricola"));
 				i.setEmail(result.getString("email"));
 				i.setPassword(result.getString("password"));
-				i.setRuolo(Ruolo.getByValue(result.getString("ruolo")));
+				i.setRuolo(Ruolo.valueOf(result.getString("ruolo")));
 				i.setDataNascita(result.getDate("dataDiNascita").toLocalDate());
+				i.setDisponibilita(result.getBoolean("disponibilit‡Impiegato"));
 				i.setStipendio(result.getDouble("stipendio"));
 //				e.setSalary(result.getDouble("Salary"));
 //				e.setStatus(StatusEmployee.valueOf(result.getString("Status")));
@@ -170,19 +173,19 @@ public class DBImpiegato {
 	
 //	TODO: Da completare e correggere
 	public void aggiungiImpiegato(Impiegato i) throws SQLException {
-		String query = " INSERT INTO mydb.impiegati ()" + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = " INSERT INTO mydb.impiegati ()" + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		// create the mysql insert preparedstatement
 		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
-		preparedStmt.setString (1, i.getNome());
-		preparedStmt.setString (2, i.getCognome());
-		preparedStmt.setString (3, i.getMatricola());
+		preparedStmt.setString (1, i.getMatricola());
+		preparedStmt.setString (2, i.getNome());
+		preparedStmt.setString (3, i.getCognome());
 		preparedStmt.setString (4, i.getEmail());
 		preparedStmt.setString (5, i.getPassword());
 		preparedStmt.setString (6, i.getDataNascita().getYear()+"-"+i.getDataNascita().getMonthValue()+"-"+i.getDataNascita().getDayOfMonth());
-//		preparedStmt.setDouble (6, i.getSalary());
-//		preparedStmt.setString (8, i.getRole().name());
-//		preparedStmt.setString (9, "AVAILABLE");
+		preparedStmt.setString (7, i.getRuolo().name());
+		preparedStmt.setString (8, "0");
+		preparedStmt.setDouble (9, i.getStipendio());
 		
 		// execute the preparedstatement
 		preparedStmt.execute();
@@ -190,11 +193,20 @@ public class DBImpiegato {
 	
 //	TODO: Da provare
 	public void comunicaNonDisponibilita(Impiegato i) throws SQLException{
-		String query = " UPDATE mydb.impiegati SET disponibilit‡Impiegato=? WHERE idImpiegato=?";
-		
-		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
-		preparedStmt.setBoolean (1, i.getDisponibilita());
-		preparedStmt.setInt     (2, i.getIdImpiegato());
+		if(String.valueOf(i.getDisponibilita()) == "true") {
+		String query = " UPDATE mydb.impiegati SET " + 
+				"disponibilit‡Impiegato = '" + 0 + "' " +
+				"WHERE matricola = '" + i.getMatricola()+"';";
+		dbm.executeUpdate(query);
+		}else if (String.valueOf(i.getDisponibilita()) == "false"){
+			String query = " UPDATE mydb.impiegati SET " + 
+					"disponibilit‡Impiegato = '" + 1 + "' " +
+					"WHERE matricola = '" + i.getMatricola() +"';";
+			dbm.executeUpdate(query);
+		}
+//		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
+//		preparedStmt.setBoolean (1, i.getDisponibilita());
+//		preparedStmt.setString  (2, i.getMatricola());
 	}
 
 }

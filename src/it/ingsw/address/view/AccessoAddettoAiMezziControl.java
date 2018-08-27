@@ -59,7 +59,7 @@ public class AccessoAddettoAiMezziControl {
 		}else {
 			  try {
 					DBImpiegato dbm = DBImpiegato.getInstance();
-					Ruolo ruolo = Ruolo.Mezzi;
+					Ruolo ruolo = Ruolo.AddettoAiMezzi;
 					Impiegato impiegato = dbm.loginAddettoAiMezzi(emailAM.getText(), passwordAM.getText(), ruolo);
 							System.out.println(ruolo);
 							if(impiegato != null && impiegato.getRuolo() == ruolo) {
@@ -73,7 +73,7 @@ public class AccessoAddettoAiMezziControl {
 									stage.setScene(scene);
 									AddettoAiMezziControl controller = loader.getController();
 									controller.setMainApp(mainApp);
-							} else if (impiegato == null || impiegato.getRuolo() != Ruolo.Mezzi) {
+							} else if (impiegato == null || impiegato.getRuolo() != Ruolo.AddettoAiMezzi) {
 								Alert alert = new Alert(AlertType.WARNING);
 					            alert.initOwner(null);
 					            alert.setTitle("Connection Information");

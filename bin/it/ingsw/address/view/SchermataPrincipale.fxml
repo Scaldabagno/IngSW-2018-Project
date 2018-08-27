@@ -15,15 +15,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ingsw.address.view.SchermataPrincipaleControl">
    <children>
-      <Text layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Schermata Principale">
+      <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Schermata Principale">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="ricercaLinea" layoutX="442.0" layoutY="12.0" prefHeight="25.0" prefWidth="244.0" promptText="Ricerca Linea" />
-      <SplitPane dividerPositions="0.25227272727272726" layoutX="14.0" layoutY="57.0" prefHeight="324.0" prefWidth="673.0">
+      <TextField fx:id="ricercaLinea" layoutX="440.0" layoutY="12.0" prefHeight="25.0" prefWidth="246.0" promptText="Ricerca Linea" />
+      <SplitPane dividerPositions="0.25227272727272726" layoutX="13.0" layoutY="63.0" prefHeight="325.0" prefWidth="675.0">
          <items>
-            <TableView fx:id="tabellaLinee" cacheShape="false" centerShape="false" editable="true" focusTraversable="false" onSort="#initialize" prefHeight="285.0" prefWidth="30.0" scaleShape="false">
+            <TableView fx:id="tabellaLinee" cacheShape="false" centerShape="false" editable="true" focusTraversable="false" maxWidth="150.0" onSort="#initialize" prefHeight="285.0" prefWidth="150.0" scaleShape="false" SplitPane.resizableWithParent="false">
                <columns>
                   <TableColumn fx:id="numeroLinea" editable="false" onEditStart="#initialize" prefWidth="75.0" text="Linea" />
                </columns>
@@ -60,7 +60,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <Button fx:id="areaRiservata" layoutX="606.0" layoutY="397.0" mnemonicParsing="false" onAction="#areaRiservataButton" onMouseClicked="#areaRiservataButton" prefHeight="39.0" prefWidth="80.0" text="Area&#10;Riservata" textAlignment="CENTER" />
+      <Button fx:id="areaRiservata" layoutX="608.0" layoutY="397.0" mnemonicParsing="false" onAction="#areaRiservataButton" onMouseClicked="#areaRiservataButton" prefHeight="39.0" prefWidth="80.0" text="Area&#10;Riservata" textAlignment="CENTER" />
       <Button fx:id="ricercaPercorso" layoutX="286.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#ricercaPercorso" prefHeight="25.0" prefWidth="109.0" text="Ricerca Percorso" />
    </children>
 </AnchorPane>

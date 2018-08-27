@@ -137,7 +137,7 @@ public class AddettoAlPersonaleControl {
 	        cognomeLabel.setText(datiImpiegato.getDatiCognome());
 	        emailLabel.setText(datiImpiegato.getDatiEmail());
 	        matricolaLabel.setText(datiImpiegato.getDatiMatricola());
-	        ruoloLabel.setText(String.valueOf(datiImpiegato.getDatiRuolo()));
+	        ruoloLabel.setText(datiImpiegato.getDatiRuolo());
 	        nascitaLabel.setText(String.valueOf(datiImpiegato.getDatiNascita()));
 	        stipendioLabel.setText(String.valueOf(datiImpiegato.getDatiStipendio()) + " €");
 	        

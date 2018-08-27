@@ -4,13 +4,16 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import it.ingsw.address.MainApp;
+import it.ingsw.address.database.DBImpiegato;
 import it.ingsw.address.model.Impiegato;
 import it.ingsw.address.model.Sessione;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -44,6 +47,9 @@ public class AutistaControl {
 	
 	@FXML
 	private Label oreLabel;
+	
+	@FXML
+	private Label disponibile;
 
 	@FXML
 	private Button indisponibilita;
@@ -68,6 +74,40 @@ public class AutistaControl {
 		this.emailLabel.setText(Sessione.impiegato.getEmail());	
 		this.nascitaLabel.setText(Sessione.impiegato.getDataNascita().toString());
 		this.stipendioLabel.setText(String.valueOf(Sessione.impiegato.getStipendio()) + " €");
+		if(Sessione.impiegato.getDisponibilita() == true) {
+			this.disponibile.setText("Disponibile");
+		} else {
+			this.disponibile.setText("Non Disponibile");
+		}
+	}
+	
+	@FXML
+	private void comunicaIndisponibilita() {
+		Impiegato i = Sessione.impiegato;
+		try {
+			DBImpiegato dbm = DBImpiegato.getInstance();
+			dbm.comunicaNonDisponibilita(i);
+			switchDisponibilita();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(null);
+            alert.setTitle("Connection Information");
+            alert.setHeaderText("Connessione Non Disponibile");
+            alert.setContentText("Controlla la connessione e riprova.");
+            alert.showAndWait();
+		}
+	}
+	
+	public void switchDisponibilita() {
+		Impiegato i = Sessione.impiegato;
+		if(i.getDisponibilita() == true) {
+			i.setDisponibilita(false);
+			disponibile.setText("Non Disponibile");
+		}else {
+			i.setDisponibilita(true);
+			disponibile.setText("Disponibile");
+		}
 	}
 	
 	@FXML
