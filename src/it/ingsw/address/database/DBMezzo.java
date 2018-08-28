@@ -1,10 +1,12 @@
 package it.ingsw.address.database;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import it.ingsw.address.model.DatiMezzo;
+import it.ingsw.address.model.Impiegato;
 import it.ingsw.address.model.Mezzo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,6 +42,7 @@ public class DBMezzo {
 			Mezzo mezzo = new Mezzo();
 			mezzo.setTarga(resultSet.getString("targa"));
 			mezzo.setNumeroPosto(resultSet.getInt("posto"));
+			mezzo.setDisponibilita(resultSet.getBoolean("disponibilitaMezzo"));
 			
 			mezzi.add(mezzo);
 		}
@@ -56,7 +59,7 @@ public class DBMezzo {
 				Mezzo mezzo = new Mezzo();
 				mezzo.setTarga(resultSet.getString("targa"));
 				mezzo.setNumeroPosto(resultSet.getInt("deposito_posto"));
-//				mezzo.setDisponibilita(resultSet.getString("disponibilitaMezzo")); Booleano, devo vedere come "settarlo"
+				mezzo.setDisponibilita(resultSet.getBoolean("disponibilit‡Mezzo"));
 				mezzi.add(new DatiMezzo (mezzo));
 			}
 		} catch(SQLException exc) {
@@ -64,6 +67,31 @@ public class DBMezzo {
 		}
 		ObservableList<DatiMezzo> datiMezzi = FXCollections.observableArrayList(mezzi);
 		return datiMezzi;
+	}
+	
+	public void aggiungiMezzo(Mezzo m) throws SQLException {
+		String query = " INSERT INTO mydb.mezzi ()" + " values (?, ?, ?, ?)";
+
+		// create the mysql insert preparedstatement
+		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
+		preparedStmt.setString (1, m.getTarga());
+		preparedStmt.setString (2, "0");
+		preparedStmt.setString (3, "0");
+		preparedStmt.setInt    (4, m.getNumeroPosto());
+		
+		
+		// execute the preparedstatement
+		preparedStmt.execute();
+	}
+	
+	public void modificaMezzo(Mezzo m) throws SQLException{
+		String query = " UPDATE mydb.mezzi SET deposito_posto=? WHERE targa=?;";
+		
+		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
+		preparedStmt.setInt    (1, m.getNumeroPosto());
+		preparedStmt.setString (2, m.getTarga());
+		
+		preparedStmt.execute();
 	}
 	
 

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class Impiegato {
 	
-	private int idImpiegato;
 	private String nome;
 	private String cognome;
 	private String matricola;
@@ -20,10 +19,6 @@ public class Impiegato {
 	public Impiegato() {
 	
 	}	
-	
-	public int getIdImpiegato() {
-		return idImpiegato;
-	}
 	
 	public String getNome() {
 		return nome;

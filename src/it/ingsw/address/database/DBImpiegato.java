@@ -171,7 +171,6 @@ public class DBImpiegato {
 		return impiegati;
 	}
 	
-//	TODO: Da completare e correggere
 	public void aggiungiImpiegato(Impiegato i) throws SQLException {
 		String query = " INSERT INTO mydb.impiegati ()" + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -191,7 +190,19 @@ public class DBImpiegato {
 		preparedStmt.execute();
 	}
 	
-//	TODO: Da provare
+	public void modificaImpiegato(Impiegato i) throws SQLException{
+		String query = " UPDATE mydb.impiegati SET nome=?, cognome=?, email=?, password=? WHERE matricola=?;";
+		
+		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
+		preparedStmt.setString (1, i.getNome());
+		preparedStmt.setString (2, i.getCognome());
+		preparedStmt.setString (3, i.getEmail());
+		preparedStmt.setString (4, i.getPassword());
+		preparedStmt.setString (5, i.getMatricola());
+		
+		preparedStmt.execute();
+	}
+	
 	public void comunicaNonDisponibilita(Impiegato i) throws SQLException{
 		if(String.valueOf(i.getDisponibilita()) == "true") {
 		String query = " UPDATE mydb.impiegati SET " + 
@@ -204,11 +215,7 @@ public class DBImpiegato {
 					"WHERE matricola = '" + i.getMatricola() +"';";
 			dbm.executeUpdate(query);
 		}
-//		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
-//		preparedStmt.setBoolean (1, i.getDisponibilita());
-//		preparedStmt.setString  (2, i.getMatricola());
 	}
-
 }
 	
 

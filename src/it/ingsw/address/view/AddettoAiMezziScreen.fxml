@@ -21,9 +21,9 @@
          </font>
       </Text>
       <TextField fx:id="ricercaMezzo" layoutX="407.0" layoutY="8.0" prefHeight="35.0" prefWidth="279.0" promptText="Ricerca" />
-      <Button fx:id="inserisciMezzo" layoutX="494.0" layoutY="121.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="192.0" text="Aggiungi mezzo al Deposito" />
-      <Button fx:id="modificaMezzo" layoutX="494.0" layoutY="193.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="192.0" text="Modifica mezzi del Deposito" />
-      <Button fx:id="disponibilitaMezzo" layoutX="494.0" layoutY="262.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="192.0" text="Comunica Disponibilità dei mezzi" />
+      <Button fx:id="inserisciMezzo" layoutX="494.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#aggiungiMezzo" prefHeight="32.0" prefWidth="192.0" text="Aggiungi mezzo al Deposito" />
+      <Button fx:id="modificaMezzo" layoutX="494.0" layoutY="193.0" mnemonicParsing="false" onMouseClicked="#selezionaMezzo" prefHeight="32.0" prefWidth="192.0" text="Modifica mezzi del Deposito" />
+      <Button fx:id="disponibilitaMezzo" layoutX="494.0" layoutY="262.0" mnemonicParsing="false" onMouseClicked="#comunicaDisponibilitaMezzo" prefHeight="32.0" prefWidth="192.0" text="Comunica Disponibilità dei mezzi" />
       <Button fx:id="logout" layoutX="606.0" layoutY="397.0" mnemonicParsing="false" onMouseClicked="#logoutAM" prefHeight="39.0" prefWidth="80.0" text="Logout" />
       <SplitPane dividerPositions="0.29797979797979796" layoutX="14.0" layoutY="64.0" prefHeight="360.0" prefWidth="462.0">
          <items>

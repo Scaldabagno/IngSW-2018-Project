@@ -5,7 +5,11 @@ import java.sql.SQLException;
 
 import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBMezzo;
+import it.ingsw.address.model.DatiImpiegato;
 import it.ingsw.address.model.DatiMezzo;
+import it.ingsw.address.model.Impiegato;
+import it.ingsw.address.model.Mezzo;
+import it.ingsw.address.model.Sessione;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -13,11 +17,13 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -102,7 +108,78 @@ public class AddettoAiMezziControl {
 
 	  	tabellaMezzi.setItems(sortedData);
 	}
+	
+	@FXML
+	public void aggiungiMezzo() throws IOException{
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/AggiungiMezzo.fxml"));
+		AnchorPane aggiungiMezzo = (AnchorPane) loader.load();
+		Scene scene = new Scene(aggiungiMezzo);
+		System.out.println(scene);
+		System.out.println(aggiungiMezzo);
+		Stage stage = mainApp.getPrimaryStage();
+		stage.setScene(scene);
+		AggiungiMezzoControl controller = loader.getController();
+		controller.setMainApp(mainApp);
+	}
+	
+	@FXML
+	private void selezionaMezzo() {
+	    DatiMezzo mezzoSel = tabellaMezzi.getSelectionModel().getSelectedItem();
+	    if (mezzoSel != null) {
+	        boolean okClicked = modificaMezzo(mezzoSel);
+	        if (okClicked) {
+	            dettagliMezzo(mezzoSel);
+	        }
 
+	    } else {
+	        // Nothing selected.
+	        Alert alert = new Alert(AlertType.WARNING);
+	        alert.initOwner(null);
+	        alert.setTitle("Nessuna Selezione");
+	        alert.setHeaderText("Nessun mezzo selezionato");
+	        alert.setContentText("Selezionare un mezzo dall'elenco.");
+
+	        alert.showAndWait();
+	    }
+	}
+	
+	public boolean modificaMezzo(DatiMezzo datiMezzo) {
+		try {
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/ModificaMezzo.fxml"));
+		AnchorPane modificaMezzo = (AnchorPane) loader.load();
+		Scene scene = new Scene(modificaMezzo);
+		System.out.println(scene);
+		System.out.println(modificaMezzo);
+		Stage stage = mainApp.getPrimaryStage();
+		stage.setScene(scene);
+		ModificaMezzoControl controller = loader.getController();
+		controller.setMainApp(mainApp);
+        controller.setMezzo(datiMezzo);
+        
+        return controller.isOkClicked();
+		}catch (IOException e){
+			 e.printStackTrace();
+		     return false;
+		}
+	}
+	
+	@FXML
+	private void comunicaDisponibilitaMezzo() {
+		DatiMezzo m = tabellaMezzi.getSelectionModel().getSelectedItem();
+		switchDisponibilita(m);
+	} 
+	
+	public void switchDisponibilita(DatiMezzo mezzo) {
+		if(mezzo.getMezzo().getDisponibilita() == true) {
+			mezzo.getMezzo().setDisponibilita(false);
+			disponibilita.setText("Non Disponibile");
+		}else {
+			mezzo.getMezzo().setDisponibilita(true);
+			disponibilita.setText("Disponibile");
+		}
+	}
 	
 	@FXML
 	public void logoutAM() throws IOException{
@@ -127,8 +204,11 @@ public class AddettoAiMezziControl {
 	        // Riempie le label con targa, posto nel deposito, disponibilità
 	        targa.setText(datiMezzo.getDatiTarga());
 	        posto.setText(datiMezzo.getDatiPosto());
-//	        disponibilita.setText(datiMezzo.getDatiDisponibilita());
-	        // TODO: posto e disp
+	        if(datiMezzo.getDatiDisponibilta() == "true"){
+	        	disponibilita.setText("Disponibile");
+	        }else {
+	        	disponibilita.setText("Non Disponibile");
+	        }
 	    } else {
 	        // Se non viene selezionato nessun mezzo, non mostra nulla.
 	        targa.setText("");

@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBImpiegato;
 import it.ingsw.address.model.DatiImpiegato;
+import it.ingsw.address.model.Impiegato;
+import it.ingsw.address.model.Sessione;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -13,6 +15,8 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -81,6 +85,8 @@ public class AddettoAlPersonaleControl {
 	
 	@FXML
 	private Button allocaTurno;
+	
+	private boolean okClicked = false;
 	
 	public AddettoAlPersonaleControl() {
 		
@@ -167,6 +173,48 @@ public class AddettoAlPersonaleControl {
 		stage.setScene(scene);
 		AggiungiImpiegatoControl controller = loader.getController();
 		controller.setMainApp(mainApp);
+	}
+	
+	@FXML
+	private void selezionaImpiegato() {
+	    DatiImpiegato impiegatoSel = tabellaImpiegati.getSelectionModel().getSelectedItem();
+	    if (impiegatoSel != null) {
+	        boolean okClicked = modificaImpiegato(impiegatoSel);
+	        if (okClicked) {
+	            dettagliImpiegato(impiegatoSel);
+	        }
+
+	    } else {
+	        // Nothing selected.
+	        Alert alert = new Alert(AlertType.WARNING);
+	        alert.initOwner(null);
+	        alert.setTitle("Nessuna Selezione");
+	        alert.setHeaderText("Nessun impiegato selezionato");
+	        alert.setContentText("Selezionare un impiegato dall'elenco.");
+
+	        alert.showAndWait();
+	    }
+	}
+	
+	public boolean modificaImpiegato(DatiImpiegato datiImpiegato) {
+		try {
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/ModificaImpiegato.fxml"));
+		AnchorPane modificaImpiegato = (AnchorPane) loader.load();
+		Scene scene = new Scene(modificaImpiegato);
+		System.out.println(scene);
+		System.out.println(modificaImpiegato);
+		Stage stage = mainApp.getPrimaryStage();
+		stage.setScene(scene);
+		ModificaImpiegatoControl controller = loader.getController();
+		controller.setMainApp(mainApp);
+        controller.setImpiegato(datiImpiegato);
+        
+        return controller.isOkClicked();
+		}catch (IOException e){
+			 e.printStackTrace();
+		     return false;
+		}
 	}
 	
 	@FXML

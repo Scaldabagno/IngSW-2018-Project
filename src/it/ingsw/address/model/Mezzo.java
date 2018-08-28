@@ -24,7 +24,7 @@ public class Mezzo {
 		this.numeroPosto = numeroPosto;
 	}
 
-	public boolean isDisponibilita() {
+	public boolean getDisponibilita() {
 		return disponibilita;
 	}
 	public void setDisponibilita(boolean disponibilita) {

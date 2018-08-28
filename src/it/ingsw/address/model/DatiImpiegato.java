@@ -12,6 +12,7 @@ public class DatiImpiegato {
 	private final SimpleStringProperty datiCognome;
 	private final SimpleStringProperty datiMatricola;
 	private final SimpleStringProperty datiEmail;
+	private final SimpleStringProperty datiPassword;
 	private final SimpleStringProperty datiRuolo;
 	private final SimpleObjectProperty <LocalDate> datiNascita;
 	private final SimpleStringProperty datiStipendio;
@@ -19,11 +20,12 @@ public class DatiImpiegato {
 	//TODO: Aggiungere altre SimpleStringProperty
 	private Impiegato impiegato;
 	
-	public DatiImpiegato(String nome, String cognome, String matricola, String email, String ruolo, String nascita, String stipendio) {
+	public DatiImpiegato(String nome, String cognome, String matricola, String email, String password, String ruolo, String nascita, String stipendio) {
 		this.datiNome = new SimpleStringProperty(nome);
 		this.datiCognome = new SimpleStringProperty(cognome);
 		this.datiMatricola = new SimpleStringProperty(matricola);
 		this.datiEmail = new SimpleStringProperty(email);
+		this.datiPassword = new SimpleStringProperty(password);
 		this.datiRuolo = new SimpleStringProperty(ruolo);
 		this.datiNascita = new SimpleObjectProperty(nascita);
 		this.datiStipendio = new SimpleStringProperty(stipendio);
@@ -34,6 +36,7 @@ public class DatiImpiegato {
 		this.datiCognome = new SimpleStringProperty(i.getCognome());
 		this.datiMatricola = new SimpleStringProperty(i.getMatricola());
 		this.datiEmail = new SimpleStringProperty(i.getEmail());
+		this.datiPassword = new SimpleStringProperty(i.getPassword());
 		this.datiRuolo = new SimpleStringProperty(String.valueOf(i.getRuolo()));
 		this.datiNascita = new SimpleObjectProperty(i.getDataNascita());
 		this.datiStipendio = new SimpleStringProperty(String.valueOf(i.getStipendio()));
@@ -85,6 +88,18 @@ public class DatiImpiegato {
 	
 	public StringProperty emailProperty() {
 	    return datiEmail;
+	}
+	
+	public String getDatiPassword() {
+		return datiPassword.get();
+	}
+	
+	public void setDatiPassword(String password) {
+		this.datiPassword.set(password);
+	}
+	
+	public StringProperty passwordProperty() {
+	    return datiPassword;
 	}
 
 	public String getDatiRuolo(){

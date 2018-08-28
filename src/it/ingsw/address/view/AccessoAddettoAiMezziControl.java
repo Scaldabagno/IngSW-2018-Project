@@ -26,10 +26,10 @@ public class AccessoAddettoAiMezziControl {
 	private MainApp mainApp;
 	
 	@FXML 
-	TextField emailAM;
+	private TextField emailAM;
 	
 	@FXML
-	PasswordField passwordAM;
+	private PasswordField passwordAM;
 	
 	@FXML
 	private Button loginAM;

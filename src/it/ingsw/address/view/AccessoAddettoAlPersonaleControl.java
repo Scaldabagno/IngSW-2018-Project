@@ -26,10 +26,10 @@ public class AccessoAddettoAlPersonaleControl {
 	private MainApp mainApp;
 	
 	@FXML 
-	TextField emailAP;
+	private TextField emailAP;
 	
 	@FXML
-	PasswordField passwordAP;
+	private PasswordField passwordAP;
 	
 	@FXML
 	private Button loginAP;
