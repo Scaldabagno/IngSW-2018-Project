@@ -4,7 +4,11 @@ public class Fermata {
 	private String fermata;
 	
 	public Fermata() {
-		
+		this(null);
+	}
+	
+	public Fermata(String fermata) {
+		this.setFermata(fermata);
 	}
 
 	public String getFermata() {
@@ -15,5 +19,7 @@ public class Fermata {
 		this.fermata = fermata;
 	}
 	
-	
+	public String toString() {
+		return fermata;
+	}
 }

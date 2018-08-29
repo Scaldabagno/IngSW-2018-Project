@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBMezzo;
+import it.ingsw.address.model.Deposito;
 import it.ingsw.address.model.Mezzo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,8 +37,7 @@ public class AggiungiMezzoControl {
 	}
 	
 	@FXML
-	private void aggiungi() {
-		//System.out.println(turno.getValue());
+	private void aggiungi() throws IOException {
 		Alert error = check();
 		if (error != null) {
 			error.showAndWait();
@@ -51,8 +51,7 @@ public class AggiungiMezzoControl {
 				alert.setContentText("L'impiegato è stato aggiunto all'elenco degli impiegati");
 				alert.showAndWait();
 
-				targaText.setText("");
-				postoText.setText("");
+				annullaButton();
 
 			} catch (SQLException e) {
 				Alert alert = new Alert(AlertType.WARNING);
@@ -91,30 +90,11 @@ public class AggiungiMezzoControl {
 			alert.setContentText("Inserisci un numero di posto");
 			return alert;
 		}
-		
-			// Alfabetical check for name
-//			if( (Integer.parseInt(nome.getText())) | (Integer.parseInt(cognome.getText())) ) {
-//				alert.setContentText("Nome e cognome non possono contenere solo numeri");
-//				return alert;
-//			}
-			// TODO: String check for nome e cognome
-//			try {
-//				Integer.parseInt(nomeText.getText());
-//				alert.setContentText("Inserisci un nome valido");
-//				return alert;
-//			}
-//			catch(NumberFormatException exc) {
-//				;
-//			}
-//			
-//			try {
-//				Integer.parseInt(cognomeText.getText());
-//				alert.setContentText("Inserisci un cognome valido");
-//				return alert;
-//			}
-//			catch(NumberFormatException exc) {
-//				;
-//			}
+		// Check numero posto
+		if (Integer.valueOf(postoText.getText()) > Deposito.getMax()) {
+			alert.setContentText("Posto non esistente, il deposito ha " + Deposito.getMax() + " posti");
+			return alert;
+		}
 
 		// Data is ok
 		return null;

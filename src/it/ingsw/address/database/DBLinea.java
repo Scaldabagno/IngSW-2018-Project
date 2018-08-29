@@ -54,8 +54,9 @@ public class DBLinea {
 			while(resultSet.next()) {
 				Linea linea = new Linea();
 				linea.setNumeroLinea(resultSet.getString("numeroLinea"));
-				linea.setCapolineaI(resultSet.getString("capolineaI"));
-				linea.setCapolineaF(resultSet.getString("capolineaF"));
+				linea.setCapolineaI(this.getCapolinea(linea, true));
+				linea.setCapolineaF(this.getCapolinea(linea, false));
+				linea.setFermate(this.getFermate(linea));
 				linee.add(new DatiLinea (linea));
 			}
 		} catch(SQLException exc) {
@@ -65,33 +66,54 @@ public class DBLinea {
 		return datiLinee;
 	}
 	
-	public Fermata getTerminal(Linea linea, boolean first) {
+	public ArrayList<Fermata> getFermate(Linea linea) {
+		ArrayList<Fermata> fermate = new ArrayList<>();
+		try {
+				dbm.executeQuery("SELECT fermate.idFermate, fermate.fermata FROM fermate, linee_has_fermate, linee " +
+						"WHERE fermate.idFermate=linee_has_fermate.fermate_idFermate AND linee.numeroLinea='" + linea.getNumeroLinea() +
+						"' AND linee.numeroLinea=linee_has_fermate.linee_idLinea AND linee_has_fermate.tipo='INTERMEDIA'");
+			
+			ResultSet resultSet = dbm.getResultSet();
+			resultSet.beforeFirst();
+			int i=-1;
+			while(resultSet.next()) {
+				Fermata fermata = new Fermata();
+				fermata.setFermata(resultSet.getString("fermate.fermata"));
+				fermate.add(++i, fermata);
+			}
+		} catch (SQLException exc) {
+			exc.printStackTrace();
+		}
+		return fermate;
+	}
+	
+	public Fermata getCapolinea(Linea linea, boolean first) {
 		Fermata fermata = new Fermata();
 		try {
 			if(first == true) {
 //				TODO: Aggiustare
-				dbm.executeQuery("SELECT s.idStop, s.Address FROM stop s, line_has_stop ls, line l " +
-						"WHERE s.idStop=ls.Stop_idStop AND l.idLine='" + linea.getNumeroLinea() +
-						"' AND l.idLine=ls.Line_idLine AND ls.type='FIRST'");
+				dbm.executeQuery("SELECT fermate.idFermate, fermate.fermata FROM fermate, linee_has_fermate, linee " +
+						"WHERE fermate.idFermate=linee_has_fermate.fermate_idFermate AND linee.numeroLinea='" + linea.getNumeroLinea() +
+						"' AND linee.numeroLinea=linee_has_fermate.linee_idLinea AND linee_has_fermate.tipo='PRIMA'");
 			} else {
-				dbm.executeQuery("SELECT s.idStop, s.Address FROM stop s, line_has_stop ls, line l " +
-						"WHERE s.idStop=ls.Stop_idStop AND l.idLine='" + linea.getNumeroLinea() +
-						"' AND l.idLine=ls.Line_idLine AND ls.type='END'");
+				dbm.executeQuery("SELECT fermate.idFermate, fermate.fermata FROM fermate, linee_has_fermate, linee " +
+						"WHERE fermate.idFermate=linee_has_fermate.fermate_idFermate AND linee.numeroLinea='" + linea.getNumeroLinea() +
+						"' AND linee.numeroLinea=linee_has_fermate.linee_idLinea AND linee_has_fermate.tipo='ULTIMA'");
 			}
 			ResultSet result = dbm.getResultSet();
-			/**************
-			 * CONTROLLO DA FARE
-			 * ATTENZIONE
-			 */
+//			/**************
+//			 * CONTROLLO DA FARE
+//			 * ATTENZIONE
+//			 */
 			if(!result.next()) {
-				Fermata s = new Fermata();
-				s.setFermata("Via vattelappesca 12");
-				return s;
+				Fermata f = new Fermata();
+				f.setFermata("Via vattelappesca 12");
+				return f;
 			}
-			/**
-			 * AGGIUSTARE
-			 */
-			fermata.setFermata(result.getString("s.Address"));
+//			/**
+//			 * AGGIUSTARE
+//			 */
+			fermata.setFermata(result.getString("fermate.fermata"));
 		} catch(SQLException exc) {
 			exc.printStackTrace();
 		}

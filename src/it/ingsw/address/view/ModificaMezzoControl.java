@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBMezzo;
 import it.ingsw.address.model.DatiMezzo;
+import it.ingsw.address.model.Deposito;
 import it.ingsw.address.model.Mezzo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -70,8 +71,8 @@ private MainApp mainApp;
             // Show the error message.
             Alert alert = new Alert(AlertType.ERROR);
             alert.initOwner(null);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
+            alert.setTitle("Campi non validi");
+            alert.setHeaderText("Correggere i campi non validi");
             alert.setContentText(errorMessage);
             
             alert.showAndWait();
@@ -81,7 +82,7 @@ private MainApp mainApp;
     }
     
     @FXML
-	private void modifica() {
+	private void modifica() throws IOException {
 		Alert error = check();
 		if (error != null) {
 			error.showAndWait();
@@ -91,23 +92,22 @@ private MainApp mainApp;
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.initOwner(mainApp.getPrimaryStage());
 				alert.setTitle("Avviso");
-				alert.setHeaderText("Inserimento avvenuto con successo!");
+				alert.setHeaderText("Modifica avvenuta con successo!");
 				alert.setContentText("Il mezzo stato aggiunto all'elenco dei mezzi");
 				alert.showAndWait();
 
-				targaText.setText("");
-				postoText.setText("");
+				annullaButton();
 				
 			} catch (SQLException e) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.initOwner(null);
 				alert.setTitle("Avviso");
 				alert.setHeaderText("Inserimento fallito!");
-				alert.setContentText("Il numero di targa inserito è già stato assegnato");
+				alert.setContentText("Il posto inserito è già stato assegnato");
 				alert.showAndWait();
 				e.printStackTrace();
 			}
-			String result = "Il mezzo con targa " + targaText.getText() + " é stato modificato con successo";
+			String result = "Il mezzo con targa " + targaText.getText() + " è stato modificato con successo";
 			System.out.println(result);
 		}
 	}
@@ -125,16 +125,22 @@ private MainApp mainApp;
 		alert.setTitle("Avviso");
 		alert.setHeaderText("Inserimento fallito!");
 
-		// Check nome
+		// Check targa
 		if (targaText.getText().equals("")) {
 			alert.setContentText("Inserisci una targa");
 			return alert;
 		}
-		// Check cognome
+		// Check numero posto
 		if (postoText.getText().equals("")) {
 			alert.setContentText("Inserisci un posto");
 			return alert;
 		}
+		// Check numero posto
+		if (Integer.valueOf(postoText.getText()) >= 51) {
+			alert.setContentText("Posto non esistente, il deposito ha " + Deposito.getMax() + " posti");
+			return alert;
+		}
+		
 		// Data is ok
 		return null;
 	}

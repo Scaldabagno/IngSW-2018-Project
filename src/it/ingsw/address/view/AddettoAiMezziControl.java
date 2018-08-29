@@ -196,13 +196,13 @@ public class AddettoAiMezziControl {
 	
 	public void switchDisponibilita(DatiMezzo datiMezzo) {
 		if(datiMezzo.getDatiDisponibilita() == "true") {
-				datiMezzo.setDatiDisponibilita("false");
-				disponibilita.setText("Non Disponibile");
+			datiMezzo.setDatiDisponibilita("false");
+			disponibilita.setText("Non Disponibile");
 				
 				
 		}else if(datiMezzo.getDatiDisponibilita() == "false"){
 			datiMezzo.setDatiDisponibilita("true");
-				disponibilita.setText("Disponibile");
+			disponibilita.setText("Disponibile");
 		}
 	}
 	

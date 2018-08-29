@@ -4,7 +4,6 @@ package it.ingsw.address.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -69,7 +68,7 @@ public class AggiungiImpiegatoControl {
 	}
 	
 	@FXML
-	private void aggiungi() {
+	private void aggiungi() throws IOException {
 		//System.out.println(turno.getValue());
 		Alert error = check();
 		if (error != null) {
@@ -83,13 +82,8 @@ public class AggiungiImpiegatoControl {
 				alert.setHeaderText("Inserimento avvenuto con successo!");
 				alert.setContentText("L'impiegato è stato aggiunto all'elenco degli impiegati");
 				alert.showAndWait();
-
-				matricolaText.setText("");
-				nomeText.setText("");
-				cognomeText.setText("");
-				emailText.setText("");
-				passwordText.setText("");
-				dataDiNascitaText.setValue(LocalDate.of(1900, 1, 1));
+				
+				annullaButton();
 
 			} catch (SQLException e) {
 				Alert alert = new Alert(AlertType.WARNING);

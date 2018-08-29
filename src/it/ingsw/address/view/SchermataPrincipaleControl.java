@@ -135,7 +135,8 @@ public class SchermataPrincipaleControl {
 	        // Riempie le label con numero linea, capolinea, fermate, orari 
 	        linea.setText(datiLinea.getDatiNumeroLinea());
 	        capolinea.setText(datiLinea.getDatiCapolineaI() + "-" + datiLinea.getDatiCapolineaF());
-	        // TODO: Fermate e orari
+	        fermate.setText(datiLinea.getDatiCapolineaI() + ", " + datiLinea.getDatiFermate() + ", " + datiLinea.getDatiCapolineaF());
+	        // TODO: Orari
 	    } else {
 	        // Se non viene selezionata nessuna linea, non mostra nulla.
 	        linea.setText("");

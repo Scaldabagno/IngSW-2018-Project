@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBImpiegato;
 import it.ingsw.address.model.DatiImpiegato;
-import it.ingsw.address.model.Impiegato;
-import it.ingsw.address.model.Sessione;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -63,8 +61,6 @@ public class AddettoAlPersonaleControl {
 	@FXML
 	private Label stipendioLabel;
 	
-//	TODO: Aggiungere altre Label
-	
 	@FXML
 	private Button logout;
 	
@@ -85,8 +81,6 @@ public class AddettoAlPersonaleControl {
 	
 	@FXML
 	private Button allocaTurno;
-	
-	private boolean okClicked = false;
 	
 	public AddettoAlPersonaleControl() {
 		
