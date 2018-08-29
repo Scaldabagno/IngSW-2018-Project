@@ -176,10 +176,10 @@ public class AddettoAlPersonaleControl {
 	}
 	
 	@FXML
-	private void selezionaImpiegato() {
+	private void modificaImpiegato() {
 	    DatiImpiegato impiegatoSel = tabellaImpiegati.getSelectionModel().getSelectedItem();
 	    if (impiegatoSel != null) {
-	        boolean okClicked = modificaImpiegato(impiegatoSel);
+	        boolean okClicked = modificaImpiegatoScene(impiegatoSel);
 	        if (okClicked) {
 	            dettagliImpiegato(impiegatoSel);
 	        }
@@ -196,7 +196,7 @@ public class AddettoAlPersonaleControl {
 	    }
 	}
 	
-	public boolean modificaImpiegato(DatiImpiegato datiImpiegato) {
+	public boolean modificaImpiegatoScene(DatiImpiegato datiImpiegato) {
 		try {
 		FXMLLoader loader=new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("view/ModificaImpiegato.fxml"));

@@ -46,7 +46,7 @@ public class DatiMezzo {
 	    return datiPosto;
 	}
 	
-	public String getDatiDisponibilta() {
+	public String getDatiDisponibilita() {
 		return datiDisponibilita.get();
 	}
 	

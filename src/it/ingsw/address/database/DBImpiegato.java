@@ -205,10 +205,10 @@ public class DBImpiegato {
 	
 	public void comunicaNonDisponibilita(Impiegato i) throws SQLException{
 		if(String.valueOf(i.getDisponibilita()) == "true") {
-		String query = " UPDATE mydb.impiegati SET " + 
-				"disponibilit‡Impiegato = '" + 0 + "' " +
-				"WHERE matricola = '" + i.getMatricola()+"';";
-		dbm.executeUpdate(query);
+			String query = " UPDATE mydb.impiegati SET " + 
+					"disponibilit‡Impiegato = '" + 0 + "' " +
+					"WHERE matricola = '" + i.getMatricola()+"';";
+			dbm.executeUpdate(query);
 		}else if (String.valueOf(i.getDisponibilita()) == "false"){
 			String query = " UPDATE mydb.impiegati SET " + 
 					"disponibilit‡Impiegato = '" + 1 + "' " +

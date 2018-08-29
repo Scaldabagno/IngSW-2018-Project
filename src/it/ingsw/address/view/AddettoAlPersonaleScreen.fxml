@@ -22,7 +22,7 @@
       </Text>
       <TextField fx:id="ricercaImpiegato" layoutX="330.0" layoutY="13.0" prefHeight="25.0" prefWidth="296.0" promptText="Ricerca" />
       <Button fx:id="nuovoImpiegato" layoutX="512.0" layoutY="57.0" mnemonicParsing="false" onMouseClicked="#aggiungiImpiegato" prefHeight="25.0" prefWidth="114.0" text="Inserisci nuovi dati" />
-      <Button fx:id="modificaImpiegato" layoutX="512.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#selezionaImpiegato" prefHeight="25.0" prefWidth="114.0" text="Modifica dati" />
+      <Button fx:id="modificaImpiegato" layoutX="512.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#modificaImpiegato" prefHeight="25.0" prefWidth="114.0" text="Modifica dati" />
       <Button fx:id="calcolaStipendio" layoutX="512.0" layoutY="148.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Calcola stipendio" />
       <Button fx:id="allocaMezzo" layoutX="512.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Alloca mezzo" />
       <Button fx:id="allocaTurno" layoutX="512.0" layoutY="248.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Alloca turno" />

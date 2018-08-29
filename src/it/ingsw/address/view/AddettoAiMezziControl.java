@@ -5,11 +5,7 @@ import java.sql.SQLException;
 
 import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBMezzo;
-import it.ingsw.address.model.DatiImpiegato;
 import it.ingsw.address.model.DatiMezzo;
-import it.ingsw.address.model.Impiegato;
-import it.ingsw.address.model.Mezzo;
-import it.ingsw.address.model.Sessione;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -124,10 +120,10 @@ public class AddettoAiMezziControl {
 	}
 	
 	@FXML
-	private void selezionaMezzo() {
+	private void modificaMezzo() {
 	    DatiMezzo mezzoSel = tabellaMezzi.getSelectionModel().getSelectedItem();
 	    if (mezzoSel != null) {
-	        boolean okClicked = modificaMezzo(mezzoSel);
+	        boolean okClicked = modificaMezzoScene(mezzoSel);
 	        if (okClicked) {
 	            dettagliMezzo(mezzoSel);
 	        }
@@ -144,7 +140,7 @@ public class AddettoAiMezziControl {
 	    }
 	}
 	
-	public boolean modificaMezzo(DatiMezzo datiMezzo) {
+	public boolean modificaMezzoScene(DatiMezzo datiMezzo) {
 		try {
 		FXMLLoader loader=new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("view/ModificaMezzo.fxml"));
@@ -165,19 +161,48 @@ public class AddettoAiMezziControl {
 		}
 	}
 	
+	
 	@FXML
 	private void comunicaDisponibilitaMezzo() {
-		DatiMezzo m = tabellaMezzi.getSelectionModel().getSelectedItem();
-		switchDisponibilita(m);
+		DatiMezzo mezzoSel = tabellaMezzi.getSelectionModel().getSelectedItem();
+		if (mezzoSel != null) {
+			System.out.println(mezzoSel);
+			System.out.println(mezzoSel.getDatiDisponibilita());
+			try {
+			DBMezzo dbm = DBMezzo.getInstance();
+			dbm.comunicaNonDisponibilita(mezzoSel);
+			switchDisponibilita(mezzoSel);
+			} catch (SQLException e){
+				e.printStackTrace();
+				Alert alert = new Alert(AlertType.WARNING);
+	            alert.initOwner(null);
+	            alert.setTitle("Connection Information");
+	            alert.setHeaderText("Connessione Non Disponibile");
+	            alert.setContentText("Controlla la connessione e riprova.");
+	            alert.showAndWait();
+			}
+	    } else {
+	        // Nothing selected.
+	        Alert alert = new Alert(AlertType.WARNING);
+	        alert.initOwner(null);
+	        alert.setTitle("Nessuna Selezione");
+	        alert.setHeaderText("Nessun mezzo selezionato");
+	        alert.setContentText("Selezionare un mezzo dall'elenco.");
+
+	        alert.showAndWait();
+	    }
+		
 	} 
 	
-	public void switchDisponibilita(DatiMezzo mezzo) {
-		if(mezzo.getMezzo().getDisponibilita() == true) {
-			mezzo.getMezzo().setDisponibilita(false);
-			disponibilita.setText("Non Disponibile");
-		}else {
-			mezzo.getMezzo().setDisponibilita(true);
-			disponibilita.setText("Disponibile");
+	public void switchDisponibilita(DatiMezzo datiMezzo) {
+		if(datiMezzo.getDatiDisponibilita() == "true") {
+				datiMezzo.setDatiDisponibilita("false");
+				disponibilita.setText("Non Disponibile");
+				
+				
+		}else if(datiMezzo.getDatiDisponibilita() == "false"){
+			datiMezzo.setDatiDisponibilita("true");
+				disponibilita.setText("Disponibile");
 		}
 	}
 	
@@ -204,9 +229,9 @@ public class AddettoAiMezziControl {
 	        // Riempie le label con targa, posto nel deposito, disponibilità
 	        targa.setText(datiMezzo.getDatiTarga());
 	        posto.setText(datiMezzo.getDatiPosto());
-	        if(datiMezzo.getDatiDisponibilta() == "true"){
+	        if(datiMezzo.getDatiDisponibilita() == "true"){
 	        	disponibilita.setText("Disponibile");
-	        }else {
+	        }else if(datiMezzo.getDatiDisponibilita() == "false"){
 	        	disponibilita.setText("Non Disponibile");
 	        }
 	    } else {

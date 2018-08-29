@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import it.ingsw.address.model.DatiMezzo;
-import it.ingsw.address.model.Impiegato;
 import it.ingsw.address.model.Mezzo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -93,6 +92,19 @@ public class DBMezzo {
 		
 		preparedStmt.execute();
 	}
-	
+
+	public void comunicaNonDisponibilita(DatiMezzo m) throws SQLException{
+		if(String.valueOf(m.getDatiDisponibilita()) == "true") {
+			String query = " UPDATE mydb.mezzi SET " + 
+					"disponibilit‡Mezzo = '" + 0 + "' " +
+					"WHERE targa = '" + m.getDatiTarga()+"';";
+			dbm.executeUpdate(query);
+		}else if (m.getDatiDisponibilita() == "false"){
+			String query = " UPDATE mydb.mezzi SET " + 
+					"disponibilit‡Mezzo = '" + 1 + "' " +
+					"WHERE targa = '" + m.getDatiTarga() +"';";
+			dbm.executeUpdate(query);
+		}
+	}
 
 }
