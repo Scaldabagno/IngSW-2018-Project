@@ -5,9 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.omg.PortableInterceptor.NON_EXISTENT;
+
 import it.ingsw.address.model.DatiImpiegato;
 import it.ingsw.address.model.Impiegato;
 import it.ingsw.address.model.Ruolo;
+import it.ingsw.address.model.Turno;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -99,6 +102,7 @@ public class DBImpiegato {
 			impiegato.setDataNascita(resultSet.getDate("dataDiNascita").toLocalDate());
 			impiegato.setDisponibilita(resultSet.getBoolean("disponibilit‡Impiegato"));
 			impiegato.setStipendio(resultSet.getDouble("stipendio"));
+			impiegato.setTurno(Turno.valueOf(resultSet.getString("turno")));
 			impiegati.add(impiegato);
 		}
 		return impiegati;
@@ -121,6 +125,43 @@ public class DBImpiegato {
 				impiegato.setDataNascita(resultSet.getDate("dataDiNascita").toLocalDate());
 				impiegato.setDisponibilita(resultSet.getBoolean("disponibilit‡Impiegato"));
 				impiegato.setStipendio(resultSet.getDouble("stipendio"));
+				if(resultSet.getString("turno") != null) {
+					impiegato.setTurno(Turno.valueOf(resultSet.getString("turno")));
+				}else {
+					impiegato.setTurno(Turno.NonAssegnato);
+				}
+				
+				impiegati.add(new DatiImpiegato(impiegato));
+			}
+		} catch(SQLException exc) {
+			exc.printStackTrace();
+		}
+		ObservableList<DatiImpiegato> datiImpiegati = FXCollections.observableArrayList(impiegati);
+		return datiImpiegati;
+	}
+	
+	public ObservableList<DatiImpiegato> getAutistiDisponibili() {
+		ArrayList<DatiImpiegato> impiegati = new ArrayList<>();
+		try {
+			dbm.executeQuery("SELECT * FROM impiegati WHERE disponibilit‡Impiegato=1 AND ruolo='" + String.valueOf(Ruolo.Autista) + "'");
+			ResultSet resultSet = dbm.getResultSet();
+			resultSet.beforeFirst();
+			while(resultSet.next()) {
+				Impiegato impiegato = new Impiegato();
+				impiegato.setNome(resultSet.getString("nome"));
+				impiegato.setCognome(resultSet.getString("cognome"));
+				impiegato.setMatricola(resultSet.getString("matricola"));
+				impiegato.setEmail(resultSet.getString("email"));
+				impiegato.setPassword(resultSet.getString("password"));
+				impiegato.setRuolo(Ruolo.valueOf(resultSet.getString("ruolo")));
+				impiegato.setDataNascita(resultSet.getDate("dataDiNascita").toLocalDate());
+				impiegato.setDisponibilita(resultSet.getBoolean("disponibilit‡Impiegato"));
+				impiegato.setStipendio(resultSet.getDouble("stipendio"));
+				if(resultSet.getString("turno") != null) {
+					impiegato.setTurno(Turno.valueOf(resultSet.getString("turno")));
+				}else {
+					impiegato.setTurno(Turno.NonAssegnato);
+				}
 				impiegati.add(new DatiImpiegato(impiegato));
 			}
 		} catch(SQLException exc) {
@@ -134,16 +175,9 @@ public class DBImpiegato {
 		ArrayList<Impiegato> impiegati = new ArrayList<>();
 		try {
 			dbm.executeQuery("SELECT * FROM impiegati WHERE " + clause);
-			// verify if the query returned an empty table
-			//			if(!dbm.getResultSet().next()) {
-			//				return null;
-			//			}
-			// if the query table returned contains something
 			ResultSet result = dbm.getResultSet();
-			//			result.beforeFirst();
 			while(result.next()) {
 				Impiegato i= new Impiegato();
-//				e.setId(result.getString("idEmployee"));
 				i.setNome(result.getString("nome"));
 				i.setCognome(result.getString("cognome"));
 				i.setMatricola(result.getString("matricola"));
@@ -153,15 +187,7 @@ public class DBImpiegato {
 				i.setDataNascita(result.getDate("dataDiNascita").toLocalDate());
 				i.setDisponibilita(result.getBoolean("disponibilit‡Impiegato"));
 				i.setStipendio(result.getDouble("stipendio"));
-//				e.setSalary(result.getDouble("Salary"));
-//				e.setStatus(StatusEmployee.valueOf(result.getString("Status")));
-//				String w = result.getString("Workshift");
-//				if(w.equals("MORNING"))
-//					e.setWorkshift(Workshift.MATTINA);
-//				if(w.equals("AFTERNOON"))
-//					e.setWorkshift(Workshift.POMERIGGIO);
-//				else
-//					e.setWorkshift(Workshift.SERA);
+				i.setTurno(Turno.valueOf(result.getString("turno")));
 				impiegati.add(i);
 			}
 		}
@@ -172,7 +198,7 @@ public class DBImpiegato {
 	}
 	
 	public void aggiungiImpiegato(Impiegato i) throws SQLException {
-		String query = " INSERT INTO mydb.impiegati ()" + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = " INSERT INTO mydb.impiegati ()" + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		// create the mysql insert preparedstatement
 		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
@@ -185,7 +211,8 @@ public class DBImpiegato {
 		preparedStmt.setString (7, i.getRuolo().name());
 		preparedStmt.setString (8, "0");
 		preparedStmt.setDouble (9, i.getStipendio());
-		
+		preparedStmt.setString (10, null);
+		preparedStmt.setString (11, null);
 		// execute the preparedstatement
 		preparedStmt.execute();
 	}

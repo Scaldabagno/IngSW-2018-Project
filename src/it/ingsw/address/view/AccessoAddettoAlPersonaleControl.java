@@ -47,7 +47,7 @@ public class AccessoAddettoAlPersonaleControl {
 		if(emailAP.getText().equals("") && passwordAP.getText().equals("")) {
 //			TODO: da togliere
 			FXMLLoader loader=new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/AddettoAlPersonaleScreen.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/AddettoAlPersonaleArea.fxml"));
 			AnchorPane areaAddettoAlPersonale = (AnchorPane) loader.load();
 			Scene scene = new Scene(areaAddettoAlPersonale);
 			System.out.println(scene);
@@ -64,7 +64,7 @@ public class AccessoAddettoAlPersonaleControl {
 							System.out.println(ruolo);
 							if(impiegato != null && impiegato.getRuolo() == ruolo) {
 									FXMLLoader loader=new FXMLLoader();
-									loader.setLocation(MainApp.class.getResource("view/AddettoAlPersonaleScreen.fxml"));
+									loader.setLocation(MainApp.class.getResource("view/AddettoAlPersonaleArea.fxml"));
 									AnchorPane areaAddettoAlPersonale = (AnchorPane) loader.load();
 									Scene scene = new Scene(areaAddettoAlPersonale);
 									System.out.println(scene);

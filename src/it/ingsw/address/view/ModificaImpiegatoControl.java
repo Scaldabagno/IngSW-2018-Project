@@ -130,8 +130,8 @@ public class ModificaImpiegatoControl {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.initOwner(mainApp.getPrimaryStage());
 				alert.setTitle("Avviso");
-				alert.setHeaderText("Inserimento avvenuto con successo!");
-				alert.setContentText("L'impiegato è stato aggiunto all'elenco degli impiegati");
+				alert.setHeaderText("Modifica avvenuto con successo!");
+				alert.setContentText("L'impiegato è stato modificato all'elenco degli impiegati");
 				alert.showAndWait();
 
 				annullaButton();
@@ -261,7 +261,7 @@ public class ModificaImpiegatoControl {
 	@FXML
 	public void annullaButton() throws IOException{
 		FXMLLoader loader=new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("view/AddettoAlPersonaleScreen.fxml"));
+		loader.setLocation(MainApp.class.getResource("view/AddettoAlPersonaleArea.fxml"));
 		AnchorPane addettoAlPersonale = (AnchorPane) loader.load();
 		Scene scene = new Scene(addettoAlPersonale);
 		System.out.println(scene);

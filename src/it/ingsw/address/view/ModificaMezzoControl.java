@@ -149,7 +149,7 @@ private MainApp mainApp;
 	@FXML
 	public void annullaButton() throws IOException{
 		FXMLLoader loader=new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziScreen.fxml"));
+		loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziArea.fxml"));
 		AnchorPane addettoAiMezzi = (AnchorPane) loader.load();
 		Scene scene = new Scene(addettoAiMezzi);
 		System.out.println(scene);

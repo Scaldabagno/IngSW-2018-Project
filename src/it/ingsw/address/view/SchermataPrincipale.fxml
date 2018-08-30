@@ -21,7 +21,7 @@
          </font>
       </Text>
       <TextField fx:id="ricercaLinea" layoutX="440.0" layoutY="12.0" prefHeight="25.0" prefWidth="246.0" promptText="Ricerca Linea" />
-      <SplitPane dividerPositions="0.25227272727272726" layoutX="13.0" layoutY="63.0" prefHeight="325.0" prefWidth="675.0">
+      <SplitPane dividerPositions="0.17410714285714285" layoutX="13.0" layoutY="47.0" prefHeight="336.0" prefWidth="674.0">
          <items>
             <TableView fx:id="tabellaLinee" cacheShape="false" centerShape="false" editable="true" focusTraversable="false" maxWidth="150.0" onSort="#initialize" prefHeight="285.0" prefWidth="150.0" scaleShape="false" SplitPane.resizableWithParent="false">
                <columns>
@@ -31,36 +31,34 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="436.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="422.0">
                <children>
                   <Text layoutX="8.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dettagli Linea:" />
-                  <GridPane layoutX="8.0" layoutY="31.0" prefHeight="291.0" prefWidth="318.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
+                  <GridPane layoutX="8.0" layoutY="31.0" prefHeight="292.0" prefWidth="544.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.0" minWidth="10.0" prefWidth="85.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.0" minWidth="10.0" prefWidth="232.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.0" minWidth="0.0" prefWidth="0.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="427.0" minWidth="10.0" prefWidth="427.0" />
                      </columnConstraints>
                      <rowConstraints>
-                        <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="237.0" minHeight="10.0" prefHeight="99.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="206.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="237.0" minHeight="10.0" prefHeight="92.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
                         <Label prefHeight="38.0" prefWidth="95.0" text="Linea" />
                         <Label prefHeight="47.0" prefWidth="85.0" text="Capolinea" GridPane.rowIndex="1" />
-                        <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="56.0" prefWidth="158.0" text="Fermate" GridPane.rowIndex="2" />
-                        <Label fx:id="linea" prefHeight="34.0" prefWidth="277.0" GridPane.columnIndex="1" />
-                        <Label fx:id="capolinea" prefHeight="71.0" prefWidth="269.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="fermate" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="100.0" prefWidth="269.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label text="Orari" GridPane.rowIndex="3" />
-                        <Label fx:id="orari" prefHeight="88.0" prefWidth="269.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label prefHeight="56.0" prefWidth="158.0" text="Fermate" GridPane.rowIndex="2" />
+                        <Label fx:id="linea" prefHeight="33.0" prefWidth="430.0" GridPane.columnIndex="1" />
+                        <Label fx:id="capolinea" prefHeight="71.0" prefWidth="428.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="fermate" prefHeight="98.0" prefWidth="431.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>
             </AnchorPane>
          </items>
       </SplitPane>
-      <Button fx:id="areaRiservata" layoutX="608.0" layoutY="397.0" mnemonicParsing="false" onAction="#areaRiservataButton" onMouseClicked="#areaRiservataButton" prefHeight="39.0" prefWidth="80.0" text="Area&#10;Riservata" textAlignment="CENTER" />
+      <Button fx:id="areaRiservata" layoutX="608.0" layoutY="397.0" mnemonicParsing="false" onAction="#areaRiservataButton" onMouseClicked="#areaRiservataButton" prefHeight="40.0" prefWidth="80.0" text="Area&#10;Riservata" textAlignment="CENTER" />
       <Button fx:id="ricercaPercorso" layoutX="286.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#ricercaPercorso" prefHeight="25.0" prefWidth="109.0" text="Ricerca Percorso" />
+      <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="397.0" prefHeight="40.0" prefWidth="585.0" text="NOTA: Ogni linea parte alle 8 di mattina, ogni fermata avviene mezz'ora dopo la precedente.&#10;Vi è una pausa per il cambio del turno dalle 14:00 alle 15:00, dalle 21:00 alle 22:00 e dalle 4:00 alle 8:00" />
    </children>
 </AnchorPane>

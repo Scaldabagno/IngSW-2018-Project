@@ -131,7 +131,7 @@ public class AddettoAiMezziControl {
 	    } else {
 	        // Nothing selected.
 	        Alert alert = new Alert(AlertType.WARNING);
-	        alert.initOwner(null);
+	        alert.initOwner(mainApp.getPrimaryStage());
 	        alert.setTitle("Nessuna Selezione");
 	        alert.setHeaderText("Nessun mezzo selezionato");
 	        alert.setContentText("Selezionare un mezzo dall'elenco.");

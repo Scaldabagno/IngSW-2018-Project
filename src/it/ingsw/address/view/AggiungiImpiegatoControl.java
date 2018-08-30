@@ -69,7 +69,6 @@ public class AggiungiImpiegatoControl {
 	
 	@FXML
 	private void aggiungi() throws IOException {
-		//System.out.println(turno.getValue());
 		Alert error = check();
 		if (error != null) {
 			error.showAndWait();
@@ -107,7 +106,6 @@ public class AggiungiImpiegatoControl {
 		impiegato.setDataNascita(dataDiNascitaText.getValue());
 		impiegato.setEmail(emailText.getText());
 		impiegato.setRuolo(Ruolo.valueOf(this.ruoloSpinner.getValue()));
-//		e.setWorkshift(Workshift.valueOf(this.turno.getValue().toUpperCase()));
 		impiegato.setPassword(passwordText.getText());
 		return impiegato;
 	}
@@ -144,46 +142,29 @@ public class AggiungiImpiegatoControl {
 			alert.setContentText("Inserisci una data di nascita");
 			return alert;
 		}
-//		// Check stipendio
-//		if (stipendio.getText().equals("")) {
-//			alert.setContentText("Inserisci uno stipendio");
-//			return alert;
-//		}
-		// Check lunghezza matricola
-			//Check email pattern
-			String regex = "^[\\w\\d\\.]+@[\\w\\.]+\\.\\w+$";
-			Pattern p = Pattern.compile(regex);
-			Matcher m = p.matcher(emailText.getText());
-			if(! m.matches()) {
-				alert.setContentText("Inserisci un indirizzo email valido");
-				return alert;
+		//Check email pattern
+		String regex = "^[\\w\\d\\.]+@[\\w\\.]+\\.\\w+$";
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(emailText.getText());
+		if(! m.matches()) {
+			alert.setContentText("Inserisci un indirizzo email valido");
+			return alert;
+		}
+		// Numerical check for matricola
+		if (!matricolaText.getText().equals("")) {
+		try {
+			int a = Integer.parseInt(matricolaText.getText());
+			if(a < 0)	throw new NumberFormatException();
+		} catch(NumberFormatException e) {
+			alert.setContentText("Inserisci un valore numerico positivo per la matricola");
+			return alert;
 			}
-			// Numerical check for stipendio
-//			try {
-//				double s = Double.parseDouble(stipendio.getText());
-//				if(s <= 0) throw new NumberFormatException();
-//			}
-//			catch(NumberFormatException e) {
-//				alert.setContentText("Inserisci un valore numerico positivo per lo stipendio");
-//				return alert;
-//			}
-			// Numerical check for matricola
-			if (!matricolaText.getText().equals("")) {
-				try {
-					int a = Integer.parseInt(matricolaText.getText());
-					if(a < 0)	throw new NumberFormatException();
-				}
-				catch(NumberFormatException e) {
-					alert.setContentText("Inserisci un valore numerico positivo per la matricola");
-					return alert;
-				}
-			}
+		}
 			// Alfabetical check for name
 //			if( (Integer.parseInt(nome.getText())) | (Integer.parseInt(cognome.getText())) ) {
 //				alert.setContentText("Nome e cognome non possono contenere solo numeri");
 //				return alert;
 //			}
-			// TODO: String check for nome e cognome
 			try {
 				Integer.parseInt(nomeText.getText());
 				alert.setContentText("Inserisci un nome valido");
@@ -210,7 +191,7 @@ public class AggiungiImpiegatoControl {
 	@FXML
 	public void annullaButton() throws IOException{
 		FXMLLoader loader=new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("view/AddettoAlPersonaleScreen.fxml"));
+		loader.setLocation(MainApp.class.getResource("view/AddettoAlPersonaleArea.fxml"));
 		AnchorPane addettoAlPersonale = (AnchorPane) loader.load();
 		Scene scene = new Scene(addettoAlPersonale);
 		System.out.println(scene);

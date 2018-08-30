@@ -68,6 +68,26 @@ public class DBMezzo {
 		return datiMezzi;
 	}
 	
+	public ObservableList<DatiMezzo> getMezziDisponibili() {
+		ArrayList<DatiMezzo> mezzi = new ArrayList<>();
+		try {
+			dbm.executeQuery("SELECT * FROM mezzi WHERE disponibilit‡Mezzo=1");
+			ResultSet resultSet = dbm.getResultSet();
+			resultSet.beforeFirst();
+			while(resultSet.next()) {
+				Mezzo mezzo = new Mezzo();
+				mezzo.setTarga(resultSet.getString("targa"));
+				mezzo.setNumeroPosto(resultSet.getInt("deposito_posto"));
+				mezzo.setDisponibilita(resultSet.getBoolean("disponibilit‡Mezzo"));
+				mezzi.add(new DatiMezzo (mezzo));
+			}
+		} catch(SQLException exc) {
+			exc.printStackTrace();
+		}
+		ObservableList<DatiMezzo> datiMezzi = FXCollections.observableArrayList(mezzi);
+		return datiMezzi;
+	}
+	
 	public void aggiungiMezzo(Mezzo m) throws SQLException {
 		String query = " INSERT INTO mydb.mezzi ()" + " values (?, ?, ?, ?)";
 

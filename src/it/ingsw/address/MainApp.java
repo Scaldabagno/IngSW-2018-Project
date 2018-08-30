@@ -6,6 +6,7 @@ import it.ingsw.address.view.AvvioProgrammaControl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -19,6 +20,8 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
+        Image icon = new Image(MainApp.class.getResource("images/Bus-Map.png").toExternalForm(), false);  
+        primaryStage.getIcons().add(icon);
         this.primaryStage.setTitle("IngSW2018");
         try {
 			initRootLayout();
@@ -47,7 +50,7 @@ public class MainApp extends Application {
     public void avvioProgramma() throws IOException{
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/PrimaSchermata.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/AvvioProgramma.fxml"));
             AnchorPane primaSchermata = (AnchorPane) loader.load();
             
             rootLayout.setCenter(primaSchermata);

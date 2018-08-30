@@ -136,13 +136,11 @@ public class SchermataPrincipaleControl {
 	        linea.setText(datiLinea.getDatiNumeroLinea());
 	        capolinea.setText(datiLinea.getDatiCapolineaI() + "-" + datiLinea.getDatiCapolineaF());
 	        fermate.setText(datiLinea.getDatiCapolineaI() + ", " + datiLinea.getDatiFermate().replace("[", "").replace("]", "") + ", " + datiLinea.getDatiCapolineaF());
-	        // TODO: Orari
 	    } else {
 	        // Se non viene selezionata nessuna linea, non mostra nulla.
 	        linea.setText("");
 	        capolinea.setText("");
 	        fermate.setText("");
-	        orari.setText("");
 	    }
 	}
 	

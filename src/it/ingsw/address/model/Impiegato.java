@@ -12,7 +12,7 @@ public class Impiegato {
 	private LocalDate dataNascita;
 	private Ruolo ruolo;
 	private double stipendio;
-	private Turno ore;
+	private Turno turno;
 	private boolean disponibilita;
 	
 	
@@ -78,11 +78,11 @@ public class Impiegato {
 		this.stipendio = stipendio;
 	}
 
-	public Turno getOre() {
-		return ore;
+	public Turno getTurno() {
+		return turno;
 	}
-	public void setOre(Turno ore) {
-		this.ore = ore;
+	public void setTurno(Turno turno) {
+		this.turno = turno;
 	}
 
 	public boolean getDisponibilita() {

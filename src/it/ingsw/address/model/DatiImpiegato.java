@@ -16,11 +16,12 @@ public class DatiImpiegato {
 	private final SimpleStringProperty datiRuolo;
 	private final SimpleObjectProperty <LocalDate> datiNascita;
 	private final SimpleStringProperty datiStipendio;
+	private final SimpleStringProperty datiTurno;
 	
 	//TODO: Aggiungere altre SimpleStringProperty
 	private Impiegato impiegato;
 	
-	public DatiImpiegato(String nome, String cognome, String matricola, String email, String password, String ruolo, String nascita, String stipendio) {
+	public DatiImpiegato(String nome, String cognome, String matricola, String email, String password, String ruolo, String nascita, String stipendio, String turno) {
 		this.datiNome = new SimpleStringProperty(nome);
 		this.datiCognome = new SimpleStringProperty(cognome);
 		this.datiMatricola = new SimpleStringProperty(matricola);
@@ -29,6 +30,7 @@ public class DatiImpiegato {
 		this.datiRuolo = new SimpleStringProperty(ruolo);
 		this.datiNascita = new SimpleObjectProperty(nascita);
 		this.datiStipendio = new SimpleStringProperty(stipendio);
+		this.datiTurno = new SimpleStringProperty(turno);
 	}
 	
 	public DatiImpiegato(Impiegato i) {
@@ -40,6 +42,7 @@ public class DatiImpiegato {
 		this.datiRuolo = new SimpleStringProperty(String.valueOf(i.getRuolo()));
 		this.datiNascita = new SimpleObjectProperty(i.getDataNascita());
 		this.datiStipendio = new SimpleStringProperty(String.valueOf(i.getStipendio()));
+		this.datiTurno = new SimpleStringProperty(String.valueOf(i.getTurno()));
 	}
 	
 	public String getDatiNome() {
@@ -128,6 +131,18 @@ public class DatiImpiegato {
 	
 	public StringProperty stipendioProperty() {
 	    return datiStipendio;
+	}
+	
+	public String getDatiTurno() {
+		return datiTurno.get();
+	}
+	
+	public void setDatiTurno(String turno) {
+		this.datiTurno.set(turno);
+	}
+	
+	public StringProperty turnoProperty() {
+	    return datiTurno;
 	}
 	
 	public String getEdit() {

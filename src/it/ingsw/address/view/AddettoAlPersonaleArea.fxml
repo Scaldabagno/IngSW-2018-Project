@@ -24,8 +24,8 @@
       <Button fx:id="nuovoImpiegato" layoutX="512.0" layoutY="57.0" mnemonicParsing="false" onMouseClicked="#aggiungiImpiegato" prefHeight="25.0" prefWidth="114.0" text="Inserisci nuovi dati" />
       <Button fx:id="modificaImpiegato" layoutX="512.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#modificaImpiegato" prefHeight="25.0" prefWidth="114.0" text="Modifica dati" />
       <Button fx:id="calcolaStipendio" layoutX="512.0" layoutY="148.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Calcola stipendio" />
-      <Button fx:id="allocaMezzo" layoutX="512.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Alloca mezzo" />
-      <Button fx:id="allocaTurno" layoutX="512.0" layoutY="248.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Alloca turno" />
+      <Button fx:id="allocaMezzo" layoutX="512.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#allocaMezzo" prefHeight="25.0" prefWidth="114.0" text="Alloca mezzo" />
+      <Button fx:id="allocaTurno" layoutX="512.0" layoutY="248.0" mnemonicParsing="false" onMouseClicked="#allocaTurno" prefHeight="25.0" prefWidth="114.0" text="Alloca turno" />
       <Button fx:id="logout" layoutX="606.0" layoutY="395.0" mnemonicParsing="false" onMouseClicked="#logoutAP" prefHeight="39.0" prefWidth="80.0" text="Logout" />
       <AnchorPane layoutX="14.0" layoutY="54.0" prefHeight="342.0" prefWidth="471.0">
          <children>
@@ -75,7 +75,7 @@
                               <Label fx:id="matricolaLabel" prefHeight="17.0" prefWidth="257.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label fx:id="nascitaLabel" prefHeight="17.0" prefWidth="237.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <Label fx:id="stipendioLabel" prefHeight="17.0" prefWidth="241.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <Label prefHeight="17.0" prefWidth="251.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Label fx:id="turnoLabel" prefHeight="17.0" prefWidth="251.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                               <Label fx:id="ruoloLabel" prefHeight="17.0" prefWidth="251.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                               <Label prefHeight="17.0" prefWidth="239.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                            </children>
@@ -86,5 +86,6 @@
             </SplitPane>
          </children>
       </AnchorPane>
+      <Button fx:id="allocaCorsa" layoutX="512.0" layoutY="300.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Alloca Corsa" />
 </children>
 </AnchorPane>

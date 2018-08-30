@@ -2,6 +2,8 @@ package it.ingsw.address.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBMezzo;
@@ -48,7 +50,7 @@ public class AggiungiMezzoControl {
 				alert.initOwner(mainApp.getPrimaryStage());
 				alert.setTitle("Avviso");
 				alert.setHeaderText("Inserimento avvenuto con successo!");
-				alert.setContentText("L'impiegato è stato aggiunto all'elenco degli impiegati");
+				alert.setContentText("L'impiegato è stato aggiunto all'elenco dei mezzi");
 				alert.showAndWait();
 
 				annullaButton();
@@ -90,6 +92,14 @@ public class AggiungiMezzoControl {
 			alert.setContentText("Inserisci un numero di posto");
 			return alert;
 		}
+		// Check targa
+		String regex = "([A-Z][A-Z])([0-9][0-9][0-9])([A-Z][A-Z])";
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(targaText.getText());
+		if(! m.matches()) {
+			alert.setContentText("Inserisci un numero di targa valido");
+			return alert;
+		}
 		// Check numero posto
 		if (Integer.valueOf(postoText.getText()) > Deposito.getMax()) {
 			alert.setContentText("Posto non esistente, il deposito ha " + Deposito.getMax() + " posti");
@@ -104,7 +114,7 @@ public class AggiungiMezzoControl {
 	@FXML
 	public void annullaButton() throws IOException{
 		FXMLLoader loader=new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziScreen.fxml"));
+		loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziArea.fxml"));
 		AnchorPane addettoAiMezzi = (AnchorPane) loader.load();
 		Scene scene = new Scene(addettoAiMezzi);
 		System.out.println(scene);

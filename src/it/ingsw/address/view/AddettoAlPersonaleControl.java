@@ -62,6 +62,9 @@ public class AddettoAlPersonaleControl {
 	private Label stipendioLabel;
 	
 	@FXML
+	private Label turnoLabel;
+	
+	@FXML
 	private Button logout;
 	
 	@FXML
@@ -81,6 +84,9 @@ public class AddettoAlPersonaleControl {
 	
 	@FXML
 	private Button allocaTurno;
+	
+	@FXML
+	private Button allocaCorsa;
 	
 	public AddettoAlPersonaleControl() {
 		
@@ -137,21 +143,30 @@ public class AddettoAlPersonaleControl {
 	        cognomeLabel.setText(datiImpiegato.getDatiCognome());
 	        emailLabel.setText(datiImpiegato.getDatiEmail());
 	        matricolaLabel.setText(datiImpiegato.getDatiMatricola());
-	        ruoloLabel.setText(datiImpiegato.getDatiRuolo());
+	        if(datiImpiegato.getDatiRuolo() == "AddettoAlPersonale") {
+	        	ruoloLabel.setText("Addetto Al Personale");
+	        }else if(datiImpiegato.getDatiRuolo() == "AddettoAiMezzi") {
+	        	ruoloLabel.setText("Addetto Ai Mezzi");
+	        }else {
+		        ruoloLabel.setText(datiImpiegato.getDatiRuolo());
+	        }
 	        nascitaLabel.setText(String.valueOf(datiImpiegato.getDatiNascita()));
 	        stipendioLabel.setText(String.valueOf(datiImpiegato.getDatiStipendio()) + " €");
-	        
-	        // TODO: Altri dati
+	        if(datiImpiegato.getDatiTurno() == "NonAssegnato") {
+	        	turnoLabel.setText("Non Assegnato");
+	        } else {
+		        turnoLabel.setText(datiImpiegato.getDatiTurno());
+	        }
 	    } else {
 	        // Se non viene selezionata nessuna linea, non mostra nulla.
 	        nomeLabel.setText("");
 	        cognomeLabel.setText("");
-//	        TODO: Aggiungere gli altri
 	        matricolaLabel.setText("");
 	        emailLabel.setText("");
 	        ruoloLabel.setText("");
 	        nascitaLabel.setText("");
 	        stipendioLabel.setText("");
+	        turnoLabel.setText("");
 	    }
 	}
 	
@@ -209,6 +224,34 @@ public class AddettoAlPersonaleControl {
 			 e.printStackTrace();
 		     return false;
 		}
+	}
+	
+	@FXML
+	public void allocaMezzo() throws IOException{
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/AllocaMezzo.fxml"));
+		AnchorPane allocaMezzo = (AnchorPane) loader.load();
+		Scene scene = new Scene(allocaMezzo);
+		System.out.println(scene);
+		System.out.println(allocaMezzo);
+		Stage stage = mainApp.getPrimaryStage();
+		stage.setScene(scene);
+		AllocaMezzoControl controller = loader.getController();
+		controller.setMainApp(mainApp);
+	}
+	
+	@FXML
+	public void allocaTurno() throws IOException{
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/AllocaTurno.fxml"));
+		AnchorPane allocaTurno = (AnchorPane) loader.load();
+		Scene scene = new Scene(allocaTurno);
+		System.out.println(scene);
+		System.out.println(allocaTurno);
+		Stage stage = mainApp.getPrimaryStage();
+		stage.setScene(scene);
+		AllocaTurnoControl controller = loader.getController();
+		controller.setMainApp(mainApp);
 	}
 	
 	@FXML
