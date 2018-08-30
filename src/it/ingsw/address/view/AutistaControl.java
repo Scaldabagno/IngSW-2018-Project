@@ -75,9 +75,9 @@ public class AutistaControl {
 		this.nascitaLabel.setText(Sessione.impiegato.getDataNascita().toString());
 		this.stipendioLabel.setText(String.valueOf(Sessione.impiegato.getStipendio()) + " €");
 		if(Sessione.impiegato.getDisponibilita() == true) {
-			this.disponibile.setText("Disponibile");
+			this.disponibile.setText("Stato: Disponibile");
 		} else {
-			this.disponibile.setText("Non Disponibile");
+			this.disponibile.setText("Stato: Non Disponibile");
 		}
 	}
 	
@@ -103,10 +103,10 @@ public class AutistaControl {
 		Impiegato i = Sessione.impiegato;
 		if(i.getDisponibilita() == true) {
 			i.setDisponibilita(false);
-			disponibile.setText("Non Disponibile");
+			disponibile.setText("Stato: Non Disponibile");
 		}else {
 			i.setDisponibilita(true);
-			disponibile.setText("Disponibile");
+			disponibile.setText("Stato: Disponibile");
 		}
 	}
 	

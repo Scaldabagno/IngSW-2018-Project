@@ -28,6 +28,9 @@ public class RicercaPercorsoControl {
 	private ListView<Fermata> percorso;
 	
 	@FXML
+	private Button calcola;
+	
+	@FXML
 	private Button annulla;
 	
 	@FXML
