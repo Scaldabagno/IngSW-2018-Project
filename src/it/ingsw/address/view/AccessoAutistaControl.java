@@ -86,7 +86,7 @@ public class AccessoAutistaControl {
 									controller.setMainApp(mainApp);
 							} else if (impiegato == null || impiegato.getRuolo() != Ruolo.Autista) {
 								Alert alert = new Alert(AlertType.WARNING);
-					            alert.initOwner(null);
+								alert.initOwner(mainApp.getPrimaryStage());
 					            alert.setTitle("Connection Information");
 					            alert.setHeaderText("Email e/o password errate");
 					            alert.setContentText("Controlla le credenziali inserite e riprova.");
@@ -96,7 +96,7 @@ public class AccessoAutistaControl {
 				} catch (SQLException exc) {
 					exc.printStackTrace();
 					Alert alert = new Alert(AlertType.WARNING);
-		            alert.initOwner(null);
+					alert.initOwner(mainApp.getPrimaryStage());
 		            alert.setTitle("Connection Information");
 		            alert.setHeaderText("Connessione Non Disponibile");
 		            alert.setContentText("Controlla la connessione e riprova.");

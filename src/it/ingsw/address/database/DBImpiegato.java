@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.omg.PortableInterceptor.NON_EXISTENT;
 
 import it.ingsw.address.model.DatiImpiegato;
 import it.ingsw.address.model.Impiegato;
@@ -187,7 +186,11 @@ public class DBImpiegato {
 				i.setDataNascita(result.getDate("dataDiNascita").toLocalDate());
 				i.setDisponibilita(result.getBoolean("disponibilit‡Impiegato"));
 				i.setStipendio(result.getDouble("stipendio"));
-				i.setTurno(Turno.valueOf(result.getString("turno")));
+				if(result.getString("turno") != null) {
+					i.setTurno(Turno.valueOf(result.getString("turno")));
+				}else if (result.getString("turno") == null || result.getString("turno") == "NonAssegnato"){
+					i.setTurno(Turno.NonAssegnato);
+				}
 				impiegati.add(i);
 			}
 		}
@@ -198,7 +201,7 @@ public class DBImpiegato {
 	}
 	
 	public void aggiungiImpiegato(Impiegato i) throws SQLException {
-		String query = " INSERT INTO mydb.impiegati ()" + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = " INSERT INTO mydb.impiegati ()" + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		// create the mysql insert preparedstatement
 		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
@@ -212,7 +215,6 @@ public class DBImpiegato {
 		preparedStmt.setString (8, "0");
 		preparedStmt.setDouble (9, i.getStipendio());
 		preparedStmt.setString (10, null);
-		preparedStmt.setString (11, null);
 		// execute the preparedstatement
 		preparedStmt.execute();
 	}

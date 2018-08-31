@@ -53,6 +53,9 @@ public class AddettoAiMezziControl {
 	private TextField ricercaMezzo;
 	
 	@FXML
+	private Button profilo;
+	
+	@FXML
 	private Button inserisciMezzo;
 	
 	@FXML
@@ -103,6 +106,39 @@ public class AddettoAiMezziControl {
 	    sortedData.comparatorProperty().bind(tabellaMezzi.comparatorProperty());
 
 	  	tabellaMezzi.setItems(sortedData);
+	}
+	
+	private void dettagliMezzo(DatiMezzo datiMezzo) {
+	    if (datiMezzo != null) {
+	        // Riempie le label con targa, posto nel deposito, disponibilità
+	        targa.setText(datiMezzo.getDatiTarga());
+	        posto.setText(datiMezzo.getDatiPosto());
+	        if(datiMezzo.getDatiDisponibilita() == "true"){
+	        	disponibilita.setText("Disponibile");
+	        }else if(datiMezzo.getDatiDisponibilita() == "false"){
+	        	disponibilita.setText("Non Disponibile");
+	        }
+	    } else {
+	        // Se non viene selezionato nessun mezzo, non mostra nulla.
+	        targa.setText("");
+	        posto.setText("");
+	        disponibilita.setText("");
+	    }
+	}
+
+	
+	@FXML
+	public void profiloScene() throws IOException{
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/Profilo.fxml"));
+		AnchorPane profilo = (AnchorPane) loader.load();
+		Scene scene = new Scene(profilo);
+		System.out.println(scene);
+		System.out.println(profilo);
+		Stage stage = mainApp.getPrimaryStage();
+		stage.setScene(scene);
+		ProfiloControl controller = loader.getController();
+		controller.setMainApp(mainApp);
 	}
 	
 	@FXML
@@ -175,7 +211,7 @@ public class AddettoAiMezziControl {
 			} catch (SQLException e){
 				e.printStackTrace();
 				Alert alert = new Alert(AlertType.WARNING);
-	            alert.initOwner(null);
+				alert.initOwner(mainApp.getPrimaryStage());
 	            alert.setTitle("Connection Information");
 	            alert.setHeaderText("Connessione Non Disponibile");
 	            alert.setContentText("Controlla la connessione e riprova.");
@@ -184,7 +220,7 @@ public class AddettoAiMezziControl {
 	    } else {
 	        // Nothing selected.
 	        Alert alert = new Alert(AlertType.WARNING);
-	        alert.initOwner(null);
+	        alert.initOwner(mainApp.getPrimaryStage());
 	        alert.setTitle("Nessuna Selezione");
 	        alert.setHeaderText("Nessun mezzo selezionato");
 	        alert.setContentText("Selezionare un mezzo dall'elenco.");
@@ -223,23 +259,4 @@ public class AddettoAiMezziControl {
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
-	
-	private void dettagliMezzo(DatiMezzo datiMezzo) {
-	    if (datiMezzo != null) {
-	        // Riempie le label con targa, posto nel deposito, disponibilità
-	        targa.setText(datiMezzo.getDatiTarga());
-	        posto.setText(datiMezzo.getDatiPosto());
-	        if(datiMezzo.getDatiDisponibilita() == "true"){
-	        	disponibilita.setText("Disponibile");
-	        }else if(datiMezzo.getDatiDisponibilita() == "false"){
-	        	disponibilita.setText("Non Disponibile");
-	        }
-	    } else {
-	        // Se non viene selezionato nessun mezzo, non mostra nulla.
-	        targa.setText("");
-	        posto.setText("");
-	        disponibilita.setText("");
-	    }
-	}
-
 }

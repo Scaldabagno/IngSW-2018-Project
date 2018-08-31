@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ingsw.address.view.AllocaMezzoControl">
+<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ingsw.address.view.AllocaCorsaControl">
    <children>
       <Text layoutX="20.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alloca Corsa">
          <font>
@@ -17,7 +17,7 @@
          </font>
       </Text>
       <Button fx:id="annulla" layoutX="14.0" layoutY="397.0" mnemonicParsing="false" onMouseClicked="#annullaButton" prefHeight="39.0" prefWidth="80.0" text="Annulla" />
-      <Button fx:id="allocaMezzo" layoutX="596.0" layoutY="397.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="90.0" text="Alloca Corsa" />
+      <Button fx:id="allocaCorsa" layoutX="596.0" layoutY="397.0" mnemonicParsing="false" onMouseClicked="#selezionaImpiegato" prefHeight="39.0" prefWidth="90.0" text="Alloca Corsa" />
       <SplitPane dividerPositions="0.3347826086956522, 0.691304347826087" layoutX="20.0" layoutY="51.0" prefHeight="330.0" prefWidth="659.0">
          <items>
             <TableView fx:id="tabellaImpiegati" onSort="#initialize" prefHeight="358.0" prefWidth="249.0">
@@ -37,9 +37,9 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <TableView fx:id="tabellaMezzi1" onSort="#initialize" prefHeight="358.0" prefWidth="145.0">
+            <TableView fx:id="tabellaLinee" onSort="#initialize" prefHeight="358.0" prefWidth="145.0">
                <columns>
-                  <TableColumn fx:id="targaColumn1" onEditStart="#initialize" prefWidth="75.0" text="Linea" />
+                  <TableColumn fx:id="lineaColumn" onEditStart="#initialize" prefWidth="75.0" text="Linea" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

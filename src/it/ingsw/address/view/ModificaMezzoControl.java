@@ -70,7 +70,7 @@ private MainApp mainApp;
         } else {
             // Show the error message.
             Alert alert = new Alert(AlertType.ERROR);
-            alert.initOwner(null);
+            alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("Campi non validi");
             alert.setHeaderText("Correggere i campi non validi");
             alert.setContentText(errorMessage);
@@ -100,7 +100,7 @@ private MainApp mainApp;
 				
 			} catch (SQLException e) {
 				Alert alert = new Alert(AlertType.WARNING);
-				alert.initOwner(null);
+				alert.initOwner(mainApp.getPrimaryStage());
 				alert.setTitle("Avviso");
 				alert.setHeaderText("Inserimento fallito!");
 				alert.setContentText("Il posto inserito è già stato assegnato");

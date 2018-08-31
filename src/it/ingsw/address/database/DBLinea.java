@@ -107,7 +107,7 @@ public class DBLinea {
 //			 */
 			if(!result.next()) {
 				Fermata f = new Fermata();
-				f.setFermata("Via vattelappesca 12");
+				f.setFermata("Fermate non settate, rivolgersi all'amministrazione");
 				return f;
 			}
 //			/**

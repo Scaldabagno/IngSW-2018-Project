@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBImpiegato;
 import it.ingsw.address.model.Impiegato;
+import it.ingsw.address.model.Ruolo;
 import it.ingsw.address.model.Sessione;
 import it.ingsw.address.model.Turno;
 import javafx.fxml.FXML;
@@ -18,12 +19,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * @author Federico Augello
- * @description gestisce l'area Autista  
- */
-public class AutistaControl {
-	private MainApp mainApp;
+public class ProfiloControl {
+private MainApp mainApp;
 	
 	@FXML
 	private Label nomeLabel;
@@ -58,13 +55,13 @@ public class AutistaControl {
 	@FXML
 	private Button logout;
 	
-	public AutistaControl() {
+	public ProfiloControl() {
 		
 	}
 	
 	/**
 	 * @author Federico Augello
-	 * @description funzione che si avvia entrando nell'area Autista
+	 * @description funzione che si avvia entrando nel profilo personale
 	 */
 	
 	@FXML
@@ -82,9 +79,10 @@ public class AutistaControl {
 		}
 		if(Sessione.impiegato.getTurno() == Turno.NonAssegnato || Sessione.impiegato.getTurno() == null) {
 			this.turnoLabel.setText("Non Assegnato");
-		}else {
+		} else {
 			this.turnoLabel.setText(String.valueOf(Sessione.impiegato.getTurno()));
 		}
+		
 	}
 	
 	@FXML
@@ -117,18 +115,31 @@ public class AutistaControl {
 	}
 	
 	@FXML
-	public void logoutA() throws IOException{
-		Sessione.impiegato = new Impiegato();
-		FXMLLoader loader=new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("view/SchermataPrincipale.fxml"));
-		AnchorPane schermataPrincipale = (AnchorPane) loader.load();
-		Scene scene = new Scene(schermataPrincipale);
-		System.out.println(scene);
-		System.out.println(schermataPrincipale);
-		Stage stage = mainApp.getPrimaryStage();
-		stage.setScene(scene);
-		SchermataPrincipaleControl controller = loader.getController();
-		controller.setMainApp(mainApp);
+	public void annullaButton() throws IOException{
+		if(Sessione.impiegato.getRuolo() == Ruolo.AddettoAlPersonale) {
+			FXMLLoader loader=new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/AddettoAlPersonaleArea.fxml"));
+			AnchorPane addettoAlPersonale = (AnchorPane) loader.load();
+			Scene scene = new Scene(addettoAlPersonale);
+			System.out.println(scene);
+			System.out.println(addettoAlPersonale);
+			Stage stage = mainApp.getPrimaryStage();
+			stage.setScene(scene);
+			AddettoAlPersonaleControl controller = loader.getController();
+			controller.setMainApp(mainApp);
+		}
+		if(Sessione.impiegato.getRuolo() == Ruolo.AddettoAiMezzi) {
+			FXMLLoader loader=new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziArea.fxml"));
+			AnchorPane addettoAiMezzi = (AnchorPane) loader.load();
+			Scene scene = new Scene(addettoAiMezzi);
+			System.out.println(scene);
+			System.out.println(addettoAiMezzi);
+			Stage stage = mainApp.getPrimaryStage();
+			stage.setScene(scene);
+			AddettoAiMezziControl controller = loader.getController();
+			controller.setMainApp(mainApp);
+		}
 	}
 	
 	public void setMainApp(MainApp mainApp) {

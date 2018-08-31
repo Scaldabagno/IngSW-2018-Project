@@ -7,10 +7,12 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import it.ingsw.address.MainApp;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class DBManager {
+	private MainApp mainApp;
     private String username;
     private String psw;
     private String server;
@@ -87,7 +89,7 @@ public class DBManager {
         }
         catch (SQLException ex) {
         	Alert alert = new Alert(AlertType.WARNING);
-          alert.initOwner(null);
+          alert.initOwner(mainApp.getPrimaryStage());
           alert.setTitle("Connection Information");
           alert.setHeaderText("Connessione Non Disponibile");
           alert.setContentText("Controlla la connessione e riprova.");
@@ -114,14 +116,14 @@ public class DBManager {
             return this.resultSet;
         }
         catch (SQLException ex) {
-        	Alert alert = new Alert(AlertType.WARNING);
-          alert.initOwner(null);
+          Alert alert = new Alert(AlertType.WARNING);
+          alert.initOwner(mainApp.getPrimaryStage());;
           alert.setTitle("Connection Information");
           alert.setHeaderText("Connessione Non Disponibile");
           alert.setContentText("Controlla la connessione e riprova.");
           alert.showAndWait();
-            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+          Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+          return null;
         }
     }
 
@@ -133,7 +135,7 @@ public class DBManager {
             return result;
         } catch (SQLException ex) {
         	Alert alert = new Alert(AlertType.WARNING);
-            alert.initOwner(null);
+            alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("Connection Information");
             alert.setHeaderText("Connessione Non Disponibile");
             alert.setContentText("Controlla la connessione e riprova.");

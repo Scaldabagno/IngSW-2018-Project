@@ -80,10 +80,7 @@ public class AddettoAlPersonaleControl {
 	private Button calcolaStipendio;
 	
 	@FXML
-	private Button allocaMezzo;
-	
-	@FXML
-	private Button allocaTurno;
+	private Button profilo;
 	
 	@FXML
 	private Button allocaCorsa;
@@ -171,6 +168,21 @@ public class AddettoAlPersonaleControl {
 	}
 	
 	@FXML
+	public void profiloScene() throws IOException{
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/Profilo.fxml"));
+		AnchorPane profilo = (AnchorPane) loader.load();
+		Scene scene = new Scene(profilo);
+		System.out.println(scene);
+		System.out.println(profilo);
+		Stage stage = mainApp.getPrimaryStage();
+		stage.setScene(scene);
+		ProfiloControl controller = loader.getController();
+		controller.setMainApp(mainApp);
+	}
+	
+	
+	@FXML
 	public void aggiungiImpiegato() throws IOException{
 		FXMLLoader loader=new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("view/AggiungiImpiegato.fxml"));
@@ -196,7 +208,7 @@ public class AddettoAlPersonaleControl {
 	    } else {
 	        // Nothing selected.
 	        Alert alert = new Alert(AlertType.WARNING);
-	        alert.initOwner(null);
+	        alert.initOwner(mainApp.getPrimaryStage());
 	        alert.setTitle("Nessuna Selezione");
 	        alert.setHeaderText("Nessun impiegato selezionato");
 	        alert.setContentText("Selezionare un impiegato dall'elenco.");
@@ -227,30 +239,16 @@ public class AddettoAlPersonaleControl {
 	}
 	
 	@FXML
-	public void allocaMezzo() throws IOException{
+	public void allocaCorsa() throws IOException{
 		FXMLLoader loader=new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("view/AllocaMezzo.fxml"));
-		AnchorPane allocaMezzo = (AnchorPane) loader.load();
-		Scene scene = new Scene(allocaMezzo);
+		loader.setLocation(MainApp.class.getResource("view/AllocaCorsa.fxml"));
+		AnchorPane allocaCorsa = (AnchorPane) loader.load();
+		Scene scene = new Scene(allocaCorsa);
 		System.out.println(scene);
-		System.out.println(allocaMezzo);
+		System.out.println(allocaCorsa);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
-		AllocaMezzoControl controller = loader.getController();
-		controller.setMainApp(mainApp);
-	}
-	
-	@FXML
-	public void allocaTurno() throws IOException{
-		FXMLLoader loader=new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("view/AllocaTurno.fxml"));
-		AnchorPane allocaTurno = (AnchorPane) loader.load();
-		Scene scene = new Scene(allocaTurno);
-		System.out.println(scene);
-		System.out.println(allocaTurno);
-		Stage stage = mainApp.getPrimaryStage();
-		stage.setScene(scene);
-		AllocaTurnoControl controller = loader.getController();
+		AllocaCorsaControl controller = loader.getController();
 		controller.setMainApp(mainApp);
 	}
 	

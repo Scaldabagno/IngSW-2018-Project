@@ -89,14 +89,13 @@ public class DBMezzo {
 	}
 	
 	public void aggiungiMezzo(Mezzo m) throws SQLException {
-		String query = " INSERT INTO mydb.mezzi ()" + " values (?, ?, ?, ?)";
+		String query = " INSERT INTO mydb.mezzi ()" + " values (?, ?, ?)";
 
 		// create the mysql insert preparedstatement
 		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
 		preparedStmt.setString (1, m.getTarga());
 		preparedStmt.setString (2, "0");
-		preparedStmt.setString (3, "0");
-		preparedStmt.setInt    (4, m.getNumeroPosto());
+		preparedStmt.setInt    (3, m.getNumeroPosto());
 		
 		
 		// execute the preparedstatement

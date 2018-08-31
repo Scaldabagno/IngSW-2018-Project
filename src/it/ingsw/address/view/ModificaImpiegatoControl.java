@@ -108,7 +108,7 @@ public class ModificaImpiegatoControl {
         } else {
             // Show the error message.
             Alert alert = new Alert(AlertType.ERROR);
-            alert.initOwner(null);
+            alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please correct invalid fields");
             alert.setContentText(errorMessage);
