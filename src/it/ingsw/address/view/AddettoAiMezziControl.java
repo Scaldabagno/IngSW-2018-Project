@@ -85,7 +85,6 @@ public class AddettoAiMezziControl {
 		tabellaMezzi.getSelectionModel().selectedItemProperty().addListener(
 	            (observable, oldValue, newValue) -> dettagliMezzo(newValue));
 		
-		System.out.println(listMezzo);
 		
 		FilteredList<DatiMezzo> filteredData = new FilteredList<>(listMezzo, p -> true);
 
@@ -133,8 +132,6 @@ public class AddettoAiMezziControl {
 		loader.setLocation(MainApp.class.getResource("view/Profilo.fxml"));
 		AnchorPane profilo = (AnchorPane) loader.load();
 		Scene scene = new Scene(profilo);
-		System.out.println(scene);
-		System.out.println(profilo);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		ProfiloControl controller = loader.getController();
@@ -147,8 +144,6 @@ public class AddettoAiMezziControl {
 		loader.setLocation(MainApp.class.getResource("view/AggiungiMezzo.fxml"));
 		AnchorPane aggiungiMezzo = (AnchorPane) loader.load();
 		Scene scene = new Scene(aggiungiMezzo);
-		System.out.println(scene);
-		System.out.println(aggiungiMezzo);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		AggiungiMezzoControl controller = loader.getController();
@@ -182,8 +177,6 @@ public class AddettoAiMezziControl {
 		loader.setLocation(MainApp.class.getResource("view/ModificaMezzo.fxml"));
 		AnchorPane modificaMezzo = (AnchorPane) loader.load();
 		Scene scene = new Scene(modificaMezzo);
-		System.out.println(scene);
-		System.out.println(modificaMezzo);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		ModificaMezzoControl controller = loader.getController();
@@ -202,8 +195,6 @@ public class AddettoAiMezziControl {
 	private void comunicaDisponibilitaMezzo() {
 		DatiMezzo mezzoSel = tabellaMezzi.getSelectionModel().getSelectedItem();
 		if (mezzoSel != null) {
-			System.out.println(mezzoSel);
-			System.out.println(mezzoSel.getDatiDisponibilita());
 			try {
 			DBMezzo dbm = DBMezzo.getInstance();
 			dbm.comunicaNonDisponibilita(mezzoSel);
@@ -248,8 +239,6 @@ public class AddettoAiMezziControl {
 		loader.setLocation(MainApp.class.getResource("view/SchermataPrincipale.fxml"));
 		AnchorPane schermataPrincipale = (AnchorPane) loader.load();
 		Scene scene = new Scene(schermataPrincipale);
-		System.out.println(scene);
-		System.out.println(schermataPrincipale);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		SchermataPrincipaleControl controller = loader.getController();

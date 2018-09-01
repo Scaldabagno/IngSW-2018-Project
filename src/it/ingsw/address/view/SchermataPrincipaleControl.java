@@ -72,7 +72,6 @@ public class SchermataPrincipaleControl {
 		tabellaLinee.getSelectionModel().selectedItemProperty().addListener(
 	            (observable, oldValue, newValue) -> dettagliLinea(newValue));
 		
-		System.out.println(listLinea);
 		
 		FilteredList<DatiLinea> filteredData = new FilteredList<>(listLinea, p -> true);
 
@@ -103,8 +102,6 @@ public class SchermataPrincipaleControl {
 		loader.setLocation(MainApp.class.getResource("view/RicercaPercorso.fxml"));
 		AnchorPane ricercaPercorso = (AnchorPane) loader.load();
 		Scene scene = new Scene(ricercaPercorso);
-		System.out.println(scene);
-		System.out.println(ricercaPercorso);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		RicercaPercorsoControl controller = loader.getController();
@@ -117,8 +114,6 @@ public class SchermataPrincipaleControl {
 		loader.setLocation(MainApp.class.getResource("view/AreaRiservata.fxml"));
 		AnchorPane areaRiservata = (AnchorPane) loader.load();
 		Scene scene = new Scene(areaRiservata);
-		System.out.println(scene);
-		System.out.println(areaRiservata);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		AreaRiservataControl controller = loader.getController();

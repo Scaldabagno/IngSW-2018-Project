@@ -60,8 +60,6 @@ public class AccessoAutistaControl {
 			loader.setLocation(MainApp.class.getResource("view/AutistaArea.fxml"));
 			AnchorPane areaAutista = (AnchorPane) loader.load();
 			Scene scene = new Scene(areaAutista);
-			System.out.println(scene);
-			System.out.println(areaAutista);
 			Stage stage = mainApp.getPrimaryStage();
 			stage.setScene(scene);
 			AutistaControl controller = loader.getController();
@@ -71,15 +69,12 @@ public class AccessoAutistaControl {
 					DBImpiegato dbm = DBImpiegato.getInstance();
 					Ruolo ruolo = Ruolo.Autista;
 					Impiegato impiegato = dbm.loginAutista(emailA.getText(), passwordA.getText(), ruolo);
-							System.out.println(ruolo);
 							if(impiegato != null && impiegato.getRuolo() == ruolo) {
 									Sessione.impiegato = impiegato;
 									FXMLLoader loader=new FXMLLoader();
 									loader.setLocation(MainApp.class.getResource("view/AutistaArea.fxml"));
 									AnchorPane areaAutista = (AnchorPane) loader.load();
 									Scene scene = new Scene(areaAutista);
-									System.out.println(scene);
-									System.out.println(areaAutista);
 									Stage stage = mainApp.getPrimaryStage();
 									stage.setScene(scene);
 									AutistaControl controller = loader.getController();
@@ -111,8 +106,6 @@ public class AccessoAutistaControl {
 		loader.setLocation(MainApp.class.getResource("view/AreaRiservata.fxml"));
 		AnchorPane areaRiservata = (AnchorPane) loader.load();
 		Scene scene = new Scene(areaRiservata);
-		System.out.println(scene);
-		System.out.println(areaRiservata);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		AreaRiservataControl controller = loader.getController();

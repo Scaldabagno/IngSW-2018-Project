@@ -92,6 +92,9 @@ public class AddettoAlPersonaleControl {
 	@FXML
 	private Button allocaCorsa;
 	
+	@FXML
+	private Button visualizzaCorsa;
+	
 	public AddettoAlPersonaleControl() {
 		
 	}
@@ -115,7 +118,6 @@ public class AddettoAlPersonaleControl {
 		tabellaImpiegati.getSelectionModel().selectedItemProperty().addListener(
 	            (observable, oldValue, newValue) -> dettagliImpiegato(newValue));
 		
-		System.out.println(listImpiegato);
 		
 		FilteredList<DatiImpiegato> filteredData = new FilteredList<>(listImpiegato, p -> true);
 
@@ -190,8 +192,6 @@ public class AddettoAlPersonaleControl {
 		loader.setLocation(MainApp.class.getResource("view/Profilo.fxml"));
 		AnchorPane profilo = (AnchorPane) loader.load();
 		Scene scene = new Scene(profilo);
-		System.out.println(scene);
-		System.out.println(profilo);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		ProfiloControl controller = loader.getController();
@@ -205,8 +205,6 @@ public class AddettoAlPersonaleControl {
 		loader.setLocation(MainApp.class.getResource("view/AggiungiImpiegato.fxml"));
 		AnchorPane aggiungiImpiegato = (AnchorPane) loader.load();
 		Scene scene = new Scene(aggiungiImpiegato);
-		System.out.println(scene);
-		System.out.println(aggiungiImpiegato);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		AggiungiImpiegatoControl controller = loader.getController();
@@ -240,8 +238,6 @@ public class AddettoAlPersonaleControl {
 		loader.setLocation(MainApp.class.getResource("view/ModificaImpiegato.fxml"));
 		AnchorPane modificaImpiegato = (AnchorPane) loader.load();
 		Scene scene = new Scene(modificaImpiegato);
-		System.out.println(scene);
-		System.out.println(modificaImpiegato);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		ModificaImpiegatoControl controller = loader.getController();
@@ -261,8 +257,6 @@ public class AddettoAlPersonaleControl {
 		loader.setLocation(MainApp.class.getResource("view/CalcolaStipendio.fxml"));
 		AnchorPane calcolaStipendio = (AnchorPane) loader.load();
 		Scene scene = new Scene(calcolaStipendio);
-		System.out.println(scene);
-		System.out.println(calcolaStipendio);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		CalcolaStipendioControl controller = loader.getController();
@@ -275,8 +269,6 @@ public class AddettoAlPersonaleControl {
 		loader.setLocation(MainApp.class.getResource("view/AllocaCorsa.fxml"));
 		AnchorPane allocaCorsa = (AnchorPane) loader.load();
 		Scene scene = new Scene(allocaCorsa);
-		System.out.println(scene);
-		System.out.println(allocaCorsa);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		AllocaCorsaControl controller = loader.getController();
@@ -289,8 +281,6 @@ public class AddettoAlPersonaleControl {
 		loader.setLocation(MainApp.class.getResource("view/SchermataPrincipale.fxml"));
 		AnchorPane schermataPrincipale = (AnchorPane) loader.load();
 		Scene scene = new Scene(schermataPrincipale);
-		System.out.println(scene);
-		System.out.println(schermataPrincipale);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		SchermataPrincipaleControl controller = loader.getController();

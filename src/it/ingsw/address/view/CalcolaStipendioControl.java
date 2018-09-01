@@ -55,7 +55,6 @@ public class CalcolaStipendioControl {
 		
 		tabellaAutisti.getSelectionModel().selectedItemProperty();
 		
-		System.out.println(listImpiegato);
 		
 		FilteredList<DatiImpiegato> filteredData = new FilteredList<>(listImpiegato, p -> true);
 		
@@ -71,8 +70,6 @@ public class CalcolaStipendioControl {
 		loader.setLocation(MainApp.class.getResource("view/AddettoAlPersonaleArea.fxml"));
 		AnchorPane addettoAlPersonale = (AnchorPane) loader.load();
 		Scene scene = new Scene(addettoAlPersonale);
-		System.out.println(scene);
-		System.out.println(addettoAlPersonale);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		AddettoAlPersonaleControl controller = loader.getController();

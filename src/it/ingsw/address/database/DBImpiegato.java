@@ -36,8 +36,6 @@ public class DBImpiegato {
 		if(impiegato == null) {
 			return null;
 		}
-		System.out.println(impiegato.getPassword());
-		System.out.println(password);
 		if( !(impiegato.getPassword().equals(password)) || !(impiegato.getRuolo().equals(ruolo))) {
 			return null;
 		}
@@ -51,8 +49,6 @@ public class DBImpiegato {
 		if(impiegato == null) {
 			return null;
 		}
-		System.out.println(impiegato.getPassword());
-		System.out.println(password);
 		if( !(impiegato.getPassword().equals(password)) || !(impiegato.getRuolo().equals(ruolo))) {
 			return null;
 		}
@@ -66,8 +62,6 @@ public class DBImpiegato {
 		if(impiegato == null) {
 			return null;
 		}
-		System.out.println(impiegato.getPassword());
-		System.out.println(password);
 		if( !(impiegato.getPassword().equals(password)) || !(impiegato.getRuolo().equals(ruolo))) {
 			return null;
 		}
@@ -290,6 +284,12 @@ public class DBImpiegato {
 					"WHERE matricola = '" + i.getMatricola() +"';";
 			dbm.executeUpdate(query);
 		}
+	}
+	
+	public void turnoQuery(Impiegato i) {
+		String query = "UPDATE mydb.impiegati SET turno='" + i.getTurno() + "'"
+				+ "WHERE matricola='" + i.getMatricola() + "';";
+		dbm.executeUpdate(query);
 	}
 }
 	

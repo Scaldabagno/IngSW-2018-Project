@@ -107,8 +107,6 @@ private MainApp mainApp;
 				alert.showAndWait();
 				e.printStackTrace();
 			}
-			String result = "Il mezzo con targa " + targaText.getText() + " è stato modificato con successo";
-			System.out.println(result);
 		}
 	}
 	
@@ -152,8 +150,6 @@ private MainApp mainApp;
 		loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziArea.fxml"));
 		AnchorPane addettoAiMezzi = (AnchorPane) loader.load();
 		Scene scene = new Scene(addettoAiMezzi);
-		System.out.println(scene);
-		System.out.println(addettoAiMezzi);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		AddettoAiMezziControl controller = loader.getController();

@@ -64,8 +64,6 @@ public class AggiungiMezzoControl {
 				alert.showAndWait();
 				e.printStackTrace();
 			}
-			String result = "Il mezzo con targa " + targaText.getText() + " é stato inserito con successo";
-			System.out.println(result);
 		}
 	}
 	
@@ -117,8 +115,6 @@ public class AggiungiMezzoControl {
 		loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziArea.fxml"));
 		AnchorPane addettoAiMezzi = (AnchorPane) loader.load();
 		Scene scene = new Scene(addettoAiMezzi);
-		System.out.println(scene);
-		System.out.println(addettoAiMezzi);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		AddettoAiMezziControl controller = loader.getController();

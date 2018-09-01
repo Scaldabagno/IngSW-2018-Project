@@ -80,7 +80,7 @@ public class AllocaCorsaControl {
 		SpinnerValueFactory<String> valueFactory = new SpinnerValueFactory.ListSpinnerValueFactory<String>(turni);
 		turnoSpinner.setValueFactory(valueFactory);
 		
-		turnoSpinner.getValueFactory().setValue(variTurni[0]);
+		turnoSpinner.getValueFactory().setValue(variTurni[3]);
 		
 		listMatricole();
 		listTarghe();
@@ -99,21 +99,21 @@ public class AllocaCorsaControl {
 		}else{
 			try {
 				DBLinea.getInstance().allocaCorsaQuery(getNuovaCorsa());
-				DBLinea.getInstance().turnoQuery(getNuovoTurno());
-//				Alert alert = new Alert(AlertType.INFORMATION);
-//				alert.initOwner(mainApp.getPrimaryStage());
-//				alert.setTitle("Avviso");
-//				alert.setHeaderText("La corsa è stata allocata con successo!");
-//				alert.setContentText("L'impiegato, il mezzo e la linea sono stati allocati con successi");
-//				alert.showAndWait();
+				DBImpiegato.getInstance().turnoQuery(getNuovoTurno());
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.initOwner(mainApp.getPrimaryStage());
+				alert.setTitle("Avviso");
+				alert.setHeaderText("La corsa è stata allocata con successo!");
+				alert.setContentText("L'impiegato, il mezzo e la linea sono stati allocati con successo");
+				alert.showAndWait();
 				
 				
 			} catch (SQLException e) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.initOwner(mainApp.getPrimaryStage());
 				alert.setTitle("Avviso");
-				alert.setHeaderText("Allocazione fallita!");
-				alert.setContentText("ERRORE");
+				alert.setHeaderText("L'impiegato è già stato assegnato ad un'altra corsa");
+				alert.setContentText("Selezionare un altro impiegato o riallocare quello già selezionato");
 				alert.showAndWait();
 				e.printStackTrace();
 			}
@@ -139,7 +139,7 @@ public class AllocaCorsaControl {
 			alert.setContentText("Seleziona un impiegato");
 			return alert;
 		}
-		if(turnoSpinner.getValue() == null) {
+		if(turnoSpinner.getValue() == null || turnoSpinner.getValue() == String.valueOf(Turno.NonAssegnato)) {
 			alert.setContentText("Seleziona un turno");
 			return alert;
 		}
@@ -154,8 +154,6 @@ public class AllocaCorsaControl {
 		loader.setLocation(MainApp.class.getResource("view/AddettoAlPersonaleArea.fxml"));
 		AnchorPane addettoAlPersonale = (AnchorPane) loader.load();
 		Scene scene = new Scene(addettoAlPersonale);
-		System.out.println(scene);
-		System.out.println(addettoAlPersonale);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		AddettoAlPersonaleControl controller = loader.getController();
@@ -168,11 +166,8 @@ public class AllocaCorsaControl {
 				new PropertyValueFactory<DatiImpiegato, String>("matricola"));
 		cognomeColumn.setCellValueFactory(
 				new PropertyValueFactory<DatiImpiegato, String>("cognome"));
-		
 		tabellaImpiegati.getSelectionModel().selectedItemProperty();
-		matricolaText.setText(String.valueOf(tabellaImpiegati.getSelectionModel().getSelectedItem()));
 		
-		System.out.println(listImpiegato);
 		
 		FilteredList<DatiImpiegato> filteredData = new FilteredList<>(listImpiegato, p -> true);
 		
@@ -189,7 +184,6 @@ public class AllocaCorsaControl {
 		
 		tabellaMezzi.getSelectionModel().selectedItemProperty();
 		
-		System.out.println(listMezzo);
 		
 		FilteredList<DatiMezzo> filteredData = new FilteredList<>(listMezzo, p -> true);
 		
@@ -206,7 +200,6 @@ public class AllocaCorsaControl {
 		
 		tabellaLinee.getSelectionModel().selectedItemProperty();
 		
-		System.out.println(listLinea);
 		
 		FilteredList<DatiLinea> filteredData = new FilteredList<>(listLinea, p -> true);
 		
@@ -221,14 +214,13 @@ public class AllocaCorsaControl {
 		DatiMezzo mezzoSel = tabellaMezzi.getSelectionModel().getSelectedItem();
 		DatiLinea lineaSel = tabellaLinee.getSelectionModel().getSelectedItem();
 		
-		System.out.println(impiegatoSel.getDatiMatricola());
-		System.out.println(mezzoSel.getDatiTarga());
-		System.out.println(lineaSel.getDatiNumeroLinea());
 		
 		Impiegato impiegato = new Impiegato();
 		Mezzo mezzo = new Mezzo();
 		Linea linea = new Linea();
 		
+		matricolaText.setVisible(false);
+		matricolaText.setText(impiegatoSel.getDatiMatricola());
 		impiegato.setMatricola(impiegatoSel.getDatiMatricola());
 		mezzo.setTarga(mezzoSel.getDatiTarga());
 		linea.setNumeroLinea(lineaSel.getDatiNumeroLinea());

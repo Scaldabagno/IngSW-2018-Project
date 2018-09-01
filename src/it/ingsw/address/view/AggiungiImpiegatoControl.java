@@ -93,8 +93,6 @@ public class AggiungiImpiegatoControl {
 				alert.showAndWait();
 				e.printStackTrace();
 			}
-			String result = "L'impiegato con matricola " + matricolaText.getText() + " é stato inserito con successo";
-			System.out.println(result);
 		}
 	}
 	
@@ -194,8 +192,6 @@ public class AggiungiImpiegatoControl {
 		loader.setLocation(MainApp.class.getResource("view/AddettoAlPersonaleArea.fxml"));
 		AnchorPane addettoAlPersonale = (AnchorPane) loader.load();
 		Scene scene = new Scene(addettoAlPersonale);
-		System.out.println(scene);
-		System.out.println(addettoAlPersonale);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		AddettoAlPersonaleControl controller = loader.getController();

@@ -60,8 +60,6 @@ public class AccessoAddettoAiMezziControl {
 			loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziArea.fxml"));
 			AnchorPane areaAddettoAiMezzi = (AnchorPane) loader.load();
 			Scene scene = new Scene(areaAddettoAiMezzi);
-			System.out.println(scene);
-			System.out.println(areaAddettoAiMezzi);
 			Stage stage = mainApp.getPrimaryStage();
 			stage.setScene(scene);
 			AddettoAiMezziControl controller = loader.getController();
@@ -71,15 +69,12 @@ public class AccessoAddettoAiMezziControl {
 					DBImpiegato dbm = DBImpiegato.getInstance();
 					Ruolo ruolo = Ruolo.AddettoAiMezzi;
 					Impiegato impiegato = dbm.loginAddettoAiMezzi(emailAM.getText(), passwordAM.getText(), ruolo);
-							System.out.println(ruolo);
 							if(impiegato != null && impiegato.getRuolo() == ruolo) {
 									Sessione.impiegato = impiegato;
 									FXMLLoader loader=new FXMLLoader();
 									loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziArea.fxml"));
 									AnchorPane areaAddettoAiMezzi = (AnchorPane) loader.load();
 									Scene scene = new Scene(areaAddettoAiMezzi);
-									System.out.println(scene);
-									System.out.println(areaAddettoAiMezzi);
 									Stage stage = mainApp.getPrimaryStage();
 									stage.setScene(scene);
 									AddettoAiMezziControl controller = loader.getController();
@@ -111,8 +106,6 @@ public class AccessoAddettoAiMezziControl {
 		loader.setLocation(MainApp.class.getResource("view/AreaRiservata.fxml"));
 		AnchorPane areaRiservata = (AnchorPane) loader.load();
 		Scene scene = new Scene(areaRiservata);
-		System.out.println(scene);
-		System.out.println(areaRiservata);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		AreaRiservataControl controller = loader.getController();

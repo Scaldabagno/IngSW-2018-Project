@@ -123,8 +123,6 @@ public class AutistaControl {
 		loader.setLocation(MainApp.class.getResource("view/SchermataPrincipale.fxml"));
 		AnchorPane schermataPrincipale = (AnchorPane) loader.load();
 		Scene scene = new Scene(schermataPrincipale);
-		System.out.println(scene);
-		System.out.println(schermataPrincipale);
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		SchermataPrincipaleControl controller = loader.getController();

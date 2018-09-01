@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import it.ingsw.address.model.Corsa;
 import it.ingsw.address.model.DatiLinea;
 import it.ingsw.address.model.Fermata;
-import it.ingsw.address.model.Impiegato;
 import it.ingsw.address.model.Linea;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -94,7 +93,6 @@ public class DBLinea {
 		Fermata fermata = new Fermata();
 		try {
 			if(first == true) {
-//				TODO: Aggiustare
 				dbm.executeQuery("SELECT fermate.idFermate, fermate.fermata FROM fermate, linee_has_fermate, linee " +
 						"WHERE fermate.idFermate=linee_has_fermate.fermate_idFermate AND linee.numeroLinea='" + linea.getNumeroLinea() +
 						"' AND linee.numeroLinea=linee_has_fermate.linee_idLinea AND linee_has_fermate.tipo='PRIMA'");
@@ -104,18 +102,11 @@ public class DBLinea {
 						"' AND linee.numeroLinea=linee_has_fermate.linee_idLinea AND linee_has_fermate.tipo='ULTIMA'");
 			}
 			ResultSet result = dbm.getResultSet();
-//			/**************
-//			 * CONTROLLO DA FARE
-//			 * ATTENZIONE
-//			 */
 			if(!result.next()) {
 				Fermata f = new Fermata();
 				f.setFermata("Fermate non settate, rivolgersi all'amministrazione");
 				return f;
 			}
-//			/**
-//			 * AGGIUSTARE
-//			 */
 			fermata.setFermata(result.getString("fermate.fermata"));
 		} catch(SQLException exc) {
 			exc.printStackTrace();
@@ -132,11 +123,5 @@ public class DBLinea {
 		preparedStmt.setString (3, corsa.getMezzo().getTarga());
 		preparedStmt.setString (4, corsa.getLinea().getNumeroLinea());
 		preparedStmt.execute();
-	}
-	
-	public void turnoQuery(Impiegato i) {
-		String query = "UPDATE mydb.impiegati SET turno='" + i.getTurno() + "'"
-				+ "WHERE matricola='" + i.getMatricola() + "';";
-		dbm.executeUpdate(query);
 	}
 }
