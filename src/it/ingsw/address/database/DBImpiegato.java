@@ -170,6 +170,37 @@ public class DBImpiegato {
 		return datiImpiegati;
 	}
 	
+	public ObservableList<DatiImpiegato> getAutisti() {
+		ArrayList<DatiImpiegato> impiegati = new ArrayList<>();
+		try {
+			dbm.executeQuery("SELECT * FROM impiegati WHERE ruolo='" + String.valueOf(Ruolo.Autista) + "'");
+			ResultSet resultSet = dbm.getResultSet();
+			resultSet.beforeFirst();
+			while(resultSet.next()) {
+				Impiegato impiegato = new Impiegato();
+				impiegato.setNome(resultSet.getString("nome"));
+				impiegato.setCognome(resultSet.getString("cognome"));
+				impiegato.setMatricola(resultSet.getString("matricola"));
+				impiegato.setEmail(resultSet.getString("email"));
+				impiegato.setPassword(resultSet.getString("password"));
+				impiegato.setRuolo(Ruolo.valueOf(resultSet.getString("ruolo")));
+				impiegato.setDataNascita(resultSet.getDate("dataDiNascita").toLocalDate());
+				impiegato.setDisponibilita(resultSet.getBoolean("disponibilit‡Impiegato"));
+				impiegato.setStipendio(resultSet.getDouble("stipendio"));
+				if(resultSet.getString("turno") != null) {
+					impiegato.setTurno(Turno.valueOf(resultSet.getString("turno")));
+				}else {
+					impiegato.setTurno(Turno.NonAssegnato);
+				}
+				impiegati.add(new DatiImpiegato(impiegato));
+			}
+		} catch(SQLException exc) {
+			exc.printStackTrace();
+		}
+		ObservableList<DatiImpiegato> datiImpiegati = FXCollections.observableArrayList(impiegati);
+		return datiImpiegati;
+	}
+	
 	public ArrayList<Impiegato> getImpiegati(String clause){
 		ArrayList<Impiegato> impiegati = new ArrayList<>();
 		try {
@@ -213,7 +244,15 @@ public class DBImpiegato {
 		preparedStmt.setString (6, i.getDataNascita().getYear()+"-"+i.getDataNascita().getMonthValue()+"-"+i.getDataNascita().getDayOfMonth());
 		preparedStmt.setString (7, i.getRuolo().name());
 		preparedStmt.setString (8, "0");
-		preparedStmt.setDouble (9, i.getStipendio());
+		if(i.getRuolo() == Ruolo.AddettoAlPersonale) {
+			preparedStmt.setDouble (9, 1500.00);
+		}
+		if(i.getRuolo() == Ruolo.AddettoAiMezzi) {
+			preparedStmt.setDouble (9, 1300.00);
+		}
+		if(i.getRuolo() == Ruolo.Autista) {
+			preparedStmt.setDouble (9, i.getStipendio());
+		}
 		preparedStmt.setString (10, null);
 		// execute the preparedstatement
 		preparedStmt.execute();
@@ -230,6 +269,13 @@ public class DBImpiegato {
 		preparedStmt.setString (5, i.getMatricola());
 		
 		preparedStmt.execute();
+	}
+	
+	public void calcolaStipendio(Impiegato i) {
+		String query = " UPDATE mydb.impiegati SET " + 
+				"stipendio = '" + i.getStipendio() + "' " +
+				"WHERE matricola = '" + i.getMatricola()+"';";
+		dbm.executeUpdate(query);
 	}
 	
 	public void comunicaNonDisponibilita(Impiegato i) throws SQLException{

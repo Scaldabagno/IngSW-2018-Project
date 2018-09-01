@@ -23,7 +23,7 @@
       <TextField fx:id="ricercaImpiegato" layoutX="330.0" layoutY="13.0" prefHeight="25.0" prefWidth="296.0" promptText="Ricerca" />
       <Button fx:id="nuovoImpiegato" layoutX="512.0" layoutY="181.0" mnemonicParsing="false" onMouseClicked="#aggiungiImpiegato" prefHeight="25.0" prefWidth="114.0" text="Inserisci nuovi dati" />
       <Button fx:id="modificaImpiegato" layoutX="512.0" layoutY="228.0" mnemonicParsing="false" onMouseClicked="#modificaImpiegato" prefHeight="25.0" prefWidth="114.0" text="Modifica dati" />
-      <Button fx:id="calcolaStipendio" layoutX="512.0" layoutY="272.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Calcola stipendio" />
+      <Button fx:id="calcolaStipendio" layoutX="512.0" layoutY="272.0" mnemonicParsing="false" onMouseClicked="#calcolaStipendio" prefHeight="25.0" prefWidth="114.0" text="Calcola stipendio" />
       <Button fx:id="profilo" layoutX="512.0" layoutY="54.0" mnemonicParsing="false" onMouseClicked="#profiloScene" prefHeight="25.0" prefWidth="114.0" text="Profilo" />
       <Button fx:id="logout" layoutX="606.0" layoutY="395.0" mnemonicParsing="false" onMouseClicked="#logoutAP" prefHeight="39.0" prefWidth="80.0" text="Logout" />
       <AnchorPane layoutX="14.0" layoutY="54.0" prefHeight="342.0" prefWidth="471.0">
@@ -56,7 +56,6 @@
                               <RowConstraints maxHeight="152.0" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <Label prefHeight="29.0" prefWidth="85.0" text="Nome" />
@@ -65,9 +64,8 @@
                               <Label prefHeight="30.0" prefWidth="120.0" text="Matricola" GridPane.rowIndex="3" />
                               <Label prefHeight="17.0" prefWidth="87.0" text="Data di Nascita" GridPane.rowIndex="4" />
                               <Label text="Stipendio" GridPane.rowIndex="5" />
-                              <Label text="Turno" GridPane.rowIndex="7" />
+                              <Label fx:id="turnoLabel1" text="Turno" GridPane.rowIndex="7" />
                               <Label text="Ruolo" GridPane.rowIndex="6" />
-                              <Label text="Ore" GridPane.rowIndex="8" />
                               <Label fx:id="nomeLabel" prefHeight="16.0" prefWidth="233.0" GridPane.columnIndex="1" />
                               <Label fx:id="cognomeLabel" prefHeight="17.0" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="emailLabel" prefHeight="17.0" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -76,7 +74,6 @@
                               <Label fx:id="stipendioLabel" prefHeight="17.0" prefWidth="241.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                               <Label fx:id="turnoLabel" prefHeight="17.0" prefWidth="251.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                               <Label fx:id="ruoloLabel" prefHeight="17.0" prefWidth="251.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <Label prefHeight="17.0" prefWidth="239.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                            </children>
                         </GridPane>
                      </children>

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import it.ingsw.address.view.AvvioProgrammaControl;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -47,6 +48,7 @@ public class MainApp extends Application {
         }
     }
     
+    @FXML
     public void avvioProgramma() throws IOException{
         try {
             FXMLLoader loader = new FXMLLoader();

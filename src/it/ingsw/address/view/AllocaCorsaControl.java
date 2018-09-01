@@ -2,14 +2,17 @@ package it.ingsw.address.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
 import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBImpiegato;
 import it.ingsw.address.database.DBLinea;
 import it.ingsw.address.database.DBMezzo;
+import it.ingsw.address.model.Corsa;
 import it.ingsw.address.model.DatiImpiegato;
 import it.ingsw.address.model.DatiLinea;
 import it.ingsw.address.model.DatiMezzo;
+import it.ingsw.address.model.Impiegato;
+import it.ingsw.address.model.Linea;
+import it.ingsw.address.model.Mezzo;
 import it.ingsw.address.model.Turno;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +23,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
@@ -54,6 +58,9 @@ public class AllocaCorsaControl {
 	private TableColumn<DatiLinea, String> lineaColumn;
 	
 	@FXML
+	private Label matricolaText;
+	
+	@FXML
 	private Spinner<String> turnoSpinner;
 	
 	@FXML
@@ -78,106 +85,68 @@ public class AllocaCorsaControl {
 		listMatricole();
 		listTarghe();
 		listLinee();
+		
+		
 	  	
 	}
 	
 	@FXML
-	private void selezionaImpiegato() {
-	    DatiImpiegato impiegatoSel = tabellaImpiegati.getSelectionModel().getSelectedItem();
-	    if (impiegatoSel != null) {
-	        boolean okClicked = modificaImpiegatoScene(impiegatoSel);
-	        if (okClicked) {
-	        	System.out.println("Autista selezionato");
-	        }
-	        
-	        DatiMezzo mezzoSel = tabellaMezzi.getSelectionModel().getSelectedItem();
-		    if (mezzoSel != null) {
-		        boolean okClicked1 = modificaMezzoScene(mezzoSel);
-		        if (okClicked1) {
-		            System.out.println("Mezzo selezionato");
-		        }
-		        DatiLinea lineaSel = tabellaLinee.getSelectionModel().getSelectedItem();
-			    if (lineaSel != null) {
-			        boolean okClicked2 = modificaLineaScene(lineaSel);
-			        if (okClicked2) {
-			        	System.out.println("Linea selezionata");
-			        }
-
-			    } else {
-			        // Nothing selected.
-			        Alert alert = new Alert(AlertType.WARNING);
-			        alert.initOwner(mainApp.getPrimaryStage());
-			        alert.setTitle("Nessuna Selezione");
-			        alert.setHeaderText("Nessun linea selezionata");
-			        alert.setContentText("Selezionare una linea dall'elenco.");
-
-			        alert.showAndWait();
-			    }
-
-		    } else {
-		        // Nothing selected.
-		        Alert alert = new Alert(AlertType.WARNING);
-		        alert.initOwner(mainApp.getPrimaryStage());
-		        alert.setTitle("Nessuna Selezione");
-		        alert.setHeaderText("Nessun mezzo selezionato");
-		        alert.setContentText("Selezionare un mezzo dall'elenco.");
-
-		        alert.showAndWait();
-		    }	    
-
-	    } else {
-	        // Nothing selected.
-	        Alert alert = new Alert(AlertType.WARNING);
-	        alert.initOwner(mainApp.getPrimaryStage());
-	        alert.setTitle("Nessuna Selezione");
-	        alert.setHeaderText("Nessun impiegato selezionato");
-	        alert.setContentText("Selezionare un impiegato dall'elenco.");
-
-	        alert.showAndWait();
-	    }
+	private void allocaCorsa(){
+		Alert error = check();
+		
+		if(error != null) {
+			error.showAndWait();
+		}else{
+			try {
+				DBLinea.getInstance().allocaCorsaQuery(getNuovaCorsa());
+				DBLinea.getInstance().turnoQuery(getNuovoTurno());
+//				Alert alert = new Alert(AlertType.INFORMATION);
+//				alert.initOwner(mainApp.getPrimaryStage());
+//				alert.setTitle("Avviso");
+//				alert.setHeaderText("La corsa è stata allocata con successo!");
+//				alert.setContentText("L'impiegato, il mezzo e la linea sono stati allocati con successi");
+//				alert.showAndWait();
+				
+				
+			} catch (SQLException e) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.initOwner(mainApp.getPrimaryStage());
+				alert.setTitle("Avviso");
+				alert.setHeaderText("Allocazione fallita!");
+				alert.setContentText("ERRORE");
+				alert.showAndWait();
+				e.printStackTrace();
+			}
+		}
 	}
 	
-//	@FXML
-//	private void selezionaMezzo() {
-//	    DatiMezzo mezzoSel = tabellaMezzi.getSelectionModel().getSelectedItem();
-//	    if (mezzoSel != null) {
-//	        boolean okClicked = modificaMezzoScene(mezzoSel);
-//	        if (okClicked) {
-//	            dettagliImpiegato(mezzoSel);
-//	        }
-//
-//	    } else {
-//	        // Nothing selected.
-//	        Alert alert = new Alert(AlertType.WARNING);
-//	        alert.initOwner(mainApp.getPrimaryStage());
-//	        alert.setTitle("Nessuna Selezione");
-//	        alert.setHeaderText("Nessun mezzo selezionato");
-//	        alert.setContentText("Selezionare un mezzo dall'elenco.");
-//
-//	        alert.showAndWait();
-//	    }
-//	}
-//	
-//	@FXML
-//	private void selezionaLinea() {
-//	    DatiLinea lineaSel = tabellaLinee.getSelectionModel().getSelectedItem();
-//	    if (lineaSel != null) {
-//	        boolean okClicked = modificaLineaScene(lineaSel);
-//	        if (okClicked) {
-//	            dettagliImpiegato(lineaSel);
-//	        }
-//
-//	    } else {
-//	        // Nothing selected.
-//	        Alert alert = new Alert(AlertType.WARNING);
-//	        alert.initOwner(mainApp.getPrimaryStage());
-//	        alert.setTitle("Nessuna Selezione");
-//	        alert.setHeaderText("Nessun linea selezionata");
-//	        alert.setContentText("Selezionare una linea dall'elenco.");
-//
-//	        alert.showAndWait();
-//	    }
-//	}
+	private Alert check() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.initOwner(mainApp.getPrimaryStage());
+		alert.setTitle("Avviso");
+		alert.setHeaderText("Inserimento fallito!");
+
+		// Check nome
+		if (tabellaImpiegati.getSelectionModel().getSelectedItem() == null) {
+			alert.setContentText("Seleziona un impiegato");
+			return alert;
+		}
+		if (tabellaMezzi.getSelectionModel().getSelectedItem() == null) {
+			alert.setContentText("Seleziona un mezzo");
+			return alert;
+		}
+		if (tabellaLinee.getSelectionModel().getSelectedItem() == null) {
+			alert.setContentText("Seleziona un impiegato");
+			return alert;
+		}
+		if(turnoSpinner.getValue() == null) {
+			alert.setContentText("Seleziona un turno");
+			return alert;
+		}
+		
+		// Data is ok
+		return null;
+	}
 	
 	@FXML
 	public void annullaButton() throws IOException{
@@ -201,6 +170,7 @@ public class AllocaCorsaControl {
 				new PropertyValueFactory<DatiImpiegato, String>("cognome"));
 		
 		tabellaImpiegati.getSelectionModel().selectedItemProperty();
+		matricolaText.setText(String.valueOf(tabellaImpiegati.getSelectionModel().getSelectedItem()));
 		
 		System.out.println(listImpiegato);
 		
@@ -244,6 +214,39 @@ public class AllocaCorsaControl {
 	    sortedData.comparatorProperty().bind(tabellaLinee.comparatorProperty());
 
 	  	tabellaLinee.setItems(sortedData);
+	}
+	
+	private Corsa getNuovaCorsa() throws SQLException {
+		DatiImpiegato impiegatoSel = tabellaImpiegati.getSelectionModel().getSelectedItem();
+		DatiMezzo mezzoSel = tabellaMezzi.getSelectionModel().getSelectedItem();
+		DatiLinea lineaSel = tabellaLinee.getSelectionModel().getSelectedItem();
+		
+		System.out.println(impiegatoSel.getDatiMatricola());
+		System.out.println(mezzoSel.getDatiTarga());
+		System.out.println(lineaSel.getDatiNumeroLinea());
+		
+		Impiegato impiegato = new Impiegato();
+		Mezzo mezzo = new Mezzo();
+		Linea linea = new Linea();
+		
+		impiegato.setMatricola(impiegatoSel.getDatiMatricola());
+		mezzo.setTarga(mezzoSel.getDatiTarga());
+		linea.setNumeroLinea(lineaSel.getDatiNumeroLinea());
+		
+		Corsa corsa = new Corsa(impiegato, mezzo, linea);
+		
+		
+		
+		return corsa;
+	}
+	
+	private Impiegato getNuovoTurno() throws SQLException {
+		Impiegato impiegato = new Impiegato();
+		
+		impiegato.setMatricola(matricolaText.getText());
+		impiegato.setTurno(Turno.valueOf(turnoSpinner.getValue()));
+		
+		return impiegato;
 	}
 	
 	public boolean modificaImpiegatoScene(DatiImpiegato impiegato) {

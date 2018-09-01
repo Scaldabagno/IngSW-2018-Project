@@ -22,6 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
@@ -39,6 +40,9 @@ public class AddettoAlPersonaleControl {
 	
 	@FXML
 	private TableColumn<DatiImpiegato, String> cognomeColumn;
+	
+	@FXML
+	private GridPane gridImpiegato;
 	
 	@FXML
 	private Label nomeLabel;
@@ -63,6 +67,9 @@ public class AddettoAlPersonaleControl {
 	
 	@FXML
 	private Label turnoLabel;
+	
+	@FXML
+	private Label turnoLabel1;
 	
 	@FXML
 	private Button logout;
@@ -114,12 +121,12 @@ public class AddettoAlPersonaleControl {
 
 		ricercaImpiegato.textProperty().addListener((observable, oldValue, newValue) -> {
 		      filteredData.setPredicate(impiegato -> {
-		          // Se il testo della barra è vuoto, restituisce tutte le linee.
+		          // Se il testo della barra è vuoto, restituisce tutti gli impiegati.
 		          if (newValue == null || newValue.isEmpty()) {
 		              return true;
 		          }
 
-		          // Ricerca linee, sia per capolinea che per numero.
+		          // Ricerca impiegati.
 		          String lowerCaseFilter = newValue.toLowerCase();
 
 		          return impiegato.getDatiNome().toLowerCase().contains(lowerCaseFilter) ||
@@ -142,10 +149,20 @@ public class AddettoAlPersonaleControl {
 	        matricolaLabel.setText(datiImpiegato.getDatiMatricola());
 	        if(datiImpiegato.getDatiRuolo() == "AddettoAlPersonale") {
 	        	ruoloLabel.setText("Addetto Al Personale");
+	        	turnoLabel.setVisible(false);
+	        	turnoLabel.setDisable(true);
+	        	turnoLabel1.setVisible(false);
+	        	turnoLabel1.setDisable(true);
 	        }else if(datiImpiegato.getDatiRuolo() == "AddettoAiMezzi") {
 	        	ruoloLabel.setText("Addetto Ai Mezzi");
+	        	turnoLabel.setVisible(false);
+	        	turnoLabel.setDisable(true);
 	        }else {
 		        ruoloLabel.setText(datiImpiegato.getDatiRuolo());
+		        turnoLabel.setVisible(true);
+		        turnoLabel.setDisable(false);
+		        turnoLabel1.setVisible(true);
+	        	turnoLabel1.setDisable(false);
 	        }
 	        nascitaLabel.setText(String.valueOf(datiImpiegato.getDatiNascita()));
 	        stipendioLabel.setText(String.valueOf(datiImpiegato.getDatiStipendio()) + " €");
@@ -236,6 +253,20 @@ public class AddettoAlPersonaleControl {
 			 e.printStackTrace();
 		     return false;
 		}
+	}
+	
+	@FXML
+	public void calcolaStipendio() throws IOException{
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/CalcolaStipendio.fxml"));
+		AnchorPane calcolaStipendio = (AnchorPane) loader.load();
+		Scene scene = new Scene(calcolaStipendio);
+		System.out.println(scene);
+		System.out.println(calcolaStipendio);
+		Stage stage = mainApp.getPrimaryStage();
+		stage.setScene(scene);
+		CalcolaStipendioControl controller = loader.getController();
+		controller.setMainApp(mainApp);
 	}
 	
 	@FXML

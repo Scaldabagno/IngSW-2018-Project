@@ -1,12 +1,16 @@
 package it.ingsw.address.database;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import it.ingsw.address.model.Corsa;
 import it.ingsw.address.model.DatiLinea;
 import it.ingsw.address.model.Fermata;
+import it.ingsw.address.model.Impiegato;
 import it.ingsw.address.model.Linea;
+import it.ingsw.address.model.Mezzo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -118,5 +122,24 @@ public class DBLinea {
 			exc.printStackTrace();
 		}
 		return fermata;
+	}
+	
+	public void allocaCorsaQuery(Corsa corsa) throws SQLException {
+		
+		
+		String query = "INSERT INTO mydb.corse (idcorse, impiegati_matricola, mezzi_targa, linee_numeroLinea) VALUES (?, ?, ?, ?);";
+		// create the mysql insert preparedstatement
+		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
+		preparedStmt.setString (1, null);
+		preparedStmt.setString (2, corsa.getImpiegato().getMatricola());
+		preparedStmt.setString (3, corsa.getMezzo().getTarga());
+		preparedStmt.setString (4, corsa.getLinea().getNumeroLinea());
+		preparedStmt.execute();
+	}
+	
+	public void turnoQuery(Impiegato i) {
+		String query = "UPDATE mydb.impiegati SET turno='" + i.getTurno() + "'"
+				+ "WHERE matricola='" + i.getMatricola() + "';";
+		dbm.executeUpdate(query);
 	}
 }
