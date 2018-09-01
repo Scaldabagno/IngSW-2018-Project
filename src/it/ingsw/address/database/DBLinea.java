@@ -10,7 +10,6 @@ import it.ingsw.address.model.DatiLinea;
 import it.ingsw.address.model.Fermata;
 import it.ingsw.address.model.Impiegato;
 import it.ingsw.address.model.Linea;
-import it.ingsw.address.model.Mezzo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -125,8 +124,6 @@ public class DBLinea {
 	}
 	
 	public void allocaCorsaQuery(Corsa corsa) throws SQLException {
-		
-		
 		String query = "INSERT INTO mydb.corse (idcorse, impiegati_matricola, mezzi_targa, linee_numeroLinea) VALUES (?, ?, ?, ?);";
 		// create the mysql insert preparedstatement
 		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
