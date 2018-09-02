@@ -30,9 +30,9 @@
                   <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="78.0" minHeight="0.0" prefHeight="61.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="152.0" minHeight="3.0" prefHeight="56.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="152.0" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="78.0" minHeight="0.0" prefHeight="63.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="152.0" minHeight="3.0" prefHeight="72.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="152.0" minHeight="0.0" prefHeight="57.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
                   <Label text="Nome" />
@@ -51,7 +51,7 @@
             </GridPane>
          </children>
       </AnchorPane>
-      <Label layoutX="497.0" layoutY="14.0" prefHeight="173.0" prefWidth="167.0">
+      <Label layoutX="445.0" layoutY="131.0" prefHeight="152.0" prefWidth="123.0">
          <graphic>
             <ImageView fitHeight="189.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                <image>

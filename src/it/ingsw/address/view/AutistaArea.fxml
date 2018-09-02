@@ -18,7 +18,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button fx:id="indisponibilita" layoutX="504.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#comunicaIndisponibilita" prefHeight="39.0" prefWidth="186.0" text="Comunica disponibilità autista" />
+      <Button fx:id="indisponibilita" layoutX="500.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#comunicaIndisponibilita" prefHeight="39.0" prefWidth="186.0" text="Comunica indisponibilità autista" />
       <Button fx:id="logout" layoutX="606.0" layoutY="397.0" mnemonicParsing="false" onMouseClicked="#logoutA" prefHeight="39.0" prefWidth="80.0" text="Logout" />
       <AnchorPane layoutX="7.0" layoutY="62.0" prefHeight="372.0" prefWidth="438.0">
          <children>
@@ -35,7 +35,6 @@
                   <RowConstraints maxHeight="152.0" minHeight="3.0" prefHeight="35.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="152.0" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
                   <Label text="Nome" />
@@ -45,7 +44,6 @@
                   <Label text="Data di Nascita" GridPane.rowIndex="4" />
                   <Label text="Stipendio" GridPane.rowIndex="5" />
                   <Label text="Turno" GridPane.rowIndex="6" />
-                  <Label text="Ore" GridPane.rowIndex="7" />
                   <Label fx:id="nomeLabel" prefHeight="17.0" prefWidth="288.0" GridPane.columnIndex="1" />
                   <Label fx:id="cognomeLabel" prefHeight="17.0" prefWidth="365.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label fx:id="matricolaLabel" prefHeight="17.0" prefWidth="291.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -53,15 +51,14 @@
                   <Label fx:id="nascitaLabel" prefHeight="17.0" prefWidth="347.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label fx:id="stipendioLabel" prefHeight="17.0" prefWidth="290.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Label fx:id="turnoLabel" prefHeight="17.0" prefWidth="395.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <Label fx:id="oreLabel" prefHeight="17.0" prefWidth="385.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                </children>
             </GridPane>
          </children>
       </AnchorPane>
-      <Label fx:id="disponibile" layoutX="504.0" layoutY="206.0" prefHeight="39.0" prefWidth="186.0" />
-      <Label layoutX="576.0" layoutY="14.0" prefHeight="96.0" prefWidth="94.0">
+      <Label fx:id="disponibile" layoutX="345.0" layoutY="18.0" prefHeight="39.0" prefWidth="155.0" />
+      <Label layoutX="445.0" layoutY="154.0" prefHeight="152.0" prefWidth="123.0">
          <graphic>
-            <ImageView fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="189.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Bus-Driver.png" />
                </image>
