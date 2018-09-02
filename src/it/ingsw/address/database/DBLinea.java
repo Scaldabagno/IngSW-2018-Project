@@ -114,6 +114,8 @@ public class DBLinea {
 		return fermata;
 	}
 	
+	
+	
 	public void allocaCorsaQuery(Corsa corsa) throws SQLException {
 		String query = "INSERT INTO mydb.corse (idcorse, impiegati_matricola, mezzi_targa, linee_numeroLinea) VALUES (?, ?, ?, ?);";
 		// create the mysql insert preparedstatement
@@ -122,6 +124,30 @@ public class DBLinea {
 		preparedStmt.setString (2, corsa.getImpiegato().getMatricola());
 		preparedStmt.setString (3, corsa.getMezzo().getTarga());
 		preparedStmt.setString (4, corsa.getLinea().getNumeroLinea());
+		preparedStmt.execute();
+	}
+	
+	
+	public void riallocaCorsaQuery(Corsa corsa) throws SQLException{
+		String query = " UPDATE mydb.corse SET impiegati_matricola=?, mezzi_targa=?, linee_numeroLinea=? WHERE idcorse=?;";
+		
+		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
+		
+		preparedStmt.setString (1, corsa.getImpiegato().getMatricola());
+		preparedStmt.setString (2, corsa.getMezzo().getTarga());
+		preparedStmt.setString (3, corsa.getLinea().getNumeroLinea());
+		preparedStmt.setInt    (4, corsa.getIdCorsa());
+		
+		preparedStmt.execute();
+	}
+	
+	public void disallocaCorsaQuery(Corsa corsa) throws SQLException{
+		String query = "DELETE FROM mydb.corse WHERE impiegati_matricola=?";
+		
+		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
+		
+		preparedStmt.setString (1, corsa.getImpiegato().getMatricola());
+		
 		preparedStmt.execute();
 	}
 }

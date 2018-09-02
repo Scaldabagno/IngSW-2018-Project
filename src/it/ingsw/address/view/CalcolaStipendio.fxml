@@ -25,8 +25,13 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TextField layoutX="454.0" layoutY="200.0" />
+      <TextField layoutX="466.0" layoutY="239.0" prefHeight="25.0" prefWidth="179.0" />
       <Button fx:id="annulla" layoutX="14.0" layoutY="398.0" mnemonicParsing="false" onMouseClicked="#annullaButton" prefHeight="38.0" prefWidth="83.0" text="Annulla" />
       <Button fx:id="calcola" layoutX="603.0" layoutY="398.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="83.0" text="Calcola" />
+      <Label layoutX="466.0" layoutY="186.0" prefHeight="53.0" prefWidth="179.0" text="Numero giorni lavorativi">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

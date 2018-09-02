@@ -227,8 +227,6 @@ public class AllocaCorsaControl {
 		
 		Corsa corsa = new Corsa(impiegato, mezzo, linea);
 		
-		
-		
 		return corsa;
 	}
 	
@@ -241,17 +239,55 @@ public class AllocaCorsaControl {
 		return impiegato;
 	}
 	
-	public boolean modificaImpiegatoScene(DatiImpiegato impiegato) {
-		return true;
+	@FXML
+	private void rialloca() throws IOException {
+		 Alert error = check();
+		 if (error != null) {
+			 error.showAndWait();
+		 } else {
+			 try {
+				DBLinea.getInstance().riallocaCorsaQuery(getModificaCorsa());;
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.initOwner(mainApp.getPrimaryStage());
+				alert.setTitle("Avviso");
+				alert.setHeaderText("Modifica avvenuto con successo!");
+				alert.setContentText("L'impiegato è stato modificato all'elenco degli impiegati");
+				alert.showAndWait();
+
+				annullaButton();
+
+			 } catch (SQLException e) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.initOwner(mainApp.getPrimaryStage());
+				alert.setTitle("Avviso");
+				alert.setHeaderText("Inserimento fallito!");
+				alert.setContentText("Il numero di matricola inserito è già stato assegnato");
+				alert.showAndWait();
+				e.printStackTrace();
+			}
+		}
 	}
 	
-	public boolean modificaMezzoScene(DatiMezzo mezzo) {
-		return true;
-	}
-
-	public boolean modificaLineaScene(DatiLinea linea) {
-		return true;
-	}
+	private Corsa getModificaCorsa() throws SQLException {
+			DatiImpiegato impiegatoSel = tabellaImpiegati.getSelectionModel().getSelectedItem();
+			DatiMezzo mezzoSel = tabellaMezzi.getSelectionModel().getSelectedItem();
+			DatiLinea lineaSel = tabellaLinee.getSelectionModel().getSelectedItem();
+			
+			
+			Impiegato impiegato = new Impiegato();
+			Mezzo mezzo = new Mezzo();
+			Linea linea = new Linea();
+			
+			matricolaText.setVisible(false);
+			matricolaText.setText(impiegatoSel.getDatiMatricola());
+			impiegato.setMatricola(impiegatoSel.getDatiMatricola());
+			mezzo.setTarga(mezzoSel.getDatiTarga());
+			linea.setNumeroLinea(lineaSel.getDatiNumeroLinea());
+			
+			Corsa corsa = new Corsa(impiegato, mezzo, linea);
+			
+			return corsa;
+		}
 	
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
