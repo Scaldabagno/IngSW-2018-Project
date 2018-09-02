@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBMezzo;
 import it.ingsw.address.model.DatiMezzo;
+import it.ingsw.address.model.Impiegato;
+import it.ingsw.address.model.Sessione;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -235,6 +237,7 @@ public class AddettoAiMezziControl {
 	
 	@FXML
 	public void logoutAM() throws IOException{
+		Sessione.impiegato = new Impiegato();
 		FXMLLoader loader=new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("view/SchermataPrincipale.fxml"));
 		AnchorPane schermataPrincipale = (AnchorPane) loader.load();

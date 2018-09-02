@@ -265,10 +265,10 @@ public class DBImpiegato {
 		preparedStmt.execute();
 	}
 	
-	public void calcolaStipendio(Impiegato i) {
+	public void calcolaStipendio(DatiImpiegato i) {
 		String query = " UPDATE mydb.impiegati SET " + 
-				"stipendio = '" + i.getStipendio() + "' " +
-				"WHERE matricola = '" + i.getMatricola()+"';";
+				"stipendio = '" + i.getDatiStipendio() + "' " +
+				"WHERE matricola = '" + i.getDatiMatricola()+"';";
 		dbm.executeUpdate(query);
 	}
 	

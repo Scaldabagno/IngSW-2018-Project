@@ -13,9 +13,12 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -34,6 +37,9 @@ public class CalcolaStipendioControl {
 	
 	@FXML
 	private TableColumn<DatiImpiegato, String> stipendioColumn;
+	
+	@FXML
+	private TextField giorniText;
 	
 	@FXML
 	private Button calcola; 
@@ -62,6 +68,70 @@ public class CalcolaStipendioControl {
 	    sortedData.comparatorProperty().bind(tabellaAutisti.comparatorProperty());
 
 	  	tabellaAutisti.setItems(sortedData);
+	}
+	
+	@FXML
+	private void calcolaStipendio() throws IOException {
+		DatiImpiegato impiegatoSel = tabellaAutisti.getSelectionModel().getSelectedItem();
+			if (impiegatoSel != null) {
+		        	Alert error = check();
+		    		if (error != null) {
+		    			error.showAndWait();
+		    		} else {
+		    			impiegatoSel.setDatiStipendio(String.valueOf(Double.valueOf(giorniText.getText())*48));
+		    			try {
+		    				DBImpiegato.getInstance().calcolaStipendio(impiegatoSel);
+		    				Alert alert = new Alert(AlertType.INFORMATION);
+		    				alert.initOwner(mainApp.getPrimaryStage());
+		    				alert.setTitle("Avviso");
+		    				alert.setHeaderText("Modifica avvenuto con successo!");
+		    				alert.setContentText("L'impiegato è stato modificato all'elenco degli impiegati");
+		    				alert.showAndWait();
+		    			} catch (SQLException e) {
+		    				Alert alert = new Alert(AlertType.WARNING);
+		    				alert.initOwner(mainApp.getPrimaryStage());
+		    				alert.setTitle("Avviso");
+		    				alert.setHeaderText("Inserimento fallito!");
+		    				alert.setContentText("Il numero di matricola inserito è già stato assegnato");
+		    				alert.showAndWait();
+		    				e.printStackTrace();
+		    			}
+
+		    		}
+
+		    } else {
+		        // Nothing selected.
+		        Alert alert = new Alert(AlertType.WARNING);
+		        alert.initOwner(mainApp.getPrimaryStage());
+		        alert.setTitle("Nessuna Selezione");
+		        alert.setHeaderText("Nessun autista selezionato");
+		        alert.setContentText("Selezionare un autista dall'elenco.");
+
+		        alert.showAndWait();
+		    }
+		}
+	
+	private Alert check() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.initOwner(mainApp.getPrimaryStage());
+		alert.setTitle("Avviso");
+		alert.setHeaderText("Inserimento fallito!");
+
+		// Check nome
+		if (giorniText.getText().equals("")) {
+			alert.setContentText("Inserisci un giorno");
+			return alert;
+		}
+		if (!giorniText.getText().equals("")) {
+			try {
+				int a = Integer.parseInt(giorniText.getText());
+				if(a < 0 || a >= 31)	throw new NumberFormatException();
+			} catch(NumberFormatException e) {
+				alert.setContentText("Inserisci un valore valido per i giorni, tra 0 e 30");
+				return alert;
+				}
+			}
+		return null;
 	}
 	
 	@FXML

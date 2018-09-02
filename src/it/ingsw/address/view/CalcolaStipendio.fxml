@@ -5,6 +5,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -25,13 +27,28 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TextField layoutX="466.0" layoutY="239.0" prefHeight="25.0" prefWidth="179.0" />
+      <TextField fx:id="giorniText" layoutX="416.0" layoutY="217.0" prefHeight="25.0" prefWidth="230.0" />
       <Button fx:id="annulla" layoutX="14.0" layoutY="398.0" mnemonicParsing="false" onMouseClicked="#annullaButton" prefHeight="38.0" prefWidth="83.0" text="Annulla" />
-      <Button fx:id="calcola" layoutX="603.0" layoutY="398.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="83.0" text="Calcola" />
-      <Label layoutX="466.0" layoutY="186.0" prefHeight="53.0" prefWidth="179.0" text="Numero giorni lavorativi">
+      <Button fx:id="calcola" layoutX="603.0" layoutY="398.0" mnemonicParsing="false" onMouseClicked="#calcolaStipendio" prefHeight="38.0" prefWidth="83.0" text="Calcola" />
+      <Label layoutX="442.0" layoutY="164.0" prefHeight="53.0" prefWidth="179.0" text="Numero giorni lavorativi">
          <font>
             <Font size="16.0" />
          </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="416.0" layoutY="260.0" prefHeight="83.0" prefWidth="230.0" text="Per calcolare lo stipendio,&#10;inserire i giorni lavorativi dell'autista,&#10;il risultato aggiornerà direttamente &#10;il profilo personale dell'autista">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="130.0" layoutY="398.0" prefHeight="38.0" prefWidth="440.0" text="NOTA: si tenga presente che un turno lavorativo è formato da 6 ore&#10;ed è possibile fare solo un turno al giorno. La paga è 8€/ora" />
+      <Label layoutX="472.0" layoutY="28.0" prefHeight="69.0" prefWidth="76.0">
+         <graphic>
+            <ImageView fitHeight="119.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Money-Bag.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Label>
    </children>
 </AnchorPane>
