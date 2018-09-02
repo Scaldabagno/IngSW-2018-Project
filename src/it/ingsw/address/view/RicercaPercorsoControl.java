@@ -46,98 +46,98 @@ public class RicercaPercorsoControl {
 	private ListView<String> linesList;
 	private ListView<String> pathList;
 	
-	@FXML
-	private void initialize() {
-//		TODO: Aggiustare
-		linesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-
-			@Override
-		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-		    		String[] steps = newValue.split(" -> ");
-		    		Linea line1 = null;
-		    		Linea line2 = null;
-		    		ArrayList<Fermata> stops2 = null;
-		    		ArrayList<Fermata> stops1 = null;
-		    		for(int i=0; i<contieneInizio.size(); i++) {
-		    			if(contieneFine.get(i).getNumeroLinea().equals(steps[0])) 
-		    				line1 = contieneInizio.get(i);
-		    		}
-		    		if(steps.length!=1) {
-			    		for(int i=0; i<contieneFine.size(); i++) {
-			    			if(contieneFine.get(i).getNumeroLinea().equals(steps[2])) 
-			    				line2 = contieneFine.get(i);
-			    		}
-			    		 stops2 = line2.getFermate();
-		    		} 
-		    		
-		    		ArrayList<String> path = new ArrayList<>();
-		    		
-		    		stops1 = line1.getFermate();
-		    		
-		    		boolean inside = false;
-		    		path.add("Dirigiti verso la fermata "+partenza.getText());
-		    		path.add("Sali sul bus "+steps[0]);
-		    		if(steps.length!=1) {
-			    		for(int i=0; i<stops1.size(); i++) {
-			    			if(stops1.get(i).getFermata().equals(steps[1])) {
-			    				break;
-			    			}
-			    			
-			    			if(inside) {
-			    				path.add("Fermata "+stops1.get(i).getFermata());	
-			    			}
-			    			
-			    			if(partenza.getText().equals(stops1.get(i).getFermata())) {
-			    				inside = true;
-			    			}
-			    		}
-			    		
-			    		path.add("Scendi alla fermata "+steps[1]);
-			    		
-			    		path.add("Sali sul "+steps[2]);
-			    		
-			    		inside = false;
-			    		
-			    		for(int i=0; i<stops2.size(); i++) {
-			    			if(arrivo.getText().equals(stops2.get(i).getFermata())) {
-			    				break;
-			    			}
-			    			
-			    			if(inside) {
-			    				path.add("Fermata "+stops2.get(i).getFermata());
-			    			}
-			    			
-			    			if(stops2.get(i).getFermata().equals(steps[1])) {
-			    				inside = true;
-			    			}
-			    		}
-			    		
-			    		path.add("Scendi alla fermata "+arrivo.getText());	    			
-		    		}
-		    		else {
-		    			inside = false;
-			    		for(int i=0; i<stops1.size(); i++) {
-			    			if(stops1.get(i).getFermata().equals(arrivo.getText())) {
-			    				break;
-			    			}
-			    			
-			    			if(inside) {
-			    				path.add("Fermata "+stops1.get(i).getFermata());	
-			    			}
-
-			    			if(partenza.getText().equals(partenza.getText())) {
-			    				inside = true;
-			    			}
-			    		}
-		    		}
-		    		path.add("Scendi alla fermata "+arrivo.getText());
-		    		path.add("Sei arrivato a destinazione");
-		    		
-		    		pathList.setItems(FXCollections.observableArrayList(path));
-		    }
-		});
-			
-	}
+//	@FXML
+//	private void initialize() {
+////		TODO: Aggiustare
+//		linesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+//
+//			@Override
+//		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//		    		String[] steps = newValue.split(" -> ");
+//		    		Linea line1 = null;
+//		    		Linea line2 = null;
+//		    		ArrayList<Fermata> stops2 = null;
+//		    		ArrayList<Fermata> stops1 = null;
+//		    		for(int i=0; i<contieneInizio.size(); i++) {
+//		    			if(contieneFine.get(i).getNumeroLinea().equals(steps[0])) 
+//		    				line1 = contieneInizio.get(i);
+//		    		}
+//		    		if(steps.length!=1) {
+//			    		for(int i=0; i<contieneFine.size(); i++) {
+//			    			if(contieneFine.get(i).getNumeroLinea().equals(steps[2])) 
+//			    				line2 = contieneFine.get(i);
+//			    		}
+//			    		 stops2 = line2.getFermate();
+//		    		} 
+//		    		
+//		    		ArrayList<String> path = new ArrayList<>();
+//		    		
+//		    		stops1 = line1.getFermate();
+//		    		
+//		    		boolean inside = false;
+//		    		path.add("Dirigiti verso la fermata "+partenza.getText());
+//		    		path.add("Sali sul bus "+steps[0]);
+//		    		if(steps.length!=1) {
+//			    		for(int i=0; i<stops1.size(); i++) {
+//			    			if(stops1.get(i).getFermata().equals(steps[1])) {
+//			    				break;
+//			    			}
+//			    			
+//			    			if(inside) {
+//			    				path.add("Fermata "+stops1.get(i).getFermata());	
+//			    			}
+//			    			
+//			    			if(partenza.getText().equals(stops1.get(i).getFermata())) {
+//			    				inside = true;
+//			    			}
+//			    		}
+//			    		
+//			    		path.add("Scendi alla fermata "+steps[1]);
+//			    		
+//			    		path.add("Sali sul "+steps[2]);
+//			    		
+//			    		inside = false;
+//			    		
+//			    		for(int i=0; i<stops2.size(); i++) {
+//			    			if(arrivo.getText().equals(stops2.get(i).getFermata())) {
+//			    				break;
+//			    			}
+//			    			
+//			    			if(inside) {
+//			    				path.add("Fermata "+stops2.get(i).getFermata());
+//			    			}
+//			    			
+//			    			if(stops2.get(i).getFermata().equals(steps[1])) {
+//			    				inside = true;
+//			    			}
+//			    		}
+//			    		
+//			    		path.add("Scendi alla fermata "+arrivo.getText());	    			
+//		    		}
+//		    		else {
+//		    			inside = false;
+//			    		for(int i=0; i<stops1.size(); i++) {
+//			    			if(stops1.get(i).getFermata().equals(arrivo.getText())) {
+//			    				break;
+//			    			}
+//			    			
+//			    			if(inside) {
+//			    				path.add("Fermata "+stops1.get(i).getFermata());	
+//			    			}
+//
+//			    			if(partenza.getText().equals(partenza.getText())) {
+//			    				inside = true;
+//			    			}
+//			    		}
+//		    		}
+//		    		path.add("Scendi alla fermata "+arrivo.getText());
+//		    		path.add("Sei arrivato a destinazione");
+//		    		
+//		    		pathList.setItems(FXCollections.observableArrayList(path));
+//		    }
+//		});
+//			
+//	}
 	
 	@FXML
 	private void calcolaPercorso() {

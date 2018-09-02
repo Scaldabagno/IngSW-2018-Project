@@ -57,7 +57,7 @@ public class AccessoAutistaControl {
 			i.setDataNascita(LocalDate.now());
 //			TODO: da togliere
 			FXMLLoader loader=new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/AutistaArea.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/AreaAutista.fxml"));
 			AnchorPane areaAutista = (AnchorPane) loader.load();
 			Scene scene = new Scene(areaAutista);
 			Stage stage = mainApp.getPrimaryStage();
@@ -72,7 +72,7 @@ public class AccessoAutistaControl {
 							if(impiegato != null && impiegato.getRuolo() == ruolo) {
 									Sessione.impiegato = impiegato;
 									FXMLLoader loader=new FXMLLoader();
-									loader.setLocation(MainApp.class.getResource("view/AutistaArea.fxml"));
+									loader.setLocation(MainApp.class.getResource("view/AreaAutista.fxml"));
 									AnchorPane areaAutista = (AnchorPane) loader.load();
 									Scene scene = new Scene(areaAutista);
 									Stage stage = mainApp.getPrimaryStage();

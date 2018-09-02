@@ -61,7 +61,7 @@ private MainApp mainApp;
 	public void annullaButton() throws IOException{
 		if(Sessione.impiegato.getRuolo() == Ruolo.AddettoAlPersonale) {
 			FXMLLoader loader=new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/AddettoAlPersonaleArea.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/AreaAddettoAlPersonale.fxml"));
 			AnchorPane addettoAlPersonale = (AnchorPane) loader.load();
 			Scene scene = new Scene(addettoAlPersonale);
 			Stage stage = mainApp.getPrimaryStage();
@@ -71,7 +71,7 @@ private MainApp mainApp;
 		}
 		if(Sessione.impiegato.getRuolo() == Ruolo.AddettoAiMezzi) {
 			FXMLLoader loader=new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziArea.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/AreaAddettoAiMezzi.fxml"));
 			AnchorPane addettoAiMezzi = (AnchorPane) loader.load();
 			Scene scene = new Scene(addettoAiMezzi);
 			Stage stage = mainApp.getPrimaryStage();

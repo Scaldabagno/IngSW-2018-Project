@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -14,11 +16,20 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="partenza" layoutX="23.0" layoutY="58.0" prefHeight="27.0" prefWidth="276.0" promptText="Partenza" />
-      <TextField fx:id="arrivo" layoutX="317.0" layoutY="58.0" prefHeight="27.0" prefWidth="276.0" promptText="Arrivo" />
-      <ListView fx:id="percorso" layoutX="108.0" layoutY="117.0" prefHeight="258.0" prefWidth="485.0" />
-      <Label layoutX="327.0" layoutY="93.0" text="Percorso" />
-      <Button fx:id="calcola" layoutX="602.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#calcolaPercorso" prefHeight="27.0" prefWidth="84.0" text="Calcola" />
+      <TextField fx:id="partenza" layoutX="23.0" layoutY="58.0" prefHeight="27.0" prefWidth="208.0" promptText="Partenza" />
+      <TextField fx:id="arrivo" layoutX="246.0" layoutY="58.0" prefHeight="27.0" prefWidth="208.0" promptText="Arrivo" />
+      <ListView fx:id="percorso" layoutX="23.0" layoutY="110.0" prefHeight="258.0" prefWidth="485.0" />
+      <Label layoutX="242.0" layoutY="93.0" text="Percorso" />
+      <Button fx:id="calcola" layoutX="466.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#calcolaPercorso" prefHeight="27.0" prefWidth="84.0" text="Calcola" />
       <Button fx:id="annulla" layoutX="23.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#annullaButton" prefHeight="30.0" prefWidth="73.0" text="Annulla" />
+      <Label layoutX="519.0" layoutY="156.0" prefHeight="111.0" prefWidth="84.0">
+         <graphic>
+            <ImageView fitHeight="177.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Bus-Stop.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
    </children>
 </AnchorPane>

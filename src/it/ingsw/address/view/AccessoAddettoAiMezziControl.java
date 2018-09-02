@@ -57,7 +57,7 @@ public class AccessoAddettoAiMezziControl {
 			i.setRuolo(Ruolo.AddettoAiMezzi);
 			i.setDataNascita(LocalDate.now());
 			FXMLLoader loader=new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziArea.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/AreaAddettoAiMezzi.fxml"));
 			AnchorPane areaAddettoAiMezzi = (AnchorPane) loader.load();
 			Scene scene = new Scene(areaAddettoAiMezzi);
 			Stage stage = mainApp.getPrimaryStage();
@@ -72,7 +72,7 @@ public class AccessoAddettoAiMezziControl {
 							if(impiegato != null && impiegato.getRuolo() == ruolo) {
 									Sessione.impiegato = impiegato;
 									FXMLLoader loader=new FXMLLoader();
-									loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziArea.fxml"));
+									loader.setLocation(MainApp.class.getResource("view/AreaAddettoAiMezzi.fxml"));
 									AnchorPane areaAddettoAiMezzi = (AnchorPane) loader.load();
 									Scene scene = new Scene(areaAddettoAiMezzi);
 									Stage stage = mainApp.getPrimaryStage();

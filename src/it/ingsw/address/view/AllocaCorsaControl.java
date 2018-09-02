@@ -151,7 +151,7 @@ public class AllocaCorsaControl {
 	@FXML
 	public void annullaButton() throws IOException{
 		FXMLLoader loader=new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("view/AddettoAlPersonaleArea.fxml"));
+		loader.setLocation(MainApp.class.getResource("view/AreaAddettoAlPersonale.fxml"));
 		AnchorPane addettoAlPersonale = (AnchorPane) loader.load();
 		Scene scene = new Scene(addettoAlPersonale);
 		Stage stage = mainApp.getPrimaryStage();

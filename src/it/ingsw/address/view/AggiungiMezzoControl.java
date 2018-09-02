@@ -112,7 +112,7 @@ public class AggiungiMezzoControl {
 	@FXML
 	public void annullaButton() throws IOException{
 		FXMLLoader loader=new FXMLLoader();
-		loader.setLocation(MainApp.class.getResource("view/AddettoAiMezziArea.fxml"));
+		loader.setLocation(MainApp.class.getResource("view/AreaAddettoAiMezzi.fxml"));
 		AnchorPane addettoAiMezzi = (AnchorPane) loader.load();
 		Scene scene = new Scene(addettoAiMezzi);
 		Stage stage = mainApp.getPrimaryStage();
