@@ -2,6 +2,7 @@ package it.ingsw.address.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
+
 import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBImpiegato;
 import it.ingsw.address.database.DBLinea;
@@ -69,6 +70,15 @@ public class AllocaCorsaControl {
 	@FXML
 	private Button allocaCorsa;
 	
+	@FXML
+	private Button riallocaCorsa;
+	
+	@FXML
+	private Button disallocaCorsa;
+	
+	@FXML
+	private Button disallocaCorse;
+	
 	ObservableList<DatiImpiegato> listImpiegato = FXCollections.observableArrayList();
 	ObservableList<DatiMezzo> listMezzo = FXCollections.observableArrayList();
 	ObservableList<DatiLinea> listLinea = FXCollections.observableArrayList();
@@ -91,13 +101,13 @@ public class AllocaCorsaControl {
 	}
 	
 	@FXML
-	private void allocaCorsa(){
+	private void allocaCorsa() throws SQLException{
 		Alert error = check();
 		
 		if(error != null) {
 			error.showAndWait();
-		}else{
-			try {
+		}else {
+				try {
 				DBLinea.getInstance().allocaCorsaQuery(getNuovaCorsa());
 				DBImpiegato.getInstance().turnoQuery(getNuovoTurno());
 				Alert alert = new Alert(AlertType.INFORMATION);
@@ -106,9 +116,7 @@ public class AllocaCorsaControl {
 				alert.setHeaderText("La corsa è stata allocata con successo!");
 				alert.setContentText("L'impiegato, il mezzo e la linea sono stati allocati con successo");
 				alert.showAndWait();
-				
-				
-			} catch (SQLException e) {
+				} catch (SQLException e) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.initOwner(mainApp.getPrimaryStage());
 				alert.setTitle("Avviso");
@@ -116,11 +124,11 @@ public class AllocaCorsaControl {
 				alert.setContentText("Selezionare un altro impiegato o riallocare quello già selezionato");
 				alert.showAndWait();
 				e.printStackTrace();
-			}
+				}
 		}
 	}
 	
-	private Alert check() {
+	private Alert check() throws SQLException {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.initOwner(mainApp.getPrimaryStage());
 		alert.setTitle("Avviso");
@@ -139,10 +147,12 @@ public class AllocaCorsaControl {
 			alert.setContentText("Seleziona un impiegato");
 			return alert;
 		}
-		if(turnoSpinner.getValue() == null || turnoSpinner.getValue() == String.valueOf(Turno.NonAssegnato)) {
+		if (turnoSpinner.getValue() == null || turnoSpinner.getValue() == String.valueOf(Turno.NonAssegnato)) {
 			alert.setContentText("Seleziona un turno");
 			return alert;
 		}
+		
+		
 		
 		// Data is ok
 		return null;
@@ -238,56 +248,6 @@ public class AllocaCorsaControl {
 		
 		return impiegato;
 	}
-	
-	@FXML
-	private void rialloca() throws IOException {
-		 Alert error = check();
-		 if (error != null) {
-			 error.showAndWait();
-		 } else {
-			 try {
-				DBLinea.getInstance().riallocaCorsaQuery(getModificaCorsa());;
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.initOwner(mainApp.getPrimaryStage());
-				alert.setTitle("Avviso");
-				alert.setHeaderText("Modifica avvenuto con successo!");
-				alert.setContentText("L'impiegato è stato modificato all'elenco degli impiegati");
-				alert.showAndWait();
-
-				annullaButton();
-
-			 } catch (SQLException e) {
-				Alert alert = new Alert(AlertType.WARNING);
-				alert.initOwner(mainApp.getPrimaryStage());
-				alert.setTitle("Avviso");
-				alert.setHeaderText("Inserimento fallito!");
-				alert.setContentText("Il numero di matricola inserito è già stato assegnato");
-				alert.showAndWait();
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	private Corsa getModificaCorsa() throws SQLException {
-			DatiImpiegato impiegatoSel = tabellaImpiegati.getSelectionModel().getSelectedItem();
-			DatiMezzo mezzoSel = tabellaMezzi.getSelectionModel().getSelectedItem();
-			DatiLinea lineaSel = tabellaLinee.getSelectionModel().getSelectedItem();
-			
-			
-			Impiegato impiegato = new Impiegato();
-			Mezzo mezzo = new Mezzo();
-			Linea linea = new Linea();
-			
-			matricolaText.setVisible(false);
-			matricolaText.setText(impiegatoSel.getDatiMatricola());
-			impiegato.setMatricola(impiegatoSel.getDatiMatricola());
-			mezzo.setTarga(mezzoSel.getDatiTarga());
-			linea.setNumeroLinea(lineaSel.getDatiNumeroLinea());
-			
-			Corsa corsa = new Corsa(impiegato, mezzo, linea);
-			
-			return corsa;
-		}
 	
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;

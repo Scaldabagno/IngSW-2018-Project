@@ -21,9 +21,9 @@
          </font>
       </Text>
       <TextField fx:id="ricercaImpiegato" layoutX="330.0" layoutY="13.0" prefHeight="25.0" prefWidth="296.0" promptText="Ricerca" />
-      <Button fx:id="nuovoImpiegato" layoutX="513.0" layoutY="177.0" mnemonicParsing="false" onMouseClicked="#aggiungiImpiegato" prefHeight="25.0" prefWidth="114.0" text="Inserisci nuovi dati" />
-      <Button fx:id="modificaImpiegato" layoutX="513.0" layoutY="224.0" mnemonicParsing="false" onMouseClicked="#modificaImpiegato" prefHeight="25.0" prefWidth="114.0" text="Modifica dati" />
-      <Button fx:id="calcolaStipendio" layoutX="513.0" layoutY="268.0" mnemonicParsing="false" onMouseClicked="#calcolaStipendio" prefHeight="25.0" prefWidth="114.0" text="Calcola stipendio" />
+      <Button fx:id="nuovoImpiegato" layoutX="513.0" layoutY="162.0" mnemonicParsing="false" onMouseClicked="#aggiungiImpiegato" prefHeight="25.0" prefWidth="114.0" text="Inserisci nuovi dati" />
+      <Button fx:id="modificaImpiegato" layoutX="513.0" layoutY="209.0" mnemonicParsing="false" onMouseClicked="#modificaImpiegato" prefHeight="25.0" prefWidth="114.0" text="Modifica dati" />
+      <Button fx:id="calcolaStipendio" layoutX="513.0" layoutY="253.0" mnemonicParsing="false" onMouseClicked="#calcolaStipendio" prefHeight="25.0" prefWidth="114.0" text="Calcola stipendio" />
       <Button fx:id="profilo" layoutX="512.0" layoutY="54.0" mnemonicParsing="false" onMouseClicked="#profiloScene" prefHeight="25.0" prefWidth="114.0" text="Profilo" />
       <Button fx:id="logout" layoutX="606.0" layoutY="395.0" mnemonicParsing="false" onMouseClicked="#logoutAP" prefHeight="39.0" prefWidth="80.0" text="Logout" />
       <AnchorPane layoutX="14.0" layoutY="54.0" prefHeight="342.0" prefWidth="471.0">
@@ -82,11 +82,12 @@
             </SplitPane>
          </children>
       </AnchorPane>
-      <Button fx:id="allocaCorsa" layoutX="513.0" layoutY="312.0" mnemonicParsing="false" onMouseClicked="#allocaCorsa" prefHeight="25.0" prefWidth="114.0" text="Alloca Corsa" />
+      <Button fx:id="allocaCorsa" layoutX="513.0" layoutY="297.0" mnemonicParsing="false" onMouseClicked="#allocaCorsa" prefHeight="25.0" prefWidth="114.0" text="Alloca Corsa" />
       <Label alignment="CENTER" layoutX="504.0" layoutY="126.0" prefHeight="20.0" prefWidth="131.0" text="Operazioni">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
+      <Button fx:id="visualizzaCorse" layoutX="513.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#visualizzaCorse" prefHeight="25.0" prefWidth="114.0" text="Visualizza Corse" />
 </children>
 </AnchorPane>

@@ -95,7 +95,7 @@ public class AddettoAlPersonaleControl {
 	private Button allocaCorsa;
 	
 	@FXML
-	private Button visualizzaCorsa;
+	private Button visualizzaCorse;
 	
 	public AddettoAlPersonaleControl() {
 		
@@ -274,6 +274,18 @@ public class AddettoAlPersonaleControl {
 		Stage stage = mainApp.getPrimaryStage();
 		stage.setScene(scene);
 		AllocaCorsaControl controller = loader.getController();
+		controller.setMainApp(mainApp);
+	}
+	
+	@FXML
+	public void visualizzaCorse() throws IOException{
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("view/VisualizzaCorse.fxml"));
+		AnchorPane allocaCorsa = (AnchorPane) loader.load();
+		Scene scene = new Scene(allocaCorsa);
+		Stage stage = mainApp.getPrimaryStage();
+		stage.setScene(scene);
+		VisualizzaCorseControl controller = loader.getController();
 		controller.setMainApp(mainApp);
 	}
 	

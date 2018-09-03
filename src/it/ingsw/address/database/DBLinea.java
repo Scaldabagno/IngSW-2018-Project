@@ -6,9 +6,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import it.ingsw.address.model.Corsa;
+import it.ingsw.address.model.DatiCorsa;
+import it.ingsw.address.model.DatiImpiegato;
 import it.ingsw.address.model.DatiLinea;
 import it.ingsw.address.model.Fermata;
+import it.ingsw.address.model.Impiegato;
 import it.ingsw.address.model.Linea;
+import it.ingsw.address.model.Mezzo;
+import it.ingsw.address.model.Turno;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -68,6 +73,22 @@ public class DBLinea {
 		return datiLinee;
 	}
 	
+	public ArrayList<Fermata> getArrayFermate () {
+		ArrayList<Fermata> stops = new ArrayList<>();
+		try {
+			dbm.executeQuery("SELECT * FROM mydb.fermate");
+			ResultSet result = dbm.getResultSet();
+			while(result.next()) {
+				Fermata stop = new Fermata();
+				stop.setFermata(result.getString("Fermata"));
+				stops.add(stop);
+			}
+		} catch (SQLException exc) {
+			exc.printStackTrace();
+		}
+		return stops;
+	}
+	
 	public ArrayList<Fermata> getFermate(Linea linea) {
 		ArrayList<Fermata> fermate = new ArrayList<>();
 		try {
@@ -114,7 +135,65 @@ public class DBLinea {
 		return fermata;
 	}
 	
+	public Corsa getCorsaById(String id) throws SQLException {
+		return getArrayCorse("idcorse = '" + id + "'").get(0);
+	}
 	
+	public Corsa getCorsaByMatricola(String matricola) throws SQLException {
+		return getArrayCorse("impiegati_matricola = '" + matricola + "'").get(0);
+	}
+	
+	public Corsa getCorsaByTarga(String targa) throws SQLException {
+		return getArrayCorse("mezzi_targa = '" + targa + "'").get(0);
+	}
+	
+	public ObservableList<DatiCorsa> getCorse() {
+		ArrayList<DatiCorsa> corse = new ArrayList<>();
+		try {
+			dbm.executeQuery("SELECT * FROM corse");
+			ResultSet resultSet = dbm.getResultSet();
+			resultSet.beforeFirst();
+			while(resultSet.next()) {
+				Impiegato impiegato = new Impiegato();
+				Mezzo mezzo = new Mezzo();
+				Linea linea = new Linea();
+				Corsa corsa = new Corsa(impiegato, mezzo, linea);
+				impiegato.setMatricola(resultSet.getString("impiegati_matricola"));
+				mezzo.setTarga(resultSet.getString("mezzi_targa"));
+				linea.setNumeroLinea(resultSet.getString("linee_numeroLinea"));
+				corsa.setIdCorsa(resultSet.getInt("idcorse"));
+				corsa.setImpiegato(impiegato);
+				corsa.setMezzo(mezzo);
+				corsa.setLinea(linea);;
+				
+				corse.add(new DatiCorsa(corsa));
+			}
+		} catch(SQLException exc) {
+			exc.printStackTrace();
+		}
+		ObservableList<DatiCorsa> datiCorse = FXCollections.observableArrayList(corse);
+		return datiCorse;
+	}
+
+	public ArrayList<Corsa> getArrayCorse(String clause) throws SQLException{
+		ArrayList<Corsa> corse = new ArrayList<>();
+
+		clause = (clause == null)? "TRUE":clause;
+
+		dbm.executeQuery("SELECT * FROM corse WHERE " + clause);
+		ResultSet resultSet = dbm.getResultSet();
+		while(resultSet.next()) {
+			Impiegato impiegato = new Impiegato();
+			Mezzo mezzo = new Mezzo();
+			Linea linea = new Linea();
+			Corsa corsa = new Corsa(impiegato, mezzo, linea);
+			
+			
+			corsa.setIdCorsa(Integer.valueOf(resultSet.getString("idcorse")));
+			corse.add(corsa);
+		}
+		return corse;
+	}
 	
 	public void allocaCorsaQuery(Corsa corsa) throws SQLException {
 		String query = "INSERT INTO mydb.corse (idcorse, impiegati_matricola, mezzi_targa, linee_numeroLinea) VALUES (?, ?, ?, ?);";
@@ -127,27 +206,38 @@ public class DBLinea {
 		preparedStmt.execute();
 	}
 	
-	
-	public void riallocaCorsaQuery(Corsa corsa) throws SQLException{
-		String query = " UPDATE mydb.corse SET impiegati_matricola=?, mezzi_targa=?, linee_numeroLinea=? WHERE idcorse=?;";
-		
-		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
-		
-		preparedStmt.setString (1, corsa.getImpiegato().getMatricola());
-		preparedStmt.setString (2, corsa.getMezzo().getTarga());
-		preparedStmt.setString (3, corsa.getLinea().getNumeroLinea());
-		preparedStmt.setInt    (4, corsa.getIdCorsa());
-		
-		preparedStmt.execute();
-	}
-	
-	public void disallocaCorsaQuery(Corsa corsa) throws SQLException{
+	public void disallocaCorsaQuery(DatiCorsa corsa) throws SQLException{
 		String query = "DELETE FROM mydb.corse WHERE impiegati_matricola=?";
 		
 		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
 		
-		preparedStmt.setString (1, corsa.getImpiegato().getMatricola());
+		preparedStmt.setString (1, corsa.getDatiMatricolaImpiegato());
 		
 		preparedStmt.execute();
+		
+		String query1 = "UPDATE mydb.impiegati SET turno=? WHERE matricola=?;";
+		
+		PreparedStatement preparedStmt1 = dbm.getConnection().prepareStatement(query1);
+		
+		preparedStmt1.setString (1,String.valueOf(Turno.NonAssegnato));
+		preparedStmt1.setString (2, corsa.getDatiMatricolaImpiegato());
+		
+		preparedStmt1.execute();
+	}
+	
+	public void disallocaCorseQuery() throws SQLException{
+		String query = "DELETE FROM mydb.corse";
+		
+		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
+		
+		preparedStmt.execute();
+		
+		String query1 = "UPDATE mydb.impiegati SET turno=?;";
+		
+		PreparedStatement preparedStmt1 = dbm.getConnection().prepareStatement(query1);
+		
+		preparedStmt1.setString (1, String.valueOf(Turno.NonAssegnato));
+		
+		preparedStmt1.execute();
 	}
 }

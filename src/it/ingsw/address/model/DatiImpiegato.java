@@ -18,7 +18,6 @@ public class DatiImpiegato {
 	private final SimpleStringProperty datiStipendio;
 	private final SimpleStringProperty datiTurno;
 	
-	//TODO: Aggiungere altre SimpleStringProperty
 	private Impiegato impiegato;
 	
 	public DatiImpiegato(String nome, String cognome, String matricola, String email, String password, String ruolo, String nascita, String stipendio, String turno) {

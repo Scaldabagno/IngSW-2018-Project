@@ -140,6 +140,10 @@ public class AggiungiImpiegatoControl {
 			alert.setContentText("Inserisci una data di nascita");
 			return alert;
 		}
+		if(matricolaText.getText().length() != 5) {
+			alert.setContentText("Inserisci un valore numerico da 5 numeri per la matricola");
+			return alert;
+		}
 		//Check email pattern
 		String regex = "^[\\w\\d\\.]+@[\\w\\.]+\\.\\w+$";
 		Pattern p = Pattern.compile(regex);
@@ -158,28 +162,25 @@ public class AggiungiImpiegatoControl {
 			return alert;
 			}
 		}
-			// Alfabetical check for name
-//			if( (Integer.parseInt(nome.getText())) | (Integer.parseInt(cognome.getText())) ) {
-//				alert.setContentText("Nome e cognome non possono contenere solo numeri");
-//				return alert;
-//			}
-			try {
-				Integer.parseInt(nomeText.getText());
-				alert.setContentText("Inserisci un nome valido");
-				return alert;
-			}
-			catch(NumberFormatException exc) {
-				;
-			}
+
+		try {
+		
+			Integer.parseInt(nomeText.getText());
+			alert.setContentText("Inserisci un nome valido");
+			return alert;
+		}
+		catch(NumberFormatException exc) {
+			;
+		}
 			
-			try {
-				Integer.parseInt(cognomeText.getText());
-				alert.setContentText("Inserisci un cognome valido");
-				return alert;
-			}
-			catch(NumberFormatException exc) {
-				;
-			}
+		try {
+			Integer.parseInt(cognomeText.getText());
+			alert.setContentText("Inserisci un cognome valido");
+			return alert;
+		}
+		catch(NumberFormatException exc) {
+			;
+		}
 
 		// Data is ok
 		return null;

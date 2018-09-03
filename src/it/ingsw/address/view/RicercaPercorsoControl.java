@@ -10,15 +10,15 @@ import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBLinea;
 import it.ingsw.address.model.Fermata;
 import it.ingsw.address.model.Linea;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -43,8 +43,6 @@ public class RicercaPercorsoControl {
 	private ArrayList<Linea> arrayLinee = null;
 	private ArrayList<Linea> contieneInizio = new ArrayList<>();
 	private ArrayList<Linea> contieneFine = new ArrayList<>();
-	private ListView<String> linesList;
-	private ListView<String> pathList;
 	
 //	@FXML
 //	private void initialize() {
@@ -133,19 +131,52 @@ public class RicercaPercorsoControl {
 //		    		path.add("Scendi alla fermata "+arrivo.getText());
 //		    		path.add("Sei arrivato a destinazione");
 //		    		
-//		    		pathList.setItems(FXCollections.observableArrayList(path));
+//		    		percorso.setItems(FXCollections.observableArrayList(path));
 //		    }
 //		});
 //			
 //	}
 	
+//	@FXML
+//	private void calcolaPercorso() {
+////		TODO: Aggiustare
+//		percorso.setItems(FXCollections.observableArrayList());
+//		ArrayList<String> percorsoStringa = new ArrayList<>();
+//		ArrayList<Fermata> fermate;
+//		ArrayList<String[]> sequence = new ArrayList<>();
+//		try {
+//			arrayLinee = DBLinea.getInstance().getArrayLinee(null);
+//		} catch (SQLException e1) {
+//			// TODO caduta di connessione
+//			e1.printStackTrace();
+//		}
+//		
+//		for(int i=0; i<arrayLinee.size(); i++) {
+//			fermate = arrayLinee.get(i).getFermate();
+//			for(int j=0; j<fermate.size(); j++) {
+//				if(fermate.get(j).getFermata().equalsIgnoreCase(partenza.getText())) 
+//					contieneInizio.add(arrayLinee.get(i));
+//					percorsoStringa.add(fermate.get(i).getFermata());
+//				if(fermate.get(j).getFermata().equalsIgnoreCase(arrivo.getText())) 
+//					contieneFine.add(arrayLinee.get(i));
+//					percorsoStringa.add(fermate.get(i).getFermata());
+//			}
+//		}
+//		percorso.setItems(FXCollections.observableArrayList(percorsoStringa));
+//	}
+	
 	@FXML
-	private void calcolaPercorso() {
-//		TODO: Aggiustare
+	private void onCalcClicked() {
+		// Clear ListViews
 		percorso.setItems(FXCollections.observableArrayList());
-		ArrayList<String> percorsoStringa = new ArrayList<>();
-		ArrayList<Fermata> fermate;
-		//ArrayList<String[]> sequence = new ArrayList<>();
+		
+		/*
+		 * 
+		 * Cristian test
+		 */
+
+		ArrayList<Fermata> stops;
+		ArrayList<String[]> sequence = new ArrayList<>();
 		try {
 			arrayLinee = DBLinea.getInstance().getArrayLinee(null);
 		} catch (SQLException e1) {
@@ -154,17 +185,123 @@ public class RicercaPercorsoControl {
 		}
 		
 		for(int i=0; i<arrayLinee.size(); i++) {
-			fermate = arrayLinee.get(i).getFermate();
-			for(int j=0; j<fermate.size(); j++) {
-				if(fermate.get(j).getFermata().equalsIgnoreCase(partenza.getText())) 
+			stops = arrayLinee.get(i).getFermate();
+			for(int j=0; j<stops.size(); j++) {
+				if(stops.get(j).getFermata().equalsIgnoreCase(partenza.getText())) 
 					contieneInizio.add(arrayLinee.get(i));
-					percorsoStringa.add(fermate.get(i).getFermata());
-				if(fermate.get(j).getFermata().equalsIgnoreCase(arrivo.getText())) 
+				if(stops.get(j).getFermata().equalsIgnoreCase(arrivo.getText())) 
 					contieneFine.add(arrayLinee.get(i));
-					percorsoStringa.add(fermate.get(i).getFermata());
 			}
 		}
-		percorso.setItems(FXCollections.observableArrayList(percorsoStringa));
+		
+		System.out.println(contieneInizio);
+		System.out.println(contieneFine);
+		
+		for(int i=0; i<contieneInizio.size(); i++) {
+			for(int j=0; j<contieneFine.size(); j++) {
+				ArrayList<Fermata> startStops = contieneInizio.get(i).getFermate();
+				ArrayList<Fermata> endStops = contieneFine.get(j).getFermate();
+				System.out.println("!!" + startStops + " ?? " + endStops);
+				innerLoop:
+				for(int k=0; k<endStops.size(); k++) {
+					for(int l=0; l<startStops.size(); l++) {
+						if(startStops.get(l).getFermata().equals(endStops.get(k).getFermata())) {
+							String[] twoLines = new String[3];
+							twoLines[0] = contieneInizio.get(i).getNumeroLinea();
+							twoLines[1] = contieneFine.get(j).getNumeroLinea();
+							twoLines[2] = endStops.get(k).getFermata();
+							sequence.add(twoLines);
+							break innerLoop;
+						}
+					}
+				}
+			}
+		}
+		
+		Alert error = check();
+
+		if(error != null) {
+			error.showAndWait();
+			return;
+		}
+
+		if (areStopsOk()) {
+			if(sequence.isEmpty()) {
+				percorso.setItems(FXCollections.observableArrayList("Nessun percorso"));
+			}
+			else {
+				ArrayList<String> al = new ArrayList<>();
+				for(int i=0; i<sequence.size(); i++) {
+					if(sequence.get(i)[0].equals(sequence.get(i)[1]))
+						al.add(sequence.get(i)[0]);
+					else
+						al.add(sequence.get(i)[0] + " -> " +sequence.get(i)[2] +" -> " +sequence.get(i)[1]);
+				}
+				System.out.println("AL"+al);
+				
+
+			}
+			percorso.refresh();
+
+		}
+		else {
+			Alert alert = new Alert(AlertType.WARNING);
+		    alert.initOwner(mainApp.getPrimaryStage());
+		    alert.setTitle("Avviso");
+		    alert.setHeaderText("Calcolo percorso fallito");
+		    alert.setContentText("Le fermate inserite non esistono");
+		    alert.showAndWait();
+		}
+	}
+
+	private boolean areStopsOk() {
+		Fermata inizio = new Fermata(partenza.getText());
+		Fermata fine = new Fermata(arrivo.getText());
+		ArrayList<Fermata> allStops = null;
+		try {
+			allStops = DBLinea.getInstance().getArrayFermate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Alert alert = new Alert(AlertType.WARNING);
+		    alert.initOwner(mainApp.getPrimaryStage());
+		    alert.setTitle("Avviso");
+		    alert.setHeaderText("Connessione non disponibile");
+		    alert.setContentText("Controlla la connessione e riprova");
+		    alert.showAndWait();
+			return false;
+		}
+		boolean s1 = false, s2 = false, retval;
+		for(Fermata s: allStops) {
+			if (s.getFermata().toLowerCase().equals(inizio.getFermata().toLowerCase())) {
+				s1 = true;
+			}
+			if(s.getFermata().toLowerCase().equals(fine.getFermata().toLowerCase())) {
+				s2 = true;
+			}
+		}
+		retval = s1 && s2;
+		System.out.println("VALID STOPS: " + retval);
+		return retval;
+	}
+
+	private Alert check() {
+		Alert alert = new Alert(AlertType.WARNING);
+	    alert.initOwner(mainApp.getPrimaryStage());
+	    alert.setTitle("Avviso");
+	    alert.setHeaderText("Calcolo percorso fallito");
+
+		if(partenza.getText().equals("")) {
+			alert.setContentText("Inserisci una fermata di partenza");
+			return alert;
+		}
+
+		if(arrivo.getText().equals("")) {
+			alert.setContentText("Inserisci una fermata di arrivo");
+			return alert;
+		}
+
+		// If it's all ok
+		return null;
 	}
 	
 	@FXML
