@@ -125,5 +125,9 @@ public class DBMezzo {
 			dbm.executeUpdate(query);
 		}
 	}
-
+	
+	public void turnoMezzoQuery(Mezzo m) {
+		String query = "UPDATE mydb.mezzi SET disponibilit‡Mezzo='0' WHERE targa='" + m.getTarga() + "';";
+		dbm.executeUpdate(query);	
+	}
 }

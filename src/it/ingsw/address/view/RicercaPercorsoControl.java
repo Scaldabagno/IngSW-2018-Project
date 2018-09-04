@@ -44,8 +44,8 @@ public class RicercaPercorsoControl {
 	private ArrayList<Linea> contieneInizio = new ArrayList<>();
 	private ArrayList<Linea> contieneFine = new ArrayList<>();
 	
-//	@FXML
-//	private void initialize() {
+	@FXML
+	private void initialize() {
 ////		TODO: Aggiustare
 //		linesList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 //
@@ -134,8 +134,9 @@ public class RicercaPercorsoControl {
 //		    		percorso.setItems(FXCollections.observableArrayList(path));
 //		    }
 //		});
-//			
-//	}
+			
+		
+	}
 	
 //	@FXML
 //	private void calcolaPercorso() {

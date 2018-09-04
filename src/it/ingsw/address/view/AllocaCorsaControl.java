@@ -62,6 +62,9 @@ public class AllocaCorsaControl {
 	private Label matricolaText;
 	
 	@FXML
+	private Label targaText;
+	
+	@FXML
 	private Spinner<String> turnoSpinner;
 	
 	@FXML
@@ -69,15 +72,6 @@ public class AllocaCorsaControl {
 	
 	@FXML
 	private Button allocaCorsa;
-	
-	@FXML
-	private Button riallocaCorsa;
-	
-	@FXML
-	private Button disallocaCorsa;
-	
-	@FXML
-	private Button disallocaCorse;
 	
 	ObservableList<DatiImpiegato> listImpiegato = FXCollections.observableArrayList();
 	ObservableList<DatiMezzo> listMezzo = FXCollections.observableArrayList();
@@ -95,9 +89,6 @@ public class AllocaCorsaControl {
 		listMatricole();
 		listTarghe();
 		listLinee();
-		
-		
-	  	
 	}
 	
 	@FXML
@@ -110,18 +101,20 @@ public class AllocaCorsaControl {
 				try {
 				DBLinea.getInstance().allocaCorsaQuery(getNuovaCorsa());
 				DBImpiegato.getInstance().turnoQuery(getNuovoTurno());
+				DBMezzo.getInstance().turnoMezzoQuery(getNuovoMezzo());
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.initOwner(mainApp.getPrimaryStage());
 				alert.setTitle("Avviso");
 				alert.setHeaderText("La corsa è stata allocata con successo!");
 				alert.setContentText("L'impiegato, il mezzo e la linea sono stati allocati con successo");
 				alert.showAndWait();
+				initialize();
 				} catch (SQLException e) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.initOwner(mainApp.getPrimaryStage());
 				alert.setTitle("Avviso");
-				alert.setHeaderText("L'impiegato è già stato assegnato ad un'altra corsa");
-				alert.setContentText("Selezionare un altro impiegato o riallocare quello già selezionato");
+				alert.setHeaderText("L'impiegato o il mezzo è già stato assegnato ad un'altra corsa");
+				alert.setContentText("Selezionare un altro impiegato o mezzo riallocare quello già selezionato");
 				alert.showAndWait();
 				e.printStackTrace();
 				}
@@ -232,6 +225,8 @@ public class AllocaCorsaControl {
 		matricolaText.setVisible(false);
 		matricolaText.setText(impiegatoSel.getDatiMatricola());
 		impiegato.setMatricola(impiegatoSel.getDatiMatricola());
+		targaText.setVisible(false);
+		targaText.setText(mezzoSel.getDatiTarga());
 		mezzo.setTarga(mezzoSel.getDatiTarga());
 		linea.setNumeroLinea(lineaSel.getDatiNumeroLinea());
 		
@@ -247,6 +242,14 @@ public class AllocaCorsaControl {
 		impiegato.setTurno(Turno.valueOf(turnoSpinner.getValue()));
 		
 		return impiegato;
+	}
+	
+	private Mezzo getNuovoMezzo() throws SQLException {
+		Mezzo mezzo = new Mezzo();
+		
+		mezzo.setTarga(targaText.getText());
+		
+		return mezzo;
 	}
 	
 	public void setMainApp(MainApp mainApp) {

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import it.ingsw.address.model.Corsa;
 import it.ingsw.address.model.DatiCorsa;
-import it.ingsw.address.model.DatiImpiegato;
 import it.ingsw.address.model.DatiLinea;
 import it.ingsw.address.model.Fermata;
 import it.ingsw.address.model.Impiegato;
@@ -206,7 +205,7 @@ public class DBLinea {
 		preparedStmt.execute();
 	}
 	
-	public void disallocaCorsaQuery(DatiCorsa corsa) throws SQLException{
+	public void deallocaCorsaQuery(DatiCorsa corsa) throws SQLException{
 		String query = "DELETE FROM mydb.corse WHERE impiegati_matricola=?";
 		
 		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
@@ -215,29 +214,48 @@ public class DBLinea {
 		
 		preparedStmt.execute();
 		
-		String query1 = "UPDATE mydb.impiegati SET turno=? WHERE matricola=?;";
+		String query1 = "UPDATE mydb.impiegati SET turno=?, disponibilit‡Impiegato=? WHERE matricola=?;";
 		
 		PreparedStatement preparedStmt1 = dbm.getConnection().prepareStatement(query1);
 		
-		preparedStmt1.setString (1,String.valueOf(Turno.NonAssegnato));
-		preparedStmt1.setString (2, corsa.getDatiMatricolaImpiegato());
+		preparedStmt1.setString (1, String.valueOf(Turno.NonAssegnato));
+		preparedStmt1.setInt    (2, 1);
+		preparedStmt1.setString (3, corsa.getDatiMatricolaImpiegato());
 		
 		preparedStmt1.execute();
+		
+		String query2 = "UPDATE mydb.mezzi SET disponibilit‡Mezzo=? WHERE targa=?;";
+		
+		PreparedStatement preparedStmt2 = dbm.getConnection().prepareStatement(query2);
+		
+		preparedStmt2.setInt    (1, 1);
+		preparedStmt2.setString (2, corsa.getDatiTargaMezzo());
+		
+		preparedStmt2.execute();
 	}
 	
-	public void disallocaCorseQuery() throws SQLException{
+	public void deallocaCorseQuery() throws SQLException{
 		String query = "DELETE FROM mydb.corse";
 		
 		PreparedStatement preparedStmt = dbm.getConnection().prepareStatement(query);
 		
 		preparedStmt.execute();
 		
-		String query1 = "UPDATE mydb.impiegati SET turno=?;";
+		String query1 = "UPDATE mydb.impiegati SET turno=?, disponibilit‡Impiegato=?;";
 		
 		PreparedStatement preparedStmt1 = dbm.getConnection().prepareStatement(query1);
 		
 		preparedStmt1.setString (1, String.valueOf(Turno.NonAssegnato));
+		preparedStmt1.setInt    (2, 1);
 		
 		preparedStmt1.execute();
+		
+		String query2 = "UPDATE mydb.mezzi SET disponibilit‡Mezzo=?;";
+		
+		PreparedStatement preparedStmt2 = dbm.getConnection().prepareStatement(query2);
+		
+		preparedStmt2.setInt    (1, 1);
+		
+		preparedStmt2.execute();
 	}
 }

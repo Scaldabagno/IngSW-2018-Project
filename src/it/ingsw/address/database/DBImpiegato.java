@@ -288,10 +288,7 @@ public class DBImpiegato {
 	
 	public void turnoQuery(Impiegato i) {
 		String query = "UPDATE mydb.impiegati SET turno='" + i.getTurno() + "'"
-				+ "WHERE matricola='" + i.getMatricola() + "';";
-		dbm.executeUpdate(query);
+				+ ", disponibilit‡Impiegato='0' WHERE matricola='" + i.getMatricola() + "';";
+		dbm.executeUpdate(query);	
 	}
 }
-	
-
-

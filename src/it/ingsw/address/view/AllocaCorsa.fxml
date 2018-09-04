@@ -50,5 +50,6 @@
       </SplitPane>
       <Spinner fx:id="turnoSpinner" layoutX="479.0" layoutY="14.0" prefHeight="25.0" prefWidth="200.0" />
       <Label fx:id="matricolaText" layoutX="377.0" layoutY="18.0" prefHeight="17.0" prefWidth="90.0" />
+      <Label fx:id="targaText" layoutX="260.0" layoutY="18.0" prefHeight="17.0" prefWidth="80.0" />
    </children>
 </AnchorPane>

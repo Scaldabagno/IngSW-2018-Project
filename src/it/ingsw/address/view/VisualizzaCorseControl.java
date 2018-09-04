@@ -48,10 +48,13 @@ public class VisualizzaCorseControl {
 	private TableColumn<DatiCorsa, String> lineaColumn;
 	
 	@FXML
-	private Button disallocaCorsa;
+	private Button deallocaCorsa;
 	
 	@FXML
-	private Button disallocaCorse;
+	private Button deallocaCorse;
+	
+	@FXML
+	private Button annulla;
 	
 	
 	ObservableList<DatiCorsa> listCorse = FXCollections.observableArrayList();
@@ -60,7 +63,7 @@ public class VisualizzaCorseControl {
 	@FXML
 	private void initialize() throws SQLException {
 		listCorse = DBLinea.getInstance().getCorse();
-		listImpiegato = DBImpiegato.getInstance().getAutistiDisponibili();
+		listImpiegato = DBImpiegato.getInstance().getAutisti();
 		matricola1Column.setCellValueFactory(cellData -> cellData.getValue().matricolaProperty());
 		turnoColumn.setCellValueFactory(cellData -> cellData.getValue().turnoProperty());
 		matricolaColumn.setCellValueFactory(cellData -> cellData.getValue().matricolaImpiegatoProperty());
@@ -85,18 +88,18 @@ public class VisualizzaCorseControl {
 	}
 	
 	@FXML
-	private void disallocaCorsa() throws SQLException{
+	private void deallocaCorsa() throws SQLException{
 		Alert error = check();
 		if(error != null) {
 			error.showAndWait();
 		}else {
 			try {
-				DBLinea.getInstance().disallocaCorsaQuery(tabellaCorse.getSelectionModel().getSelectedItem());
+				DBLinea.getInstance().deallocaCorsaQuery(tabellaCorse.getSelectionModel().getSelectedItem());
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.initOwner(mainApp.getPrimaryStage());
 				alert.setTitle("Avviso");
-				alert.setHeaderText("La corsa è stata disallocata con successo!");
-				alert.setContentText("La corsa è stata disallocata con successo!");
+				alert.setHeaderText("La corsa è stata deallocata con successo!");
+				alert.setContentText("La corsa è stata deallocata con successo!");
 				alert.showAndWait();
 				initialize();
 		}catch (SQLException e) {
@@ -112,14 +115,14 @@ public class VisualizzaCorseControl {
 		}
 	
 	@FXML
-	private void disallocaCorse() throws SQLException, IOException{
+	private void deallocaCorse() throws SQLException, IOException{
 			try {
-				DBLinea.getInstance().disallocaCorseQuery();
+				DBLinea.getInstance().deallocaCorseQuery();
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.initOwner(mainApp.getPrimaryStage());
 				alert.setTitle("Avviso");
-				alert.setHeaderText("La corse sono state disallocate con successo!");
-				alert.setContentText("La corse sono state disallocate con successo!");
+				alert.setHeaderText("La corse sono state deallocate con successo!");
+				alert.setContentText("La corse sono state deallocate con successo!");
 				alert.showAndWait();
 				initialize();
 		}catch (SQLException e) {
