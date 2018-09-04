@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import it.ingsw.address.MainApp;
+import it.ingsw.address.database.DBImpiegato;
 import it.ingsw.address.database.DBLinea;
 import it.ingsw.address.model.DatiCorsa;
+import it.ingsw.address.model.DatiImpiegato;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -28,6 +30,15 @@ public class VisualizzaCorseControl {
 	private TableView<DatiCorsa> tabellaCorse;
 	
 	@FXML
+	private TableView<DatiImpiegato> tabellaImpiegati;
+	
+	@FXML
+	private TableColumn<DatiImpiegato, String> matricola1Column;
+	
+	@FXML
+	private TableColumn<DatiImpiegato, String> turnoColumn;
+	
+	@FXML
 	private TableColumn<DatiCorsa, String> matricolaColumn;
 	
 	@FXML
@@ -37,9 +48,6 @@ public class VisualizzaCorseControl {
 	private TableColumn<DatiCorsa, String> lineaColumn;
 	
 	@FXML
-	private Button riallocaCorsa;
-	
-	@FXML
 	private Button disallocaCorsa;
 	
 	@FXML
@@ -47,14 +55,25 @@ public class VisualizzaCorseControl {
 	
 	
 	ObservableList<DatiCorsa> listCorse = FXCollections.observableArrayList();
+	ObservableList<DatiImpiegato> listImpiegato = FXCollections.observableArrayList();
 	
 	@FXML
 	private void initialize() throws SQLException {
 		listCorse = DBLinea.getInstance().getCorse();
+		listImpiegato = DBImpiegato.getInstance().getAutistiDisponibili();
+		matricola1Column.setCellValueFactory(cellData -> cellData.getValue().matricolaProperty());
+		turnoColumn.setCellValueFactory(cellData -> cellData.getValue().turnoProperty());
 		matricolaColumn.setCellValueFactory(cellData -> cellData.getValue().matricolaImpiegatoProperty());
         targaColumn.setCellValueFactory(cellData -> cellData.getValue().targaMezzoProperty());
         lineaColumn.setCellValueFactory(cellData -> cellData.getValue().numeroLineaProperty());
 		tabellaCorse.getSelectionModel().selectedItemProperty();
+		
+		FilteredList<DatiImpiegato> filteredData1 = new FilteredList<>(listImpiegato, p -> true);
+
+		SortedList<DatiImpiegato> sortedData1 = new SortedList<>(filteredData1);
+	    sortedData1.comparatorProperty().bind(tabellaImpiegati.comparatorProperty());
+
+	  	tabellaImpiegati.setItems(sortedData1);
 		
 		FilteredList<DatiCorsa> filteredData = new FilteredList<>(listCorse, p -> true);
 
