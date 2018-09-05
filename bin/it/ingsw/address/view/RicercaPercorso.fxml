@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,11 +16,9 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="partenza" layoutX="255.0" layoutY="14.0" prefHeight="27.0" prefWidth="208.0" promptText="Partenza" />
-      <TextField fx:id="arrivo" layoutX="478.0" layoutY="14.0" prefHeight="27.0" prefWidth="208.0" promptText="Arrivo" />
       <ListView fx:id="percorso" layoutX="23.0" layoutY="110.0" prefHeight="258.0" prefWidth="485.0" />
       <Label layoutX="242.0" layoutY="93.0" text="Percorso" />
-      <Button fx:id="calcola" layoutX="466.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#onCalcClicked" prefHeight="27.0" prefWidth="84.0" text="Calcola" />
+      <Button fx:id="calcola" layoutX="435.0" layoutY="59.0" mnemonicParsing="false" onMouseClicked="#calcolaPercorso" prefHeight="27.0" prefWidth="73.0" text="Calcola" />
       <Button fx:id="annulla" layoutX="23.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#annullaButton" prefHeight="30.0" prefWidth="73.0" text="Annulla" />
       <Label layoutX="519.0" layoutY="156.0" prefHeight="111.0" prefWidth="84.0">
          <graphic>
@@ -32,7 +29,7 @@
             </ImageView>
          </graphic>
       </Label>
-      <Spinner fx:id="partenzaSpinner" layoutX="22.0" layoutY="59.0" prefHeight="27.0" prefWidth="208.0" />
-      <Spinner fx:id="arrivoSpinner" layoutX="242.0" layoutY="59.0" prefHeight="25.0" prefWidth="208.0" />
+      <Spinner fx:id="partenzaSpinner" layoutX="22.0" layoutY="59.0" prefHeight="27.0" prefWidth="191.0" />
+      <Spinner fx:id="arrivoSpinner" layoutX="223.0" layoutY="59.0" prefHeight="25.0" prefWidth="191.0" />
    </children>
 </AnchorPane>

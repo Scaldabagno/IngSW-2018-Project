@@ -73,19 +73,19 @@ public class DBLinea {
 	}
 	
 	public ArrayList<Fermata> getArrayFermate () {
-		ArrayList<Fermata> stops = new ArrayList<>();
+		ArrayList<Fermata> fermate = new ArrayList<>();
 		try {
 			dbm.executeQuery("SELECT * FROM mydb.fermate");
 			ResultSet result = dbm.getResultSet();
 			while(result.next()) {
-				Fermata stop = new Fermata();
-				stop.setFermata(result.getString("Fermata"));
-				stops.add(stop);
+				Fermata fermata = new Fermata();
+				fermata.setFermata(result.getString("Fermata"));
+				fermate.add(fermata);
 			}
 		} catch (SQLException exc) {
 			exc.printStackTrace();
 		}
-		return stops;
+		return fermate;
 	}
 	
 	public ArrayList<Fermata> getFermate(Linea linea) {
