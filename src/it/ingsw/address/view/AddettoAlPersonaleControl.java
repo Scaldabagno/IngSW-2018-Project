@@ -27,10 +27,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-/**
- * @author Federico Augello
- * @description gestisce l'area Addetto Al Personale
- */
 public class AddettoAlPersonaleControl {
 	private MainApp mainApp;
 	
@@ -103,11 +99,6 @@ public class AddettoAlPersonaleControl {
 	
 	ObservableList<DatiImpiegato> listImpiegato = FXCollections.observableArrayList();
 	
-	/**
-	 * @author Federico Augello
-	 * @description funzione che si avvia entrando nell'area Addetto Al Personale
-	 */
-	
 	@FXML
 	private void initialize() throws SQLException{
 		listImpiegato = DBImpiegato.getInstance().getImpiegati();
@@ -125,12 +116,10 @@ public class AddettoAlPersonaleControl {
 
 		ricercaImpiegato.textProperty().addListener((observable, oldValue, newValue) -> {
 		      filteredData.setPredicate(impiegato -> {
-		          // Se il testo della barra è vuoto, restituisce tutti gli impiegati.
 		          if (newValue == null || newValue.isEmpty()) {
 		              return true;
 		          }
-
-		          // Ricerca impiegati.
+		          
 		          String lowerCaseFilter = newValue.toLowerCase();
 
 		          return impiegato.getDatiNome().toLowerCase().contains(lowerCaseFilter) ||
@@ -146,7 +135,6 @@ public class AddettoAlPersonaleControl {
 	
 	private void dettagliImpiegato(DatiImpiegato datiImpiegato) {
 	    if (datiImpiegato != null) {
-	        // Riempie le label con nome, cognome e gli altri dati
 	        nomeLabel.setText(datiImpiegato.getDatiNome());
 	        cognomeLabel.setText(datiImpiegato.getDatiCognome());
 	        emailLabel.setText(datiImpiegato.getDatiEmail());
@@ -176,7 +164,6 @@ public class AddettoAlPersonaleControl {
 		        turnoLabel.setText(datiImpiegato.getDatiTurno());
 	        }
 	    } else {
-	        // Se non viene selezionata nessuna linea, non mostra nulla.
 	        nomeLabel.setText("");
 	        cognomeLabel.setText("");
 	        matricolaLabel.setText("");
@@ -223,7 +210,6 @@ public class AddettoAlPersonaleControl {
 	        }
 
 	    } else {
-	        // Nothing selected.
 	        Alert alert = new Alert(AlertType.WARNING);
 	        alert.initOwner(mainApp.getPrimaryStage());
 	        alert.setTitle("Nessuna Selezione");

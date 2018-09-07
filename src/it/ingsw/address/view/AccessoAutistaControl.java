@@ -20,10 +20,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * @author Federico Augello
- * @description gestisce l'accesso autista
- */
 public class AccessoAutistaControl {
 	private MainApp mainApp;
 	
@@ -45,7 +41,6 @@ public class AccessoAutistaControl {
 	
 	@FXML
 	public void loginAreaAutista() throws IOException{
-		//da completare ovviamente
 		if(emailA.getText().equals("") && passwordA.getText().equals("")) {
 			Sessione.impiegato = new Impiegato();
 			Impiegato i = Sessione.impiegato;

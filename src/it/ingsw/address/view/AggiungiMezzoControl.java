@@ -80,17 +80,14 @@ public class AggiungiMezzoControl {
 		alert.setTitle("Avviso");
 		alert.setHeaderText("Inserimento fallito!");
 
-		// Check targa
 		if (targaText.getText().equals("")) {
 			alert.setContentText("Inserisci la targa");
 			return alert;
 		}
-		// Check numero posto
 		if (postoText.getText().equals("")) {
 			alert.setContentText("Inserisci un numero di posto");
 			return alert;
 		}
-		// Check targa
 		String regex = "([A-Z][A-Z])([0-9][0-9][0-9])([A-Z][A-Z])";
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(targaText.getText());
@@ -98,13 +95,11 @@ public class AggiungiMezzoControl {
 			alert.setContentText("Inserisci un numero di targa valido");
 			return alert;
 		}
-		// Check numero posto
 		if (Integer.valueOf(postoText.getText()) > Deposito.getMax()) {
 			alert.setContentText("Posto non esistente, il deposito ha " + Deposito.getMax() + " posti");
 			return alert;
 		}
 
-		// Data is ok
 		return null;
 	}
 

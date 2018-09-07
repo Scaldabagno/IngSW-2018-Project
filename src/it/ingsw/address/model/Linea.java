@@ -52,13 +52,4 @@ public class Linea {
 	public void setFermate(ArrayList<Fermata> fermate) {
 		this.fermate = fermate;
 	}
-	
-//	public int getOrario() {
-//		return orario;
-//	}
-//	public void setOrario(int orario) {
-//		this.orario = orario;
-//	}
-	
-	
 }

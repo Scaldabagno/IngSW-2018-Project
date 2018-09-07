@@ -31,10 +31,6 @@ public class DBLinea {
 		instance = new DBLinea();
 		return instance;
 	}
-	
-	public Linea getLineaById(String id) throws SQLException {
-		return getArrayLinee("idLinea = '" + id + "'").get(0);
-	}
 
 	public ArrayList<Linea> getArrayLinee(String clause) throws SQLException{
 		ArrayList<Linea> linee = new ArrayList<>();

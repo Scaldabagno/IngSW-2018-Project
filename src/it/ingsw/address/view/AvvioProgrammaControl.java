@@ -11,10 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import it.ingsw.address.MainApp;
 
-/**
- * @author Federico Augello
- * @description gestisce la prima schermata 
- */
+
 public class AvvioProgrammaControl {
 	private MainApp mainApp;
 	

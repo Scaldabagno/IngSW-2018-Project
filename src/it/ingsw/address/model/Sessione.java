@@ -26,12 +26,12 @@ public class Sessione {
 		this.email.set(email);
 	}
 	
-	  public StringProperty getPassword() {
-	      return password;
-	  }
+	public StringProperty getPassword() {
+	    return password;
+	}
 	  
-	  public void setPassword(String password) {
-	      this.password.set(password);
-	  }
+	public void setPassword(String password) {
+	    this.password.set(password);
+	}
 
 }

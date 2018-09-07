@@ -42,11 +42,6 @@ private MainApp mainApp;
 		
 	}
 	
-	/**
-	 * @author Federico Augello
-	 * @description funzione che si avvia entrando nel profilo personale
-	 */
-	
 	@FXML
 	private void initialize() throws SQLException{
 		this.nomeLabel.setText(Sessione.impiegato.getNome());

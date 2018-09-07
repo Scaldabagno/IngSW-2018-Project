@@ -19,6 +19,7 @@ public class Fermata {
 		this.fermata = fermata;
 	}
 	
+	@Override
 	public String toString() {
 		return fermata;
 	}

@@ -122,24 +122,20 @@ private MainApp mainApp;
 		alert.initOwner(mainApp.getPrimaryStage());
 		alert.setTitle("Avviso");
 		alert.setHeaderText("Inserimento fallito!");
-
-		// Check targa
+		
 		if (targaText.getText().equals("")) {
 			alert.setContentText("Inserisci una targa");
 			return alert;
 		}
-		// Check numero posto
 		if (postoText.getText().equals("")) {
 			alert.setContentText("Inserisci un posto");
 			return alert;
 		}
-		// Check numero posto
 		if (Integer.valueOf(postoText.getText()) >= 51) {
 			alert.setContentText("Posto non esistente, il deposito ha " + Deposito.getMax() + " posti");
 			return alert;
 		}
-		
-		// Data is ok
+
 		return null;
 	}
 

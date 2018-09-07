@@ -127,7 +127,6 @@ public class AllocaCorsaControl {
 		alert.setTitle("Avviso");
 		alert.setHeaderText("Inserimento fallito!");
 
-		// Check nome
 		if (tabellaImpiegati.getSelectionModel().getSelectedItem() == null) {
 			alert.setContentText("Seleziona un impiegato");
 			return alert;
@@ -145,9 +144,6 @@ public class AllocaCorsaControl {
 			return alert;
 		}
 		
-		
-		
-		// Data is ok
 		return null;
 	}
 	

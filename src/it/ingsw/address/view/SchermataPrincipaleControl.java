@@ -22,10 +22,6 @@ import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBLinea;
 import it.ingsw.address.model.DatiLinea;
 
-/**
- * @author Federico Augello
- * @description gestisce la Schermata Principale, "L'area cittadino" 
- */
 public class SchermataPrincipaleControl {
 	private MainApp mainApp;
 	
@@ -77,12 +73,10 @@ public class SchermataPrincipaleControl {
 
 		ricercaLinea.textProperty().addListener((observable, oldValue, newValue) -> {
 		      filteredData.setPredicate(linea -> {
-		          // Se il testo della barra è vuoto, restituisce tutte le linee.
 		          if (newValue == null || newValue.isEmpty()) {
 		              return true;
 		          }
 
-		          // Ricerca linee, sia per capolinea che per numero.
 		          String lowerCaseFilter = newValue.toLowerCase();
 
 		          return linea.getDatiNumeroLinea().toLowerCase().contains(lowerCaseFilter) ||
@@ -127,12 +121,10 @@ public class SchermataPrincipaleControl {
 
 	private void dettagliLinea(DatiLinea datiLinea) {
 	    if (datiLinea != null) {
-	        // Riempie le label con numero linea, capolinea, fermate, orari 
 	        linea.setText(datiLinea.getDatiNumeroLinea());
 	        capolinea.setText(datiLinea.getDatiCapolineaI() + "-" + datiLinea.getDatiCapolineaF());
 	        fermate.setText(datiLinea.getDatiCapolineaI() + ", " + datiLinea.getDatiFermate().replace("[", "").replace("]", "") + ", " + datiLinea.getDatiCapolineaF());
 	    } else {
-	        // Se non viene selezionata nessuna linea, non mostra nulla.
 	        linea.setText("");
 	        capolinea.setText("");
 	        fermate.setText("");

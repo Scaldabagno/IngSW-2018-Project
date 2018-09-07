@@ -18,10 +18,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * @author Federico Augello
- * @description gestisce l'area Autista  
- */
 public class AutistaControl {
 	private MainApp mainApp;
 	

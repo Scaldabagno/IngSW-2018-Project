@@ -25,10 +25,6 @@ public class DBMezzo {
 		instance = new DBMezzo();
 		return instance;
 	}
-	
-	public Mezzo getMezzoById(String id) throws SQLException {
-		return getArrayMezzi("idLinea = '" + id + "'").get(0);
-	}
 
 	public ArrayList<Mezzo> getArrayMezzi(String clause) throws SQLException{
 		ArrayList<Mezzo> mezzi = new ArrayList<>();

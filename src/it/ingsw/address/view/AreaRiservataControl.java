@@ -10,10 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * @author Federico Augello
- * @description gestisce l'area Riservata  
- */
+
 public class AreaRiservataControl {
 private MainApp mainApp;
 

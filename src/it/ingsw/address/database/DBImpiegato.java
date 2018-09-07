@@ -71,7 +71,6 @@ public class DBImpiegato {
 	public Impiegato getImpiegatoByEmail(String email, String clause) throws SQLException {
 		ArrayList<Impiegato> ar = getImpiegati("email = '" + email + "'");
 		if(ar.size() == 0) {
-			// TODO: come dovremmo comportarci se l'impiegato non esiste?
 			return null;
 		}
 		else return ar.get(0);

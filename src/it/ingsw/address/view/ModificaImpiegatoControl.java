@@ -93,7 +93,6 @@ public class ModificaImpiegatoControl {
         if (errorMessage.length() == 0) {
             return true;
         } else {
-            // Show the error message.
             Alert alert = new Alert(AlertType.ERROR);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("Invalid Fields");
@@ -152,74 +151,59 @@ public class ModificaImpiegatoControl {
 		alert.setTitle("Avviso");
 		alert.setHeaderText("Inserimento fallito!");
 
-		// Check nome
 		if (nomeText.getText().equals("")) {
 			alert.setContentText("Inserisci un nome");
 			return alert;
 		}
-		// Check cognome
 		if (cognomeText.getText().equals("")) {
 			alert.setContentText("Inserisci un cognome");
 			return alert;
 		}
-		// Check email
 		if (emailText.getText().equals("")) {
 			alert.setContentText("Inserisci un indirizzo e-mail");
 			return alert;
 		}
-
-		// Check password
 		if (passwordText.getText().equals("")) {
 			alert.setContentText("Inserisci una password");
 			return alert;
 		}
-		// Check datanascita
 		if (dataDiNascitaText.getValue() == null) {
 			alert.setContentText("Inserisci una data di nascita");
 			return alert;
 		}
 
-		// Check lunghezza matricola
-			//Check email pattern
-			String regex = "^[\\w\\d\\.]+@[\\w\\.]+\\.\\w+$";
-			Pattern p = Pattern.compile(regex);
-			Matcher m = p.matcher(emailText.getText());
-			if(! m.matches()) {
-				alert.setContentText("Inserisci un indirizzo email valido");
-				return alert;
-			}
-
-			// Numerical check for matricola
-			if (!matricolaText.getText().equals("")) {
-				try {
-					int a = Integer.parseInt(matricolaText.getText());
-					if(a < 0)	throw new NumberFormatException();
-				}
-				catch(NumberFormatException e) {
-					alert.setContentText("Inserisci un valore numerico positivo per la matricola");
-					return alert;
-				}
-			}
-
+		String regex = "^[\\w\\d\\.]+@[\\w\\.]+\\.\\w+$";
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(emailText.getText());
+		if(! m.matches()) {
+			alert.setContentText("Inserisci un indirizzo email valido");
+			return alert;
+		}
+		if (!matricolaText.getText().equals("")) {
 			try {
-				Integer.parseInt(nomeText.getText());
-				alert.setContentText("Inserisci un nome valido");
+				int a = Integer.parseInt(matricolaText.getText());
+				if(a < 0)	throw new NumberFormatException();
+			}catch(NumberFormatException e) {
+				alert.setContentText("Inserisci un valore numerico positivo per la matricola");
 				return alert;
 			}
-			catch(NumberFormatException exc) {
-				;
-			}
+		}
+		try {
+			Integer.parseInt(nomeText.getText());
+			alert.setContentText("Inserisci un nome valido");
+			return alert;
+		}catch(NumberFormatException exc) {
+			;
+		}
 			
-			try {
-				Integer.parseInt(cognomeText.getText());
-				alert.setContentText("Inserisci un cognome valido");
-				return alert;
-			}
-			catch(NumberFormatException exc) {
-				;
-			}
-
-		// Data is ok
+		try {
+			Integer.parseInt(cognomeText.getText());
+			alert.setContentText("Inserisci un cognome valido");
+			return alert;
+		}catch(NumberFormatException exc) {
+			;
+		}
+		
 		return null;
 	}
 

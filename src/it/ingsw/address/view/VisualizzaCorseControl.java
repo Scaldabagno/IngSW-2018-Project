@@ -142,14 +142,11 @@ public class VisualizzaCorseControl {
 		alert.setTitle("Avviso");
 		alert.setHeaderText("Inserimento fallito!");
 
-		// Check nome
 		if (tabellaCorse.getSelectionModel().getSelectedItem() == null) {
 			alert.setContentText("Seleziona una corsa");
 			return alert;
 		}
 		
-		
-		// Data is ok
 		return null;
 	}
 	

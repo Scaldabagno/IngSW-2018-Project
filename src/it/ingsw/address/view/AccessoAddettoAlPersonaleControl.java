@@ -20,10 +20,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * @author Federico Augello
- * @description gestisce l'accesso di addetto al personale 
- */
 public class AccessoAddettoAlPersonaleControl {
 	private MainApp mainApp;
 	
@@ -45,7 +41,6 @@ public class AccessoAddettoAlPersonaleControl {
 	
 	@FXML
 	public void loginAreaAddettoAlPersonale() throws IOException{
-		//da completare ovviamente
 		if(emailAP.getText().equals("") && passwordAP.getText().equals("")) {
 //			TODO: da togliere
 			Sessione.impiegato = new Impiegato();
