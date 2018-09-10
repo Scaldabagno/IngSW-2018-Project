@@ -2,7 +2,6 @@ package it.ingsw.address.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBImpiegato;
@@ -41,25 +40,6 @@ public class AccessoAddettoAiMezziControl {
 	
 	@FXML
 	public void loginAreaAddettoAiMezzi() throws IOException{
-		if(emailAM.getText().equals("") && passwordAM.getText().equals("")) {
-//			TODO: da togliere
-			Sessione.impiegato = new Impiegato();
-			Impiegato i = Sessione.impiegato;
-			i.setNome("Ciao");
-			i.setCognome("Amico");
-			i.setEmail(emailAM.getText() + "Niente");
-			i.setMatricola("1234");
-			i.setRuolo(Ruolo.AddettoAiMezzi);
-			i.setDataNascita(LocalDate.now());
-			FXMLLoader loader=new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/AreaAddettoAiMezzi.fxml"));
-			AnchorPane areaAddettoAiMezzi = (AnchorPane) loader.load();
-			Scene scene = new Scene(areaAddettoAiMezzi);
-			Stage stage = mainApp.getPrimaryStage();
-			stage.setScene(scene);
-			AddettoAiMezziControl controller = loader.getController();
-			controller.setMainApp(mainApp);
-		}else {
 			  try {
 					DBImpiegato dbm = DBImpiegato.getInstance();
 					Ruolo ruolo = Ruolo.AddettoAiMezzi;
@@ -93,7 +73,6 @@ public class AccessoAddettoAiMezziControl {
 		            alert.showAndWait();
 				}
 		  }
-	}
 
 	@FXML
 	public void annullaButton() throws IOException{

@@ -2,7 +2,6 @@ package it.ingsw.address.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 import it.ingsw.address.MainApp;
 import it.ingsw.address.database.DBImpiegato;
@@ -41,25 +40,6 @@ public class AccessoAutistaControl {
 	
 	@FXML
 	public void loginAreaAutista() throws IOException{
-		if(emailA.getText().equals("") && passwordA.getText().equals("")) {
-			Sessione.impiegato = new Impiegato();
-			Impiegato i = Sessione.impiegato;
-			i.setNome("Ciao");
-			i.setCognome("Amico");
-			i.setEmail(emailA.getText() + "Niente");
-			i.setMatricola("1234");
-			i.setRuolo(Ruolo.Autista);
-			i.setDataNascita(LocalDate.now());
-//			TODO: da togliere
-			FXMLLoader loader=new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/AreaAutista.fxml"));
-			AnchorPane areaAutista = (AnchorPane) loader.load();
-			Scene scene = new Scene(areaAutista);
-			Stage stage = mainApp.getPrimaryStage();
-			stage.setScene(scene);
-			AutistaControl controller = loader.getController();
-			controller.setMainApp(mainApp);
-		}else {
 			  try {
 					DBImpiegato dbm = DBImpiegato.getInstance();
 					Ruolo ruolo = Ruolo.Autista;
@@ -93,7 +73,6 @@ public class AccessoAutistaControl {
 		            alert.showAndWait();
 				}
 		  }
-	}
 	
 	@FXML
 	public void annullaButton() throws IOException{

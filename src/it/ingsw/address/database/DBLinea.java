@@ -15,6 +15,8 @@ import it.ingsw.address.model.Mezzo;
 import it.ingsw.address.model.Turno;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class DBLinea {
 	private static DBManager dbm = new DBManager("localhost", "root", "root", "mydb");
@@ -128,6 +130,53 @@ public class DBLinea {
 			exc.printStackTrace();
 		}
 		return fermata;
+	}
+	
+	public int getIdFermataByFermata(Fermata fermata) throws SQLException {
+		
+		dbm.executeQuery("SELECT idFermate "
+				+ "FROM fermate "
+				+ "WHERE fermata = '" + fermata.getFermata() + "';");
+		
+		
+		ResultSet resultSet = dbm.getResultSet();
+		if(resultSet.next()) {
+			int i = resultSet.getInt("fermate.idFermate");
+			return i;
+		}else {
+			return -1;
+		}
+	}
+	
+	public Linea getLineaByFermata(Fermata fermata) {
+		Linea linea = new Linea();
+		try {
+			dbm.executeQuery("SELECT numeroLinea " + 
+					"FROM ( " + 
+					"SELECT linee_idLinea " + 
+					"FROM linee_has_fermate " + 
+					"WHERE fermate_idFermate = " + fermata.getIdFermata() + 
+					" ) AS subquery JOIN linee ON subquery.linee_idLinea = numeroLinea;");
+			ResultSet resultSet = dbm.getResultSet();
+			
+			if(resultSet.next()) {
+				linea.setNumeroLinea(resultSet.getString("numeroLinea"));
+			}
+			return linea;
+		}catch (SQLException e) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Eccezione");
+			alert.showAndWait();
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public ArrayList<Fermata> ricercaPercorso(){
+		ArrayList<Fermata> percorso = new ArrayList<>();
+		
+		return percorso;
 	}
 	
 	public Corsa getCorsaById(String id) throws SQLException {
